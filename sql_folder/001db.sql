@@ -2,8 +2,8 @@ CREATE DATABASE it490db;
 USE it490db;
 CREATE TABLE loginform (
   id INT PRIMARY KEY,
-  user VARCHAR(20),
-  pass VARCHAR(20)
+  user VARCHAR(50) NOT NULL UNIQUE,
+  pass VARCHAR(255) NOT NULL
 );
 
 
