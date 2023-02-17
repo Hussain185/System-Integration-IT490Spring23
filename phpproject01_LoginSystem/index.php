@@ -1,3 +1,4 @@
+<!--This code was created by Dani Krossing, in his YouTube video "How to create a login system in PHP" and is used as a base to test the Authentication System -->
 <!--Splitting the header and footer into separate documents makes things easier!-->
 <?php
   include_once 'header.php';
