@@ -2,12 +2,13 @@
 require_once('/rabbitmaphp_example/path.inc');
 require_once('/rabbitmqphp_example/get_host_info.inc');
 require_once('/rabbitmqphp_example/rabbitMQLib.inc');
+require_once('mysqlConnect.php');
 
 function doLogin($username,$password)
 {
-	// lookup username in databas
-	// check password
-	return true;
+	$query = "SELECT * FROM users WHERE usersUid='$username' AND usersPwd='$password'";
+	$result = mysqli_query($conn, $query);
+	//return true;
 	//return false if not valid
 }
 
@@ -25,14 +26,16 @@ function requestProcessor($request)
 			return doLogin($request['username'],$request['password']);
 		case "validate_session":
 			return doValidate($request['sessionId']);
+		case "signup":
+
 	}
 	return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
 
-$server = new rabbitMQServer("testRabbitMQ.ini","testServer");
+$dbserver = new rabbitMQServer("db.ini","dbConnect");
 
 echo "testRabbitMQServer BEGIN".PHP_EOL;
-$server->process_requests('requestProcessor');
+$dbserver->process_requests('requestProcessor');
 echo "testRabbitMQServer END".PHP_EOL;
 exit();
 ?>

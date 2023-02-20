@@ -39,7 +39,7 @@ if (isset($_POST["submit"])) {
   }
 
   $request = array();
-  $request['type'] = "Login";
+  $request['type'] = "login";
   $request['username'] = $username;
   $request['password'] = $pwd;
   $request['message'] = $msg;
