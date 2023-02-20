@@ -7,7 +7,7 @@ require_once('mysqlConnect.php');
 function doLogin($username,$password)
 {
 	$query = "SELECT * FROM users WHERE usersUid='$username' AND usersPwd='$password'";
-	$result = mysqli_query($conn, $query);
+	$result = mysqli_query(dbConnection(), $query);
 	//return true;
 	//return false if not valid
 }
