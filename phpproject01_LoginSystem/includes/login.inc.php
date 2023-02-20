@@ -2,6 +2,8 @@
 require_once('../incFiles/path.inc');
 require_once('../incFiles/get_host_info.inc');
 require_once('../incFiles/rabbitMQLib.inc');
+require_once "dbh.inc.php";
+require_once 'functions.inc.php';
 
 if (isset($_POST["submit"])) {
 
@@ -11,9 +13,8 @@ if (isset($_POST["submit"])) {
 
   // Then we run a bunch of error handlers to catch any user mistakes we can (you can add more than I did)
   // These functions can be found in functions.inc.php
+  invalidUid($username);
 
-  //require_once "dbh.inc.php";
-//   require_once 'functions.inc.php';
 
 //   // Left inputs empty
 //   if (emptyInputLogin($username, $pwd) === true) {
