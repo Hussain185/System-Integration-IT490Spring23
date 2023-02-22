@@ -1,5 +1,5 @@
 <?php
-$path = '/usr/local/lib/php';
+$path = '/sampleFiles/path.inc';
     if (file_exists('local.ini'))
     {
         $parse = parse_ini_file('local.ini',true);
