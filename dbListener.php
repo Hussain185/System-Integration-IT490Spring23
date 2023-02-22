@@ -1,7 +1,7 @@
 <?php
-require_once('/rabbitmaphp_example/path.inc');
-require_once('/rabbitmqphp_example/get_host_info.inc');
-require_once('/rabbitmqphp_example/rabbitMQLib.inc');
+require_once('/sampleFiles/path.inc');
+require_once('/sampleFiles/get_host_info.inc');
+require_once('/sampleFiles/rabbitMQLib.inc');
 require_once('mysqlConnect.php');
 
 function doLogin($username,$password)
