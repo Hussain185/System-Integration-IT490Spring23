@@ -11,11 +11,9 @@ function doLogin($username,$password)
 	$result = mysqli_query(dbConnection(), $query);
     print_r($result);
     while($row = mysqli_fetch_assoc($result)) {
-        echo "<tr>";
         foreach ($row as $field => $value) {
-            echo "<td>" . $value . "</td>";
+            echo $value;
         }
-        echo "</tr>";
     }
 	//return true;
 	//return false if not valid
