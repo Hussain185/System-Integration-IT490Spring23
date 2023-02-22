@@ -9,7 +9,7 @@ function doLogin($username,$password)
 {
 	$query = "SELECT * FROM users WHERE usersUid='$username' AND usersPwd='$password'";
 	$result = mysqli_query(dbConnection(), $query);
-    echo $result;
+    print_r($result);
 	//return true;
 	//return false if not valid
 }
