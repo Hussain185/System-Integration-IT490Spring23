@@ -10,6 +10,7 @@ function doLogin($username,$password)
 	$query = "SELECT * FROM users WHERE usersUid='$username' AND usersPwd='$password'";
 	$result = mysqli_query(dbConnection(), $query);
     print_r($result);
+    $result -> free_result();
 	//return true;
 	//return false if not valid
 }
