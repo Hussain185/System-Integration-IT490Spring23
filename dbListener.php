@@ -10,11 +10,12 @@ function doLogin($username,$password)
 	$query = "SELECT * FROM users WHERE usersUid='$username' AND usersPwd='$password'";
 	$result = mysqli_query(dbConnection(), $query);
     print_r($result);
-    while($row = mysqli_fetch_row($result)) {
-        echo "Users ID :{$row['usersId']}  <br> ".
-            "Uid : {$row['usersUid']} <br> ".
-            "Pwd : {$row['usersPwd']} <br> ".
-            "--------------------------------<br>";
+    while($row = mysqli_fetch_assoc($result)) {
+        echo "<tr>";
+        foreach ($row as $field => $value) {
+            echo "<td>" . $value . "</td>";
+        }
+        echo "</tr>";
     }
 	//return true;
 	//return false if not valid
