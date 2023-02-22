@@ -28,7 +28,7 @@ if (isset($_POST["submit"])) {
   //loginUser($conn, $username, $pwd);
   
   
-  $client = new rabbitMQClient("../incFiles/testRabbitMQ.ini","testServer");
+  $client = new rabbitMQClient("../incFiles/testRabbitMQ.ini","dbServer");
   if (isset($argv[1]))
   {
     $msg = $argv[1];
