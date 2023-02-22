@@ -1,7 +1,7 @@
 <?php
 function dbConnection()
 {
-    $servername = "10.147.18.190";
+    $servername = "localhost";
     $dBUsername = "username";
     $dBPassword = "password";
     $dBName = "phpproject01";

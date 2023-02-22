@@ -1,13 +1,14 @@
+#!/usr/bin/php
 <?php
-require_once('/rabbitmaphp_example/path.inc');
-require_once('/rabbitmqphp_example/get_host_info.inc');
-require_once('/rabbitmqphp_example/rabbitMQLib.inc');
+require_once('sampleFiles/path.inc');
+require_once('sampleFiles/get_host_info.inc');
+require_once('sampleFiles/rabbitMQLib.inc');
 require_once('mysqlConnect.php');
 
 function doLogin($username,$password)
 {
-	$query = "SELECT * FROM users WHERE usersUid='$username' AND usersPwd='$password'";
-	$result = mysqli_query(dbConnection(), $query);
+	//$query = "SELECT * FROM users WHERE usersUid='$username' AND usersPwd='$password'";
+	//$result = mysqli_query(dbConnection(), $query);
 	//return true;
 	//return false if not valid
 }
@@ -38,4 +39,3 @@ echo "testRabbitMQServer BEGIN".PHP_EOL;
 $dbserver->process_requests('requestProcessor');
 echo "testRabbitMQServer END".PHP_EOL;
 exit();
-?>
