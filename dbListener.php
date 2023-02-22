@@ -33,9 +33,9 @@ function requestProcessor($request)
 	return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
 
-$dbserver = new rabbitMQServer("db.ini",dbConnection());
+$server = new rabbitMQServer("db.ini",'dbServer');
 
 echo "testRabbitMQServer BEGIN".PHP_EOL;
-$dbserver->process_requests('requestProcessor');
+$server->process_requests('requestProcessor');
 echo "testRabbitMQServer END".PHP_EOL;
 exit();
