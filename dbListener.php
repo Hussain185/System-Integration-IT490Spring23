@@ -10,7 +10,12 @@ function doLogin($username,$password)
 	$query = "SELECT * FROM users WHERE usersUid='$username' AND usersPwd='$password'";
 	$result = mysqli_query(dbConnection(), $query);
     print_r($result);
-    $result -> free_result();
+    while($row = define(1, $result)) {
+        echo "Users ID :{$row['usersId']}  <br> ".
+            "Uid : {$row['usersUid']} <br> ".
+            "Pwd : {$row['usersPwd']} <br> ".
+            "--------------------------------<br>";
+    }
 	//return true;
 	//return false if not valid
 }
