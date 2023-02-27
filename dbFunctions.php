@@ -135,3 +135,12 @@ function loginUser($conn, $username, $pwd) {
         exit();
     }
 }
+
+function returnToFrontend($returnMsg)
+{
+    $client = new rabbitMQClient("../incFiles/testRabbitMQ.ini","");
+
+    $returnRequest = array();
+    $returnRequest['type'] = $returnMsg;
+
+}

@@ -50,7 +50,10 @@ if (isset($_POST["submit"])) {
   echo "\n\n";
 
   echo $argv[0]." END".PHP_EOL;
-	
+
+
+
+
 } else {
 	header("location: ../login.php");
     exit();
