@@ -49,7 +49,6 @@ if (isset($_POST["submit"])) {
   print_r($response);
   echo "\n\n";
 
-  echo $response;
   echo $argv[0]." END".PHP_EOL;
 
 
