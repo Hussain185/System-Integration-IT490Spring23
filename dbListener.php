@@ -31,7 +31,7 @@ function requestProcessor($request)
 		case "validate_session":
 			return doValidate($request['sessionId']);
 		case "signup":
-            return createUser($conn);
+            return createUser($conn,$request['name'],$request['email'],$request['username'],$request['password']);
 
 	}
 	return array("returnCode" => '0', 'message'=>"Server received request and processed");
