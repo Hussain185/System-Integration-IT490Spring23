@@ -28,7 +28,7 @@ function requestProcessor($request)
 	switch ($request['type'])
 	{
 		case "login":
-			return loginUser($conn,$request['username'],$request['password']);
+			return doLogin($request['username'],$request['password']);
 		case "validate_session":
 			return doValidate($request['sessionId']);
 		case "signup":
