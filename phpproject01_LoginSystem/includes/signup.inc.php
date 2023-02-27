@@ -22,7 +22,7 @@ if (isset($_POST["submit"])) {
 		exit();
   }
 	// Proper username chosen
-  if (invalidUid($uid) !== false) {
+  if (invalidUid($username) !== false) {
     header("location: ../signup.php?error=invaliduid");
 		exit();
   }
@@ -36,7 +36,31 @@ if (isset($_POST["submit"])) {
     header("location: ../signup.php?error=passwordsdontmatch");
 		exit();
   }
- 
+
+    $client = new rabbitMQClient("../incFiles/testRabbitMQ.ini","dbServer");
+    if (isset($argv[1]))
+    {
+        $msg = $argv[1];
+    }
+    else
+    {
+        $msg = "test message";
+    }
+
+    $request = array();
+    $request['type'] = "signup";
+    $request['name'] = $name;
+    $request['email'] = $email;
+    $request['username'] = $username;
+    $request['password'] = $pwd;
+    $request['message'] = $msg;
+    $response = $client->send_request($request);
+
+    echo "client received response: ".PHP_EOL;
+    print_r($response);
+    echo "\n\n";
+
+    echo $argv[0]." END".PHP_EOL;
 
   // If we get to here, it means there are no user errors
 

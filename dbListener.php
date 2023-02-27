@@ -3,24 +3,21 @@
 require_once('sampleFiles/path.inc');
 require_once('sampleFiles/get_host_info.inc');
 require_once('sampleFiles/rabbitMQLib.inc');
-require_once('mysqlConnect.php');
-
-function doLogin($username,$password)
-{
-	$query = "SELECT * FROM users WHERE usersUid='$username' AND usersPwd='$password'";
-	$result = mysqli_query(dbConnection(), $query);
-    print_r($result);
-    while($row = mysqli_fetch_assoc($result)) {
-        foreach ($row as $field => $value) {
-            echo $value;
-        }
-    }
-	//return true;
-	//return false if not valid
-}
+require_once('dbFunctions.php');
 
 function requestProcessor($request)
 {
+    $servername = "10.147.18.190";
+    $dBUsername = "username";
+    $dBPassword = "password";
+    $dBName = "phpproject01";
+
+    $conn = mysqli_connect($servername, $dBUsername, $dBPassword, $dBName);
+
+    if (!$conn) {
+        die("Connection failed: ".mysqli_connect_error());
+    }
+
 	echo "received request".PHP_EOL;
 	var_dump($request);
 	if(!isset($request['type']))
@@ -30,10 +27,11 @@ function requestProcessor($request)
 	switch ($request['type'])
 	{
 		case "login":
-			return doLogin($request['username'],$request['password']);
+			return loginUser($conn,$request['username'],$request['password']);
 		case "validate_session":
 			return doValidate($request['sessionId']);
 		case "signup":
+            return createUser($conn);
 
 	}
 	return array("returnCode" => '0', 'message'=>"Server received request and processed");
