@@ -4,10 +4,11 @@ require_once('sampleFiles/path.inc');
 require_once('sampleFiles/get_host_info.inc');
 require_once('sampleFiles/rabbitMQLib.inc');
 require_once('dbFunctions.php');
+//require_once('mysqlConnect.php');
 
 function requestProcessor($request)
 {
-    $servername = "10.147.18.190";
+    $servername = "localhost";
     $dBUsername = "username";
     $dBPassword = "password";
     $dBName = "phpproject01";
