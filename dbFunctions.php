@@ -136,11 +136,13 @@ function loginUser($conn, $username, $pwd) {
     }
 }
 
-function returnToFrontend($returnMsg)
-{
-    $client = new rabbitMQClient("../incFiles/testRabbitMQ.ini","");
-
-    $returnRequest = array();
-    $returnRequest['type'] = $returnMsg;
-
-}
+//function returnToFrontend($returnMsg)
+//{
+//    $client = new rabbitMQClient("../incFiles/testRabbitMQ.ini","");
+//
+//    $returnRequest = array();
+//    $returnRequest['type'] = 'hi';
+//    $returnRequest['msg'] = $returnMsg;
+//
+//    $response = $client->send_request($returnRequest);
+//}
