@@ -45,13 +45,12 @@ if (isset($_POST["submit"])) {
   $request['message'] = $msg;
   $response = $client->send_request($request);
 	
-  $payload = json_encode($response);
-  echo $payload;
-
-
-
-
-} else {
+  if($response == 1){
+        header("location: ../index.php?error=none");
+        exit();
+} 
+  else {
+	session_destroy();
 	header("location: ../login.php");
     exit();
 }
