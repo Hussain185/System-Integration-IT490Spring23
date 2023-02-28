@@ -1,9 +1,9 @@
-CREATE DATABASE IT490Project;
-USE IT490Project;
+CREATE DATABASE phpproject01;
+USE phpproject01;
 CREATE TABLE users (
-	Id int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-	userName varchar(128) NOT NULL,
-	userEmail varchar(128) NOT NULL,
-	userId varchar(128) NOT NULL,
-	userPass varchar(128) NOT NULL
+	usersId int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	usersName varchar(128) NOT NULL,
+	usersEmail varchar(128) NOT NULL,
+	usersUid varchar(128) NOT NULL,
+	usersPwd varchar(128) NOT NULL
 );
