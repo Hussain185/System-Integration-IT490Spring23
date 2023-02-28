@@ -9,14 +9,28 @@ function doLogin($username,$password)
 {
     $query = "SELECT * FROM users WHERE usersUid='$username' AND usersPwd='$password'";
     $result = mysqli_query(dbConnection(), $query);
-    print_r($result);
-    while($row = mysqli_fetch_assoc($result)) {
-        foreach ($row as $field => $value) {
-            echo $value;
-        }
-    }
-    //return true;
-    //return false if not valid
+    if($result){
+		if($result->num_rows == 0){
+			echo("No users in table.");
+			$event = date("Y-m-d") . "  " . date("h:i:sa") . " [ DB ] " . "ERROR: this user does not exist: $username" . "\n";
+	                log_event($event);
+			return false;
+		}
+		else {
+			while($row = $result->fetch_assoc()){
+				// $h_password = generateHash($password);
+				if ($row['usersPwd'] == $password){
+					echo "User Authenicated".PHP_EOL;
+					return 1;
+				}
+				else{
+					// $event = date("Y-m-d") . "  " . date("h:i:sa") . " [ DB ] " . "ERROR: Username & Password do not match" . "\n";
+			                // log_event($event);
+					return 0;
+				}
+			}
+		}
+	}
 }
 
 function uidExists($conn, $username) {
