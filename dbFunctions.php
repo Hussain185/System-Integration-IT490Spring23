@@ -5,6 +5,8 @@ require_once('sampleFiles/rabbitMQLib.inc');
 require_once('mysqlConnect.php');
 require_once('dbListener.php');
 
+$conn = dbConnection();
+
 function doLogin($username,$password)
 {
     $query = "SELECT * FROM users WHERE usersUid='$username' AND usersPwd='$password'";
