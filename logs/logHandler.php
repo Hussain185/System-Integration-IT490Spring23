@@ -26,5 +26,5 @@ function errorHandler($errorMsg){
 
     $errorServer = new rabbitMQServer('log.ini','errorServer');
 
-    $errorServer->process_requests('requestProcessor');
+    $errorServer->process_requests('errorHandler');
 }
