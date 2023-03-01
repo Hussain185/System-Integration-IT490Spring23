@@ -37,3 +37,6 @@ $errorServer = new rabbitMQServer('log.ini','errorServer');
 
 echo "errorHandler BEGIN".PHP_EOL;
 $errorServer->process_requests('errorHandler');
+
+echo "testRabbitMQServer END".PHP_EOL;
+exit();
