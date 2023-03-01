@@ -39,6 +39,7 @@ function requestProcessor($request)
 }
 
 $server = new rabbitMQServer("db.ini",'dbServer');
+$errorClient = new rabbitMQClient('/logs/log.ini', 'errorServer');
 
 echo "testRabbitMQServer BEGIN".PHP_EOL;
 $server->process_requests('requestProcessor');
