@@ -1,9 +1,9 @@
-CREATE TABLE user_Session (
+CREATE TABLE user_session (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   session_id VARCHAR(255) NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES loginform(id)
+  FOREIGN KEY (user_id) REFERENCES users(id)
 
 );
 
