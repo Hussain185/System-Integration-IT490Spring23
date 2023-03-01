@@ -4,6 +4,7 @@ require_once('../incFiles/get_host_info.inc');
 require_once('../incFiles/rabbitMQLib.inc');
 //require_once("dbh.inc.php");
 require_once('functions.inc.php');
+require_once('../../logs/logClient.php');
 
 if (isset($_POST["submit"])) {
 
@@ -19,6 +20,7 @@ if (isset($_POST["submit"])) {
    // Left inputs empty
    if (emptyInputLogin($username, $pwd) === true) {
      header("location: ../login.php?error=emptyinput");
+     sendError('Login Field Empty','frontend');
  		exit();
    }
 
