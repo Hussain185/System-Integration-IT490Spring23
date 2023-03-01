@@ -35,4 +35,5 @@ function errorHandler($errorMsg){
 
 $errorServer = new rabbitMQServer('log.ini','errorServer');
 
+echo "errorHandler BEGIN".PHP_EOL;
 $errorServer->process_requests('errorHandler');

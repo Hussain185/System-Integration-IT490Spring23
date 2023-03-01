@@ -31,7 +31,6 @@ if (isset($_POST["submit"])) {
   
   
   $client = new rabbitMQClient("../incFiles/testRabbitMQ.ini","dbServer");
-  $errorClient = new rabbitMQClient('/logs/log.ini', 'errorServer');
   if (isset($argv[1]))
   {
     $msg = $argv[1];
