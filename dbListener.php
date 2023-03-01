@@ -43,5 +43,6 @@ $errorClient = new rabbitMQClient('/logs/log.ini', 'errorServer');
 
 echo "testRabbitMQServer BEGIN".PHP_EOL;
 $server->process_requests('requestProcessor');
+
 echo "testRabbitMQServer END".PHP_EOL;
 exit();

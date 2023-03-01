@@ -35,15 +35,15 @@ function uidExists($conn, $username) {
     // "Get result" returns the results from a prepared statement
     $resultData = mysqli_stmt_get_result($stmt);
 
+    mysqli_stmt_close($stmt);
+
     if ($row = mysqli_fetch_assoc($resultData)) {
         return $row;
     }
     else {
-        $result = false;
-        return $result;
+        return false;
     }
 
-    mysqli_stmt_close($stmt);
 }
 
 // Insert new user into database
@@ -138,13 +138,12 @@ function loginUser($conn, $username, $pwd) {
     }
 }
 
-//function returnToFrontend($returnMsg)
-//{
-//    $client = new rabbitMQClient("../incFiles/testRabbitMQ.ini","");
-//
-//    $returnRequest = array();
-//    $returnRequest['type'] = 'hi';
-//    $returnRequest['msg'] = $returnMsg;
-//
-//    $response = $client->send_request($returnRequest);
-//}
+function doValidate($sessionKey){
+    $query = "SELECT * FROM user_Session WHERE session_id == $sessionKey";
+
+    $result = mysqli_query(dbConnection(), $query);
+
+
+
+    exit();
+}
