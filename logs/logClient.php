@@ -1,4 +1,3 @@
-#!/usr/bin/php
 <?php
 require_once('../phpproject01_LoginSystem/incFiles/path.inc');
 require_once('../phpproject01_LoginSystem/incFiles/get_host_info.inc');
