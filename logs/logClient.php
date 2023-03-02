@@ -14,6 +14,6 @@ function sendError($error,$type){
     $request['type'] = $type;
     $request['error'] = $error;
 
-    $errorClient = new rabbitMQClient('log.ini','errorServer');
+    $errorClient = new rabbitMQClient('log.ini','logServer');
     $response = $errorClient->send_request($request);
 }
