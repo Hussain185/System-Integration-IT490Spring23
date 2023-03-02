@@ -11,8 +11,9 @@ function writeToLog($error, $file){
     }
 }
 
-function errorHandler($errorMsg){
+function requestProcessor($errorMsg){
 
+    var_dump($errorMsg);
     if(!isset($errorMsg['type']))
     {
         return "ERROR: unsupported message type";
@@ -34,10 +35,10 @@ function errorHandler($errorMsg){
 
 }
 
-$errorServer = new rabbitMQServer('log.ini','errorServer');
+$server = new rabbitMQServer('log.ini','errorServer');
 
 echo "errorHandler BEGIN".PHP_EOL;
-$errorServer->process_requests('errorHandler');
+$server->process_requests('requestProcessor');
 
-echo "testRabbitMQServer END".PHP_EOL;
+echo "errorHandler END".PHP_EOL;
 exit();
