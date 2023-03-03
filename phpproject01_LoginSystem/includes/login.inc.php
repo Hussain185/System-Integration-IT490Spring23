@@ -47,7 +47,14 @@ if (isset($_POST["submit"])) {
   $request['message'] = $msg;
   $response = $client->send_request($request);
 	
-  if($response == 1){
+  if($response == $sessionId){
+		echo '<script type="text/javascript">',
+		'var name = "<?php echo $username; ?>";',
+		'var session = "<?php echo $sessionId; ?>";',
+		'setCookie(name,session,20);',
+		'getCookie(name);';
+
+		
         header("location: ../index.php?error=none");
         exit();
 } 
