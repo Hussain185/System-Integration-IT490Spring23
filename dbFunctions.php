@@ -34,7 +34,7 @@ function doLogin($username,$password)
 							return $sessionId;	
 						}
 						else{
-							while($roww = $resultt->fetch_assoc()){
+							while($row = $resultt->fetch_assoc()){
 								$sessionId = row['session_id'];
 								return $sessionId;
 							}
