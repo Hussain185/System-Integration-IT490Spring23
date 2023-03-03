@@ -52,8 +52,9 @@ if (isset($_POST["submit"])) {
 		'var name = "<?php echo $username; ?>";',
 		'var session = "<?php echo $sessionId; ?>";',
 		'setCookie(name,session,20);',
-		'getCookie(name);';
-
+		'const cookie = document.createElement("p");',
+		'cookie.innerText = getCookie(name);',
+		'document.body.appendChild(cookie);';
 		
         header("location: ../index.php?error=none");
         exit();
