@@ -25,7 +25,7 @@ function doLogin($username,$password)
 					// Above code is incorrect. You need to use Javascript in Browser side
 					
 					$sessionId = hash("sha256",$row['usersPwd']);
-					$queryy = "INSERT INTO user_session(user_id, session_id) VALUES ($username, $sessionId);";
+					$queryy = "INSERT INTO user_session(user_id,session_id) VALUES ('$username','$sessionId');";
 					$resultt = mysqli_query(dbConnection(), $queryy);
 
 					return $sessionId;

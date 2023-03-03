@@ -1,9 +1,8 @@
 CREATE TABLE user_session (
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  user_id INT NOT NULL,
-  session_id VARCHAR(255) NOT NULL,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users(usersId)
+    id int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    user_session varchar(128) NOT NULL,
+    user_id varchar(128) NOT NULL,
+    loginTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 
