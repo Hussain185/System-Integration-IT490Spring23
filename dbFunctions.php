@@ -24,7 +24,7 @@ function doLogin($username,$password)
 					// $cookie = setcookie($row['usersUid'], hash("sha256",$row['usersPwd']), time()+60*60);
 					// Above code is incorrect. You need to use Javascript in Browser side
 					
-					$sessionId = hash("sha256",$row['usersPwd']),
+					$sessionId = hash("sha256",$row['usersPwd']);
 					$queryy = "INSERT INTO user_session(user_id, session_id) VALUES ($username, $sessionId);";
 					$resultt = mysqli_query(dbConnection(), $queryy);
 
