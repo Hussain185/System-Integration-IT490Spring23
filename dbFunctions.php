@@ -23,12 +23,22 @@ function doLogin($username,$password)
 					echo "User Authenicated".PHP_EOL;
 					// $cookie = setcookie($row['usersUid'], hash("sha256",$row['usersPwd']), time()+60*60);
 					// Above code is incorrect. You need to use Javascript in Browser side
-					
-					$sessionId = hash("sha256",$row['usersPwd']);
-					$queryy = "INSERT INTO user_session(user_id,session_id) VALUES ('$username','$sessionId');";
-					$resultt = mysqli_query(dbConnection(), $queryy);
-
-					return $sessionId;
+					$queryy = "SELECT session_id FROM user_session WHERE user_id='$username'";
+    					$resultt = mysqli_query(dbConnection(), $queryy);
+    					if($resultt){
+						if($resultt->num_rows == 0){
+							echo("No user in table. Create new sessionID");
+							$sessionId = hash("sha256",$row['usersPwd']);
+							$queryyy = "INSERT INTO user_session(user_id,session_id) VALUES ('$username','$sessionId');";
+							$resulttt = mysqli_query(dbConnection(), $queryyy);
+							return $sessionId;	
+						}
+						else{
+							while($roww = $resultt->fetch_assoc()){
+								$sessionId = row['session_id'];
+								return $sessionId;
+							}
+						}
 				}
 				else{
 					// $event = date("Y-m-d") . "  " . date("h:i:sa") . " [ DB ] " . "ERROR: Username & Password do not match" . "\n";
