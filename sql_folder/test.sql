@@ -1,1 +1,0 @@
-ALTER TABLE user_session MODIFY COLUMN user_id VARCHAR(225);
