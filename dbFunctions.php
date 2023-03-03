@@ -49,6 +49,7 @@ function doLogin($username,$password)
 		}
 	}
 }
+}
 
 function uidExists($conn, $username) {
     $sql = "SELECT * FROM users WHERE usersUid = ? OR usersEmail = ?;";
