@@ -21,7 +21,14 @@ function doLogin($username,$password)
 				// $h_password = generateHash($password);
 				if ($row['usersPwd'] == $password){
 					echo "User Authenicated".PHP_EOL;
-					return 1;
+					// $cookie = setcookie($row['usersUid'], hash("sha256",$row['usersPwd']), time()+60*60);
+					// Above code is incorrect. You need to use Javascript in Browser side
+					
+					$sessionId = hash("sha256",$row['usersPwd']),
+					$queryy = "INSERT INTO users_session(Sessionid, userName) VALUES ($sessionId, $username);";
+					$resultt = mysqli_query(dbConnection(), $queryy);
+
+					return $sessionId;
 				}
 				else{
 					// $event = date("Y-m-d") . "  " . date("h:i:sa") . " [ DB ] " . "ERROR: Username & Password do not match" . "\n";
