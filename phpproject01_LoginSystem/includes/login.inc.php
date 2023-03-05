@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 require_once('../incFiles/path.inc');
 require_once('../incFiles/get_host_info.inc');
