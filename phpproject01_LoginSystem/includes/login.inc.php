@@ -48,16 +48,19 @@ if (isset($_POST["submit"])) {
   $response = $client->send_request($request);
 	
   if($response == $sessionId){
-		echo '<script type="text/javascript">',
-		'var name = "<?php echo $username; ?>";',
-		'var session = "<?php echo $sessionId; ?>";',
-		'setCookie(name,session,20);',
-		'const cookie = document.createElement("p");',
-		'cookie.innerText = getCookie(name);',
-		'document.body.appendChild(cookie);';
+	echo '<p id="demo"></p>',
+	'<script type="text/javascript">',
+	'var name = "<?php echo $username; ?>";',
+	'var session = "<?php echo $sessionId; ?>";',
+	'setCookie(name,session,20);',
+	// 'const cookie = Object.values(getCookie(name));',
+	// 'document.getElementById("demo").innerHTML = cookie;',
+	'</script>';
+	
+	echo $_COOKIE["$username"];
 		
-        header("location: ../index.php?error=none");
-        exit();
+        // header("location: ../index.php?error=none");
+        // exit();
 } 
 }
   else {
