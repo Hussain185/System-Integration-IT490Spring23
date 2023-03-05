@@ -56,8 +56,10 @@ if (isset($_POST["submit"])) {
 	// 'const cookie = Object.values(getCookie(name));',
 	// 'document.getElementById("demo").innerHTML = cookie;',
 	'</script>';
-	
-	echo $_COOKIE["$username"];
+	if (isset($_COOKIE["$username"]))
+		echo $_COOKIE["$username"];
+    	else
+       		echo "Cookie Not Set";
 		
         // header("location: ../index.php?error=none");
         // exit();
