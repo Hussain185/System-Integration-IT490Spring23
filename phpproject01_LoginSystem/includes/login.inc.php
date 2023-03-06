@@ -51,9 +51,7 @@ if (isset($_POST["submit"])) {
 //  if($response == $sessionId){
 //	echo '<p id="demo"></p>',
 //	'<script type="text/javascript">',
-//	'var name = "<?php echo $username; ?>";',
-//	'var session = "<?php echo $sessionId; ?>";',
-//	'setCookie(name,session,20);',
+
 	// 'const cookie = Object.values(getCookie(name));',
 	// 'document.getElementById("demo").innerHTML = cookie;',
 //	'</script>';
