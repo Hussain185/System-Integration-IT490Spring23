@@ -47,18 +47,20 @@ if (isset($_POST["submit"])) {
   $request['message'] = $msg;
   $response = $client->send_request($request);
   
-  echo $response;
-//  if($response == $sessionId){
-//	echo '<p id="demo"></p>',
-//	'<script type="text/javascript">',
-
-	// 'const cookie = Object.values(getCookie(name));',
-	// 'document.getElementById("demo").innerHTML = cookie;',
-//	'</script>';
-//	if (isset($_COOKIE["$username"]))
-//		echo $_COOKIE["$username"];
-//    	else
-//       		echo "Cookie Not Set";
+  // echo $response;
+  if(!$response == 0){
+	echo '<p id="demo"></p>',
+	'<script type="text/javascript">',
+	'var name = "<?php echo $username; ?>";',
+	'var session = "<?php echo $response; ?>";',
+	'setCookie(name,session,20);',
+	'const cookie = Object.values(getCookie(name));',
+	'document.getElementById("demo").innerHTML = cookie;',
+	'</script>';
+	if (isset($_COOKIE["$username"]))
+		echo $_COOKIE["$username"];
+    	else
+       		echo "Cookie Not Set";
 		
         // header("location: ../index.php?error=none");
         // exit();
