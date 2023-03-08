@@ -5,13 +5,13 @@
 <section class="signup-form">
   <h2>Log In</h2>
   <div class="signup-form-form">
-    <form action="includes/login.inc.php" method="post">
-      <input type="text" name="uid" placeholder="Username/Email...">
-      <input type="password" name="pwd" placeholder="Password...">
-      <button type="submit" name="submit">Sign up</button>
+      <input type="text" id="ajaxTextUser" placeholder="Username/Email...">
+      <input type="password" id="ajaxTextPwd" placeholder="Password...">
+      <button type="submit" id="ajaxButton">Sign up</button>
     </form>
   </div>
   <?php
+  /*
     // Error messages
     if (isset($_GET["error"])) {
       if ($_GET["error"] == "emptyinput") {
@@ -21,8 +21,17 @@
         echo "<p>Wrong login!</p>";
       }
     }
+    */
   ?>
 </section>
+<script>
+  document.getElementById("ajaxButton").onclick = ()
+  {
+    const userName = document.getElementById("ajaxTextUser").value;
+    const passWord = document.getElementById("ajaxTextPwd").value;
+    SendLoginRequest(userName,passWord);
+  };
+</script>
 
 <?php
   include_once 'footer.php';
