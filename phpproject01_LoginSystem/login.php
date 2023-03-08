@@ -23,6 +23,10 @@
     */
   ?>
 </section>
+
+<?php
+  include_once 'footer.php';
+?>
 <script>
   document.getElementById("ajaxButton").onclick = () =>
   {
@@ -31,7 +35,3 @@
     SendLoginRequest(userName,passWord);
   }
 </script>
-
-<?php
-  include_once 'footer.php';
-?>
