@@ -32,6 +32,7 @@ function invalidEmail($email) {
 	$result;
 	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 		$result = true;
+        logClient('Email Error','frontend','Invalid email address');
 	}
 	else {
 		$result = false;
@@ -69,6 +70,7 @@ function emptyInputLogin($username, $pwd) {
 
 function logClient($type, $machine, $log)
 {
+    echo "functions.inc.php log client called";
     $client = new rabbitMQClient("log.ini","logServer");
 
     $request = array();

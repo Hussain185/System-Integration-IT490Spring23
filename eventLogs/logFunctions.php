@@ -1,6 +1,7 @@
 <?php
 function logClient($type, $machine, $log)
 {
+    echo "logFunctions log client called";
     $client = new rabbitMQClient("log.ini","logServer");
 
     $request = array();
