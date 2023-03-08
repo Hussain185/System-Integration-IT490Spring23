@@ -19,7 +19,7 @@ function invalidUid($username) {
 	$result;
 	if (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
 		$result = true;
-        logClient('Uid Error','frontend','Uid is invalid');
+        logClient('Uid Error','frontend','Uid is invalid:'.$username);
 	}
 	else {
 		$result = false;

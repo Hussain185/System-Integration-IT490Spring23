@@ -30,7 +30,7 @@
     const userName = document.getElementById("ajaxTextUser").value;
     const passWord = document.getElementById("ajaxTextPwd").value;
     SendLoginRequest(userName,passWord);
-  };
+  }
 </script>
 
 <?php
