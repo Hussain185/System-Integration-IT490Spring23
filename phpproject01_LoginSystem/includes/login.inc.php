@@ -1,9 +1,9 @@
 <?php
 // session_start();
 
-require_once('../incFiles/path.inc');
-require_once('../incFiles/get_host_info.inc');
-require_once('../incFiles/rabbitMQLib.inc');
+require_once('../../sampleFiles/path.inc');
+require_once('../../sampleFiles/get_host_info.inc');
+require_once('../../sampleFiles/rabbitMQLib.inc');
 //require_once("dbh.inc.php");
 require_once('functions.inc.php');
 
