@@ -13,6 +13,7 @@ function logHandler($request) {
         return "ERROR: unsupported log message type";
         //log this error
         fwrite($logFile, "invalid log message type\n");
+        echo "invalid log message type";
     }
 
 
