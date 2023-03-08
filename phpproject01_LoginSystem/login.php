@@ -25,7 +25,7 @@
   ?>
 </section>
 <script>
-  document.getElementById("ajaxButton").onclick = ()
+  document.getElementById("ajaxButton").onclick = () =>
   {
     const userName = document.getElementById("ajaxTextUser").value;
     const passWord = document.getElementById("ajaxTextPwd").value;
