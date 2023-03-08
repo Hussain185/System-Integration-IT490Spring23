@@ -15,9 +15,10 @@ function logHandler($request) {
         fwrite($logFile, "invalid log message type\n");
         echo "invalid log message type";
     }
+    $t=time();
+    $time = date("Y-m-d",$t);
 
-
-    fwrite($logFile, $request['type']." ".$request['machine']." ".$request['log']." ".time()."\n");
+    fwrite($logFile, $request['type']." ".$request['machine']." ".$request['log']." ".$time."\n");
     fclose($logFile);
 
     return array("returnCode" => '0', 'message'=>"log server received request and processed");
