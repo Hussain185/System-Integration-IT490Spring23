@@ -8,7 +8,6 @@
       <input type="text" id="ajaxTextUser" placeholder="Username/Email...">
       <input type="password" id="ajaxTextPwd" placeholder="Password...">
       <button type="submit" id="ajaxButton">Sign up</button>
-    </form>
   </div>
   <?php
   /*
@@ -25,7 +24,7 @@
   ?>
 </section>
 <script>
-  document.getElementById("ajaxButton").onclick = ()
+  document.getElementById("ajaxButton").onclick = () =>
   {
     const userName = document.getElementById("ajaxTextUser").value;
     const passWord = document.getElementById("ajaxTextPwd").value;
