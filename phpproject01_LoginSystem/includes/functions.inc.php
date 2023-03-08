@@ -1,5 +1,5 @@
 <?php
-require_once('../../eventLogs/logFunctions.php');
+
 
 // Check for empty input signup
 function emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat) {
@@ -65,5 +65,18 @@ function emptyInputLogin($username, $pwd) {
 		$result = false;
 	}
 	return $result;
+}
+
+function logClient($type, $machine, $log)
+{
+    $client = new rabbitMQClient("log.ini","logServer");
+
+    $request = array();
+    $request['type'] = $type;
+    $request['machine'] = $machine;
+    $request['log'] = $log;
+    $response = $client->send_request($request);
+
+    //echo $response;
 }
 
