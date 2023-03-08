@@ -8,7 +8,6 @@
       <input type="text" id="ajaxTextUser" placeholder="Username/Email...">
       <input type="password" id="ajaxTextPwd" placeholder="Password...">
       <button type="submit" id="ajaxButton">Sign up</button>
-    </form>
   </div>
   <?php
   /*
