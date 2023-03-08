@@ -52,7 +52,7 @@ function HandleLoginResponse(response)
 function SendLoginRequest(username,password)
 {
 	var request = new XMLHttpRequest();
-	request.open("POST","login.php",true);
+	request.open("POST","login.inc.php",true);
 	request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	request.onreadystatechange= function ()
 	{
@@ -62,5 +62,5 @@ function SendLoginRequest(username,password)
 			HandleLoginResponse(this.responseText);
 		}		
 	}
-	request.send("type=login&uname="+username+"&pword="+password);
+	request.send("type=login&uname=${encodeURIComponent(username)}"+"&pword=${encodeURIComponent(password)}");
 }
