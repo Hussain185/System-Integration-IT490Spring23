@@ -59,8 +59,12 @@ function SendLoginRequest(username,password)
 		
 		if ((this.readyState == 4)&&(this.status == 200))
 		{
+			alert(httpRequest.responseText);
 			HandleLoginResponse(this.responseText);
 		}		
+		else {
+          		alert("There was a problem with the request.");
+        	}
 	}
 	request.send("type=login&uname=${encodeURIComponent(username)}"+"&pword=${encodeURIComponent(password)}");
 }
