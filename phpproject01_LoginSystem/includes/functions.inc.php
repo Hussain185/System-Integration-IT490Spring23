@@ -19,7 +19,7 @@ function invalidUid($username) {
 	$result;
 	if (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
 		$result = true;
-        logClient('Uid Error','frontend','Uid is invalid:'.$username);
+        logClient('Uid Error','frontend','Uid is invalid:  '.$username);
 	}
 	else {
 		$result = false;
@@ -32,7 +32,7 @@ function invalidEmail($email) {
 	$result;
 	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 		$result = true;
-        logClient('Email Error','frontend','Invalid email address');
+        logClient('Email Error','frontend','Invalid email address: '.$email);
 	}
 	else {
 		$result = false;
@@ -45,7 +45,7 @@ function pwdMatch($pwd, $pwdrepeat) {
 	$result;
 	if ($pwd !== $pwdrepeat) {
 		$result = true;
-        logClient('Password Error','frontend','Passwords do not match');
+        logClient('Password Error','frontend','Passwords do not match: '.$pwd." ".$pwdrepeat);
 	}
 	else {
 		$result = false;
