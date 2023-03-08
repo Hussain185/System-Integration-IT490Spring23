@@ -10,5 +10,5 @@ function logClient($type, $machine, $log)
     $request['log'] = $log;
     $response = $client->send_request($request);
 
-    //echo $response;
+    echo $response;
 }
