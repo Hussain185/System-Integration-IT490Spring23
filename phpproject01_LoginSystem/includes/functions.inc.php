@@ -1,10 +1,12 @@
 <?php
+require_once('../../eventLogs/logFunctions.php');
 
 // Check for empty input signup
 function emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat) {
 	$result;
 	if (empty($name) || empty($email) || empty($username) || empty($pwd) || empty($pwdRepeat)) {
 		$result = true;
+        logClient('Signup Error','frontend','Empty signup input');
 	}
 	else {
 		$result = false;
@@ -17,6 +19,7 @@ function invalidUid($username) {
 	$result;
 	if (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
 		$result = true;
+        logClient('Uid Error','frontend','Uid is invalid');
 	}
 	else {
 		$result = false;
@@ -41,6 +44,7 @@ function pwdMatch($pwd, $pwdrepeat) {
 	$result;
 	if ($pwd !== $pwdrepeat) {
 		$result = true;
+        logClient('Password Error','frontend','Passwords do not match');
 	}
 	else {
 		$result = false;
@@ -55,6 +59,7 @@ function emptyInputLogin($username, $pwd) {
 	$result;
 	if (empty($username) || empty($pwd)) {
 		$result = true;
+        logClient('Login Input Error','frontend','Username or password is empty');
 	}
 	else {
 		$result = false;
