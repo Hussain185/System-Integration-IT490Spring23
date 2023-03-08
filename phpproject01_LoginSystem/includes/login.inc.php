@@ -7,11 +7,10 @@ require_once('../../sampleFiles/rabbitMQLib.inc');
 //require_once("dbh.inc.php");
 require_once('functions.inc.php');
 
-if (isset($_POST["submit"])) {
 
   // First we get the form data from the URL
-  $username = $_POST["uid"];
-  $pwd = $_POST["pwd"];
+  $username = $_POST["username"] ?? "no name";
+  $pwd = $_POST["password"] ?? "no password";
 
   // Then we run a bunch of error handlers to catch any user mistakes we can (you can add more than I did)
   // These functions can be found in functions.inc.php
@@ -47,27 +46,10 @@ if (isset($_POST["submit"])) {
   $request['message'] = $msg;
   $response = $client->send_request($request);
   
-  // echo $response;
-  if(!$response == 0){
-	echo '<p id="demo"></p>',
-	'<script type="text/javascript">',
-	'var name = "<?php echo $username; ?>";',
-	'var session = "<?php echo $response; ?>";',
-	'setCookie(name,session,20);',
-	'const cookie = Object.values(getCookie(name));',
-	'document.getElementById("demo").innerHTML = cookie;',
-	'</script>';
-	if (isset($_COOKIE["$username"]))
-		echo $_COOKIE["$username"];
-    	else
-       		echo "Cookie Not Set";
-		
+  echo $response;
+  // if(!$response == 0){
+	
         // header("location: ../index.php?error=none");
         // exit();
-} 
-}
-  else {
-	session_destroy();
-	header("location: ../login.php");
-    exit();
-}?>
+// } 
+
