@@ -4,6 +4,7 @@ require_once('sampleFiles/get_host_info.inc');
 require_once('sampleFiles/rabbitMQLib.inc');
 require_once('mysqlConnect.php');
 require_once('dbListener.php');
+require_once('eventLogs/logFunctions.php');
 
 function doLogin($username,$password)
 {
@@ -12,6 +13,7 @@ function doLogin($username,$password)
     if($result){
 		if($result->num_rows == 0){
 			echo("No users in table.");
+            logClient('DB Error','database','No users in table');
 			// $event = date("Y-m-d") . "  " . date("h:i:sa") . " [ DB ] " . "ERROR: this user does not exist: $username" . "\n";
 	                // log_event($event);
 			return false;
