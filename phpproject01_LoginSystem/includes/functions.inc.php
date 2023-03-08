@@ -71,7 +71,7 @@ function emptyInputLogin($username, $pwd) {
 function logClient($type, $machine, $log)
 {
     echo "functions.inc.php log client called";
-    $client = new rabbitMQClient("log.ini","logServer");
+    $client = new rabbitMQClient("../../eventLogs/log.ini","logServer");
 
     $request = array();
     $request['type'] = $type;
