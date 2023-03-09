@@ -9,11 +9,11 @@ function logHandler($request) {
 
     $logFile = fopen("logs.txt", "a");
 
-    if(!isset($request['machine'])){
-        return "ERROR: unsupported log message type";
+    if(!isset($request['type'])){
         //log this error
         fwrite($logFile, "invalid log message type\n");
         echo "invalid log message type";
+        return "ERROR: unsupported log message type";
     }
     $t=time();
     $time = date("Y-m-d",$t);
