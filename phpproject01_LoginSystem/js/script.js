@@ -66,5 +66,5 @@ function SendLoginRequest(username,password)
           		alert("There was a problem with the request.");
         	}
 	}
-	request.send("type=login&uname=username&pword=password");
+	request.send("type=login&uname="+username+"&pword="+password);
 }
