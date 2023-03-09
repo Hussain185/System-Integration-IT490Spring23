@@ -32,7 +32,8 @@
 <script>
   const formElement = document.querySelector("form");
   const request = new XMLHttpRequest();
-  request.open("POST", "submitform.php");
+  request.open("POST", "includes/login.inc.php", true);
+  request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
   request.send(new FormData(formElement));
 </script>
 </html>
