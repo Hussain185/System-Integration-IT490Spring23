@@ -63,9 +63,12 @@ function SendLoginRequest(username,password)
 		{
 			alert("Login Sucessful!");
 			HandleLoginResponse(this.responseText);
+			if(!HandleLoginResponse(this.responseText) 
+			   { alert("Login Fail.") }
+			   
 		}		
 		else {
-          		alert("Login Failed.");
+          		alert("There was an issue with the request.");
         	}
 	}
 	request.send("type=login&uname="+username+"&pword="+password);
