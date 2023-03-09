@@ -224,8 +224,9 @@ class rabbitMQClient
 			$callback_queue->consume(array($this,'process_response'));
 
 			$response = $this->response_queue[$uid];
-			unset($this->response_queue[$uid]);
 			return $response;
+			unset($this->response_queue[$uid]);
+
 		}
 		catch(Exception $e)
 		{
