@@ -59,8 +59,8 @@ function SendLoginRequest(username,password)
 		
 		if (this.status == 200)
 		{
-			alert(httpRequest.responseText);
-			HandleLoginResponse(this.responseText);
+			alert(request.responseText);
+			// HandleLoginResponse(this.responseText);
 		}		
 		else {
           		alert("There was a problem with the request.");
