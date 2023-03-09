@@ -122,7 +122,7 @@ class rabbitMQServer
 			$this->conn_queue->consume(array($this,'process_message'));
 
 			// Loop as long as the channel has callbacks registered
-			while ($channel->isConnected())
+			while (count($channel->callbacks))
 			{
 				$channel->wait();
 			}
@@ -212,7 +212,7 @@ class rabbitMQClient
 
       $callback_queue = new AMQPQueue($channel);
       $callback_queue->setName("problemChildQueue");
-      $callback_queue->declare();
+      $callback_queue->declareQueue();
 			$callback_queue->bind($exchange->getName(),$this->routing_key.".response");
 
 			$this->conn_queue = new AMQPQueue($channel);
@@ -224,9 +224,8 @@ class rabbitMQClient
 			$callback_queue->consume(array($this,'process_response'));
 
 			$response = $this->response_queue[$uid];
-			return $response;
 			unset($this->response_queue[$uid]);
-
+			return $response;
 		}
 		catch(Exception $e)
 		{
