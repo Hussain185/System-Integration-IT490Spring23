@@ -24,7 +24,6 @@ function doLogin($username,$password)
 					echo "User Authenicated".PHP_EOL;
 					$myObj = new stdClass();
 					$myObj->username = $row['usersUid'];
-					$myObj->password = $row['usersPwd'];
 					$queryy = "SELECT session_id FROM user_session WHERE user_id='$username'";
     					$resultt = mysqli_query(dbConnection(), $queryy);
     					if($resultt){
@@ -38,6 +37,7 @@ function doLogin($username,$password)
 						else{
 							while($roww = $resultt->fetch_assoc()){
 								$myObj->sessionId = $row['sesion_id'];
+								$myObj->expTime = $row['loginTime'];
 								$myJSON = json_encode($myObj);
 								return $myJSON;
 							}
