@@ -4,7 +4,6 @@ require_once('sampleFiles/get_host_info.inc');
 require_once('sampleFiles/rabbitMQLib.inc');
 require_once('mysqlConnect.php');
 require_once('dbListener.php');
-require_once('eventLogs/logFunctions.php');
 
 function doLogin($username,$password)
 {
@@ -168,6 +167,20 @@ function loginUser($conn, $username, $pwd) {
         header("location: ../index.php?error=none");
         exit();
     }
+}
+
+function logClient($type, $machine, $log)
+{
+    echo "logFunctions log client called";
+    $client = new rabbitMQClient("eventLogs/log.ini","logServer");
+
+    $request = array();
+    $request['type'] = $type;
+    $request['machine'] = $machine;
+    $request['log'] = $log;
+    $response = $client->send_request($request);
+
+    echo $response;
 }
 
 //function returnToFrontend($returnMsg)
