@@ -22,8 +22,9 @@ function doLogin($username,$password)
 				// $h_password = generateHash($password);
 				if ($row['usersPwd'] == $password){
 					echo "User Authenicated".PHP_EOL;
-					// $cookie = setcookie($row['usersUid'], hash("sha256",$row['usersPwd']), time()+60*60);
-					// Above code is incorrect. You need to use Javascript in Browser side
+					$myObj = new stdClass();
+					$myObj->username = $row['usersUid'];
+					$myObj->password = $row['usersPwd'];
 					$queryy = "SELECT session_id FROM user_session WHERE user_id='$username'";
     					$resultt = mysqli_query(dbConnection(), $queryy);
     					if($resultt){
@@ -32,12 +33,13 @@ function doLogin($username,$password)
 							$sessionId = hash("sha256",$row['usersPwd']);
 							$queryyy = "INSERT INTO user_session(user_id,session_id) VALUES ('$username','$sessionId');";
 							$resulttt = mysqli_query(dbConnection(), $queryyy);
-							return $sessionId;	
+							// return $sessionId;	
 						}
 						else{
 							while($roww = $resultt->fetch_assoc()){
-								$sessionId = $roww['session_id'];
-								return $sessionId;
+								$myObj->sessionId = $row['sesion_id'];
+								$myJSON = json_encode($myObj);
+								return $myJSON;
 							}
 						}
 				}
