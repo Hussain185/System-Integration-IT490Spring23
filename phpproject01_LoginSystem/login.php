@@ -5,11 +5,9 @@
 <section class="signup-form">
   <h2>Log In</h2>
   <div class="signup-form-form">
-      <form action="includes/login.inc.php" method="post" id="loginForm">
-      <input type="text" name="uid" placeholder="Username/Email...">
-      <input type="password" name="pwd" placeholder="Password...">
-      <button type="submit" name="submit">Sign up</button>
-    </form>
+      <input type="text" id="ajaxTextUser" value="john123">
+      <input type="password" id="ajaxTextPwd" value="password123">
+      <button type="submit" id="ajaxButton">Sign up</button>
   </div>
   <?php
   /*
@@ -30,11 +28,12 @@
   include_once 'footer.php';
 ?>
 <script>
-  const formElement = document.querySelector("form");
-  const request = new XMLHttpRequest();
-  request.open("POST", "includes/login.inc.php", true);
-  request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-  request.send(new FormData(formElement));
+  document.getElementById("ajaxButton").onclick = () =>
+  {
+    const userName = document.getElementById("ajaxTextUser").value;
+    const passWord = document.getElementById("ajaxTextPwd").value;
+    SendLoginRequest(userName,passWord);
+  }
 </script>
 </html>
 
