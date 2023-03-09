@@ -28,11 +28,12 @@
   include_once 'footer.php';
 ?>
 <script>
-  document.getElementById("ajaxButton").onclick = () =>
-  {
+  document.getElementById("ajaxButton").addEventListener('click', function() {
     const userName = document.getElementById("ajaxTextUser").value;
     const passWord = document.getElementById("ajaxTextPwd").value;
-    SendLoginRequest(userName,passWord);
+    SendLoginRequest(userName,passWord); }, false); 
+ 
+    
   }
 </script>
 </html>
