@@ -36,8 +36,8 @@ function doLogin($username,$password)
 						}
 						else{
 							while($roww = $resultt->fetch_assoc()){
-								$myObj->sessionId = $row['sesion_id'];
-								$myObj->expTime = $row['loginTime'];
+								$myObj->sessionId = $roww['sesion_id'];
+								$myObj->expTime = $roww['loginTime'];
 								$myJSON = json_encode($myObj);
 								return $myJSON;
 							}
