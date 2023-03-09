@@ -61,11 +61,11 @@ function SendLoginRequest(username,password)
 		
 		if (this.status == 200)
 		{
-			alert(request.responseText);
+			alert("Login Sucessful!");
 			HandleLoginResponse(this.responseText);
 		}		
 		else {
-          		alert("There was a problem with the request.");
+          		alert("Login Failed.");
         	}
 	}
 	request.send("type=login&uname="+username+"&pword="+password);
