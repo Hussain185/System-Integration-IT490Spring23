@@ -122,7 +122,7 @@ class rabbitMQServer
 			$this->conn_queue->consume(array($this,'process_message'));
 
 			// Loop as long as the channel has callbacks registered
-			while (count($channel->callbacks))
+			while ($channel->isConnected())
 			{
 				$channel->wait();
 			}
