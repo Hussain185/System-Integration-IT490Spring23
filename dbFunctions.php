@@ -46,7 +46,9 @@ function doLogin($username,$password)
 				else{
 					// $event = date("Y-m-d") . "  " . date("h:i:sa") . " [ DB ] " . "ERROR: Username & Password do not match" . "\n";
 			                // log_event($event);
-					return 0;
+					$myNum= 0;
+					$myJSON = json_encode($myNum);
+					return $myJSON;
 				}
 			}
 		}
