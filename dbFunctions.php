@@ -13,7 +13,7 @@ function doLogin($username,$password)
     if($result){
 		if($result->num_rows == 0){
 			echo("No users in table.");
-            logClient('DB Error','database','No users in table');
+            //logClient('DB Error','database','No users in table');
 			// $event = date("Y-m-d") . "  " . date("h:i:sa") . " [ DB ] " . "ERROR: this user does not exist: $username" . "\n";
 	                // log_event($event);
 			return false;
