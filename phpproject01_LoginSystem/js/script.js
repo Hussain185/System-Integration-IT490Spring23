@@ -44,11 +44,17 @@ function getCookie(cname) {
 
 function HandleLoginResponse(response)
 {
-	const myObj = JSON.parse(response);
-	var name = myObj.username;
-	var session = myObj.sessionId;
-	var exp = 10;
-	setCookie(name,session,exp);
+	if(response == "0") {
+		alert("Login Fail.")
+	}
+	else{
+		alert("Login Sucessful!");
+		const myObj = JSON.parse(response);
+		var name = myObj.username;
+		var session = myObj.sessionId;
+		var exp = 10;
+		setCookie(name,session,exp);
+	}
 }
 
 function SendLoginRequest(username,password)
@@ -61,11 +67,7 @@ function SendLoginRequest(username,password)
 		
 		if (this.status == 200)
 		{
-			alert("Login Sucessful!");
-			HandleLoginResponse(this.responseText);
-			if(!HandleLoginResponse(this.responseText) 
-			   { alert("Login Fail.") }
-			   
+			HandleLoginResponse(this.responseText);	   
 		}		
 		else {
           		alert("There was an issue with the request.");
