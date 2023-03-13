@@ -44,9 +44,17 @@ function getCookie(cname) {
 
 function HandleLoginResponse(response)
 {
-	var text = JSON.parse(response);
-//	document.getElementById("textResponse").innerHTML = response+"<p>";	
-	document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
+	if(response == "0") {
+		alert("Login Fail.")
+	}
+	else{
+		alert("Login Sucessful!");
+		const myObj = JSON.parse(response);
+		var name = myObj.username;
+		var session = myObj.sessionId;
+		var exp = 10;
+		setCookie(name,session,exp);
+	}
 }
 
 function SendLoginRequest(username,password)
@@ -57,14 +65,13 @@ function SendLoginRequest(username,password)
 	request.onreadystatechange= function ()
 	{
 		
-		if ((this.readyState == 4)&&(this.status == 200))
+		if (this.status == 200)
 		{
-			alert(httpRequest.responseText);
-			HandleLoginResponse(this.responseText);
+			HandleLoginResponse(this.responseText);	   
 		}		
 		else {
-          		alert("There was a problem with the request.");
+          		alert("There was an issue with the request.");
         	}
 	}
-	request.send("type=login&uname=${encodeURIComponent(username)}"+"&pword=${encodeURIComponent(password)}");
+	request.send("type=login&uname="+username+"&pword="+password);
 }

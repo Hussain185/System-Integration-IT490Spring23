@@ -1,6 +1,5 @@
 <?php
 
-
 // Check for empty input signup
 function emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat) {
 	$result;

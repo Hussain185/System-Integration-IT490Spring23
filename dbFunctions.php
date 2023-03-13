@@ -4,7 +4,6 @@ require_once('sampleFiles/get_host_info.inc');
 require_once('sampleFiles/rabbitMQLib.inc');
 require_once('mysqlConnect.php');
 require_once('dbListener.php');
-require_once('eventLogs/logFunctions.php');
 
 function doLogin($username,$password)
 {
@@ -16,15 +15,17 @@ function doLogin($username,$password)
             //logClient('DB Error','database','No users in table');
 			// $event = date("Y-m-d") . "  " . date("h:i:sa") . " [ DB ] " . "ERROR: this user does not exist: $username" . "\n";
 	                // log_event($event);
-			return false;
-		}
+			$myNum= 0;
+			$myJSON = json_encode($myNum);
+			return $myJSON;
+						}
 		else {
 			while($row = $result->fetch_assoc()){
 				// $h_password = generateHash($password);
 				if ($row['usersPwd'] == $password){
 					echo "User Authenicated".PHP_EOL;
-					// $cookie = setcookie($row['usersUid'], hash("sha256",$row['usersPwd']), time()+60*60);
-					// Above code is incorrect. You need to use Javascript in Browser side
+					$myObj = new stdClass();
+					$myObj->username = $row['usersUid'];
 					$queryy = "SELECT session_id FROM user_session WHERE user_id='$username'";
     					$resultt = mysqli_query(dbConnection(), $queryy);
     					if($resultt){
@@ -33,19 +34,23 @@ function doLogin($username,$password)
 							$sessionId = hash("sha256",$row['usersPwd']);
 							$queryyy = "INSERT INTO user_session(user_id,session_id) VALUES ('$username','$sessionId');";
 							$resulttt = mysqli_query(dbConnection(), $queryyy);
-							return $sessionId;	
+							// return $sessionId;	
 						}
 						else{
 							while($roww = $resultt->fetch_assoc()){
-								$sessionId = $roww['session_id'];
-								return $sessionId;
+								$myObj->sessionId = $roww['session_id'];
+								$myObj->expTime = $roww['loginTime'];
+								$myJSON = json_encode($myObj);
+								return $myJSON;
 							}
 						}
 				}
 				else{
 					// $event = date("Y-m-d") . "  " . date("h:i:sa") . " [ DB ] " . "ERROR: Username & Password do not match" . "\n";
 			                // log_event($event);
-					return 0;
+					$myNum= 0;
+					$myJSON = json_encode($myNum);
+					return $myJSON;
 				}
 			}
 		}
@@ -168,6 +173,20 @@ function loginUser($conn, $username, $pwd) {
         header("location: ../index.php?error=none");
         exit();
     }
+}
+
+function logClient($type, $machine, $log)
+{
+    echo "logFunctions log client called";
+    $client = new rabbitMQClient("eventLogs/log.ini","logServer");
+
+    $request = array();
+    $request['type'] = $type;
+    $request['machine'] = $machine;
+    $request['log'] = $log;
+    $response = $client->send_request($request);
+
+    echo $response;
 }
 
 //function returnToFrontend($returnMsg)
