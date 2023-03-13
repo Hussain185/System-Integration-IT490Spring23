@@ -44,7 +44,7 @@ function getCookie(cname) {
 
 function HandleLoginResponse(response)
 {
-	if(response == "0") {
+	if(response == 0) {
 		alert("Login Fail.")
 	}
 	else{
