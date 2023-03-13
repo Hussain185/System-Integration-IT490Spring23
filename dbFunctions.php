@@ -15,8 +15,10 @@ function doLogin($username,$password)
             logClient('DB Error','database','No users in table');
 			// $event = date("Y-m-d") . "  " . date("h:i:sa") . " [ DB ] " . "ERROR: this user does not exist: $username" . "\n";
 	                // log_event($event);
-			return false;
-		}
+			$myNum= 0;
+			$myJSON = json_encode($myNum);
+			return $myJSON;
+						}
 		else {
 			while($row = $result->fetch_assoc()){
 				// $h_password = generateHash($password);
@@ -36,7 +38,7 @@ function doLogin($username,$password)
 						}
 						else{
 							while($roww = $resultt->fetch_assoc()){
-								$myObj->sessionId = $roww['sesion_id'];
+								$myObj->sessionId = $roww['session_id'];
 								$myObj->expTime = $roww['loginTime'];
 								$myJSON = json_encode($myObj);
 								return $myJSON;
