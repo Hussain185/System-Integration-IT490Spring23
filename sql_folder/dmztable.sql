@@ -1,0 +1,7 @@
+CREATE TABLE dmztable (
+  id INT NOT NULL AUTO_INCREMENT,
+  url VARCHAR(225) NOT NULL,
+  calories INT NOT NULL,
+  PRIMARY KEY (id)
+);
+
