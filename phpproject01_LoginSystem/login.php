@@ -7,7 +7,7 @@
   <div class="signup-form-form">
       <input type="text" id="ajaxTextUser" value="john123">
       <input type="password" id="ajaxTextPwd" value="password123">
-      <button type="submit" id="ajaxButton">Sign up</button>
+      <button type="submit" id="ajaxButton">Log in</button>
   </div>
   <?php
   /*
