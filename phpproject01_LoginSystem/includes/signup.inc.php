@@ -1,13 +1,11 @@
 <?php
 
-if (isset($_POST["submit"])) {
-
   // First we get the form data from the URL
   $name = $_POST["name"];
   $email = $_POST["email"];
-  $username = $_POST["uid"];
-  $pwd = $_POST["pwd"];
-  $pwdRepeat = $_POST["pwdrepeat"];
+  $username = $_POST["uname"];
+  $pwd = $_POST["pword"];
+  $pwdRepeat = $_POST["rptpword"];
 
   // Then we run a bunch of error handlers to catch any user mistakes we can (you can add more than I did)
   // These functions can be found in functions.inc.php
@@ -56,18 +54,3 @@ if (isset($_POST["submit"])) {
     $request['message'] = $msg;
     $response = $client->send_request($request);
 
-    echo "client received response: ".PHP_EOL;
-    print_r($response);
-    echo "\n\n";
-
-    echo $argv[0]." END".PHP_EOL;
-
-  // If we get to here, it means there are no user errors
-
-  // Now we insert the user into the database
-  // createUser($conn, $name, $email, $username, $pwd);
-
-} else {
-	header("location: ../signup.php");
-    exit();
-}
