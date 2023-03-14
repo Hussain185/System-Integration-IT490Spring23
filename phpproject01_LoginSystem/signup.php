@@ -44,7 +44,7 @@
     const email = document.getElementById("ajaxTextEmail").value;
     const userName = document.getElementById("ajaxTextUser").value;
     const passWord = document.getElementById("ajaxTextPwd").value;
-	  const rptPassWord = document.getElementById("ajaxTextRptPwd").value;
-    SendLoginRequest(name,email,userName,passWord,rptPassWord); }, false); 
+    const rptPassWord = document.getElementById("ajaxTextRptPwd").value;
+    SendSignupRequest(name,email,userName,passWord,rptPassWord); }, false); 
 </script>
 </html>
