@@ -58,4 +58,5 @@ require_once('functions.inc.php');
     $request['password'] = $pwd;
     $request['message'] = $msg;
     $response = $client->send_request($request);
+    echo $response;
 
