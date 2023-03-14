@@ -75,3 +75,32 @@ function SendLoginRequest(username,password)
 	}
 	request.send("type=login&uname="+username+"&pword="+password);
 }
+
+function SendSignupRequest(name,email,username,password,passwordrpt)
+{
+	var request = new XMLHttpRequest();
+	request.open("POST","includes/signup.inc.php",true);
+	request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	request.onreadystatechange= function ()
+	{
+		
+		if (this.status == 200)
+		{
+			HandleSignupResponse(this.responseText);	   
+		}		
+		else {
+          		alert("There was an issue with the request.");
+        	}
+	}
+	request.send("type=signup&name="+name+"&email="+email+"&uname="+username+"&pword="+password+"&rptpword="+passwordrpt);
+}
+
+function HandleSignupResponse(response)
+{
+	if(response == 0) {
+		alert("Signup Fail.")
+	}
+	else{
+		alert("Signup Sucessful! You can now login.");
+	}
+}
