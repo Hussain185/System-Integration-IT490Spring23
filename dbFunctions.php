@@ -91,7 +91,7 @@ function loginUser($conn, $username, $pwd) {
 
 function doLogin($username,$password)
 {
-    $uidExists = uidExists($conn, $username);
+    $uidExists = uidExists(dbConnection(), $username);
 
     if ($uidExists === false) {
     	echo("No users in table.");
