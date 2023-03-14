@@ -76,6 +76,16 @@ function SendLoginRequest(username,password)
 	request.send("type=login&uname="+username+"&pword="+password);
 }
 
+function HandleSignupResponse(response)
+{
+	if(response == 0) {
+		alert("Signup Fail.")
+	}
+	else{
+		alert("Signup Sucessful! You can now login.");
+	}
+}
+
 function SendSignupRequest(name,email,username,password,passwordrpt)
 {
 	var request = new XMLHttpRequest();
@@ -93,14 +103,4 @@ function SendSignupRequest(name,email,username,password,passwordrpt)
         	}
 	}
 	request.send("type=signup&name="+name+"&email="+email+"&uname="+username+"&pword="+password+"&rptpword="+passwordrpt);
-}
-
-function HandleSignupResponse(response)
-{
-	if(response == 0) {
-		alert("Signup Fail.")
-	}
-	else{
-		alert("Signup Sucessful! You can now login.");
-	}
 }
