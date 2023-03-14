@@ -104,7 +104,7 @@ function doLogin($username,$password)
 	}
     else {
     	$pwdHashed = $uidExists["usersPwd"];
-    	$checkPwd = password_verify($pwd, $pwdHashed);
+    	$checkPwd = password_verify($password, $pwdHashed);
 	if ($checkPwd === false) {
 		$myNum= 0;
 		$myJSON = json_encode($myNum);
