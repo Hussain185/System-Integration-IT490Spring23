@@ -7,55 +7,57 @@ require_once('dbListener.php');
 
 function doLogin($username,$password)
 {
-    $query = "SELECT * FROM users WHERE usersUid='$username' AND usersPwd='$password'";
-    $result = mysqli_query(dbConnection(), $query);
-    if($result){
-		if($result->num_rows == 0){
-			echo("No users in table.");
-            logClient('DB Error','database','No users in table');
-			// $event = date("Y-m-d") . "  " . date("h:i:sa") . " [ DB ] " . "ERROR: this user does not exist: $username" . "\n";
-	                // log_event($event);
-			$myNum= 0;
-			$myJSON = json_encode($myNum);
-			return $myJSON;
-						}
-		else {
-			while($row = $result->fetch_assoc()){
-				// $h_password = generateHash($password);
-				if ($row['usersPwd'] == $password){
-					echo "User Authenicated".PHP_EOL;
-					$myObj = new stdClass();
-					$myObj->username = $row['usersUid'];
-					$queryy = "SELECT session_id FROM user_session WHERE user_id='$username'";
-    					$resultt = mysqli_query(dbConnection(), $queryy);
-    					if($resultt){
-						if($resultt->num_rows == 0){
-							echo("No user in table. Create new sessionID");
-							$sessionId = hash("sha256",$row['usersPwd']);
-							$queryyy = "INSERT INTO user_session(user_id,session_id) VALUES ('$username','$sessionId');";
-							$resulttt = mysqli_query(dbConnection(), $queryyy);
-							// return $sessionId;	
-						}
-						else{
-							while($roww = $resultt->fetch_assoc()){
-								$myObj->sessionId = $roww['session_id'];
-								$myObj->expTime = $roww['loginTime'];
-								$myJSON = json_encode($myObj);
-								return $myJSON;
-							}
-						}
+    $uidExists = uidExists($conn, $username);
+
+    if ($uidExists === false) {
+    	echo("No users in table.");
+        logClient('DB Error','database','No users in table');
+	// $event = date("Y-m-d") . "  " . date("h:i:sa") . " [ DB ] " . "ERROR: this user does not exist: $username" . "\n";
+	// log_event($event);
+	$myNum= 0;
+	$myJSON = json_encode($myNum);
+	return $myJSON;
+	}
+    else {
+    	$pwdHashed = $uidExists["usersPwd"];
+    	$checkPwd = password_verify($pwd, $pwdHashed);
+	if ($checkPwd === false) {
+		$myNum= 0;
+		$myJSON = json_encode($myNum);
+		return $myJSON; 
+	}
+	else{
+		echo "User Authenicated".PHP_EOL;
+		$myObj = new stdClass();
+		$myObj->username = $uidExists['usersUid'];
+		$queryy = "SELECT session_id FROM user_session WHERE user_id='$username'";
+    		$resultt = mysqli_query(dbConnection(), $queryy);
+    		if($resultt){
+			if($resultt->num_rows == 0){
+				echo("No user in table. Create new sessionID");
+				$sessionId = hash("sha256",$row['usersPwd']);
+				$queryyy = "INSERT INTO user_session(user_id,session_id) VALUES ('$username','$sessionId');";
+				$resulttt = mysqli_query(dbConnection(), $queryyy);
+				// return $sessionId;	
 				}
-				else{
-					// $event = date("Y-m-d") . "  " . date("h:i:sa") . " [ DB ] " . "ERROR: Username & Password do not match" . "\n";
-			                // log_event($event);
-					$myNum= 0;
-					$myJSON = json_encode($myNum);
+			else{
+				while($roww = $resultt->fetch_assoc()){
+					$myObj->sessionId = $roww['session_id'];
+					$myObj->expTime = $roww['loginTime'];
+					$myJSON = json_encode($myObj);
 					return $myJSON;
+					}
 				}
+			}
+			else{
+				// $event = date("Y-m-d") . "  " . date("h:i:sa") . " [ DB ] " . "ERROR: Username & Password do not match" . "\n";
+			        // log_event($event);
+				$myNum= 0;
+				$myJSON = json_encode($myNum);
+				return $myJSON;
 			}
 		}
 	}
-}
 }
 
 function uidExists($conn, $username) {
