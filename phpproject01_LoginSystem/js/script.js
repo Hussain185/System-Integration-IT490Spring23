@@ -44,11 +44,17 @@ function getCookie(cname) {
 
 function HandleLoginResponse(response)
 {
-	const myObj = JSON.parse(response);
-	var name = myObj.username;
-	var session = myObj.sessionId;
-	var exp = 10;
-	setCookie(name,session,exp);
+	if(response == 0) {
+		alert("Login Fail.")
+	}
+	else{
+		alert("Login Sucessful!");
+		const myObj = JSON.parse(response);
+		var name = myObj.username;
+		var session = myObj.sessionId;
+		var exp = 10;
+		setCookie(name,session,exp);
+	}
 }
 
 function SendLoginRequest(username,password)
@@ -61,12 +67,40 @@ function SendLoginRequest(username,password)
 		
 		if (this.status == 200)
 		{
-			alert("Login Sucessful!");
-			HandleLoginResponse(this.responseText);
+			HandleLoginResponse(this.responseText);	   
 		}		
 		else {
-          		alert("Login Failed.");
+          		alert("There was an issue with the request.");
         	}
 	}
 	request.send("type=login&uname="+username+"&pword="+password);
+}
+
+function HandleSignupResponse(response)
+{
+	if(response == 0) {
+		alert("Signup Fail.")
+	}
+	else{
+		alert("Signup Sucessful! You can now login.");
+	}
+}
+
+function SendSignupRequest(name,email,username,password,passwordrpt)
+{
+	var request = new XMLHttpRequest();
+	request.open("POST","includes/signup.inc.php",true);
+	request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	request.onreadystatechange= function ()
+	{
+		
+		if (this.status == 200)
+		{
+			HandleSignupResponse(this.responseText);	   
+		}		
+		else {
+          		alert("There was an issue with the request.");
+        	}
+	}
+	request.send("type=signup&name="+name+"&email="+email+"&uname="+username+"&pword="+password+"&rptpword="+passwordrpt);
 }

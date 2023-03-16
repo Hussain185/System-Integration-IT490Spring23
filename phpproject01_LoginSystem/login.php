@@ -5,9 +5,9 @@
 <section class="signup-form">
   <h2>Log In</h2>
   <div class="signup-form-form">
-      <input type="text" id="ajaxTextUser" value="john123">
-      <input type="password" id="ajaxTextPwd" value="password123">
-      <button type="submit" id="ajaxButton">Sign up</button>
+      <input type="text" id="ajaxTextUser" placeholder="Username/Email">
+      <input type="password" id="ajaxTextPwd" placeholder="Password">
+      <button type="submit" id="ajaxButton">Log in</button>
   </div>
   <?php
   /*

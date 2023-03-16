@@ -117,17 +117,14 @@ section {
   color: #007ecc;
 }
 
-.signup-form form {
-  width: 30%;
-}
 
-.signup-form form input {
+.signup-form input {
   width: calc(100% - 16px);
   padding: 6px;
   margin-bottom: 4px;
 }
 
-.signup-form form button {
+.signup-form button {
   display: block;
   padding: 10px 20px;
   margin: 10px auto;

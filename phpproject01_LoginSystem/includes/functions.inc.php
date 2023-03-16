@@ -5,7 +5,7 @@ function emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat) {
 	$result;
 	if (empty($name) || empty($email) || empty($username) || empty($pwd) || empty($pwdRepeat)) {
 		$result = true;
-        logClient('Signup Error','frontend','Empty signup input');
+        //logClient('Signup Error','frontend','Empty signup input');
 	}
 	else {
 		$result = false;
@@ -31,7 +31,7 @@ function invalidEmail($email) {
 	$result;
 	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 		$result = true;
-        logClient('Email Error','frontend','Invalid email address: '.$email);
+        //logClient('Email Error','frontend','Invalid email address: '.$email);
 	}
 	else {
 		$result = false;
@@ -44,7 +44,7 @@ function pwdMatch($pwd, $pwdrepeat) {
 	$result;
 	if ($pwd !== $pwdrepeat) {
 		$result = true;
-        logClient('Password Error','frontend','Passwords do not match: '.$pwd." ".$pwdrepeat);
+        //logClient('Password Error','frontend','Passwords do not match: '.$pwd." ".$pwdrepeat);
 	}
 	else {
 		$result = false;
@@ -59,7 +59,7 @@ function emptyInputLogin($username, $pwd) {
 	$result;
 	if (empty($username) || empty($pwd)) {
 		$result = true;
-        logClient('Login Input Error','frontend','Username or password is empty');
+        //logClient('Login Input Error','frontend','Username or password is empty');
 	}
 	else {
 		$result = false;

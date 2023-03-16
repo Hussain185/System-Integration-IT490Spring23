@@ -5,14 +5,12 @@
 <section class="signup-form">
   <h2>Sign Up</h2>
   <div class="signup-form-form">
-    <form action="includes/signup.inc.php" method="post">
-      <input type="text" name="name" placeholder="Full name...">
-      <input type="text" name="email" placeholder="Email...">
-      <input type="text" name="uid" placeholder="Username...">
-      <input type="password" name="pwd" placeholder="Password...">
-      <input type="password" name="pwdrepeat" placeholder="Repeat password...">
-      <button type="submit" name="submit">Sign up</button>
-    </form>
+      <input type="text" id="ajaxTextName" placeholder="Full name...">
+      <input type="text" id="ajaxTextEmail" placeholder="Email...">
+      <input type="text" id="ajaxTextUser" placeholder="Username...">
+      <input type="password" id="ajaxTextPwd" placeholder="Password...">
+      <input type="password" id="ajaxTextRptPwd" placeholder="Repeat password...">
+      <button type="submit" id="ajaxButton">Sign up</button>
   </div>
   <?php
     // Error messages
@@ -39,4 +37,14 @@
 <?php
   include_once 'footer.php';
 ?>
+
+<script>
+  document.getElementById("ajaxButton").addEventListener('click', function() {
+    const name = document.getElementById("ajaxTextName").value;
+    const email = document.getElementById("ajaxTextEmail").value;
+    const userName = document.getElementById("ajaxTextUser").value;
+    const passWord = document.getElementById("ajaxTextPwd").value;
+    const rptPassWord = document.getElementById("ajaxTextRptPwd").value;
+    SendSignupRequest(name,email,userName,passWord,rptPassWord); }, false); 
+</script>
 </html>
