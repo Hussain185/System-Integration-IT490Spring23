@@ -23,16 +23,16 @@
           <li><a href="discover.php">About Us</a></li>
           <li><a href="blog.php">Find Blogs</a></li>
           <?php
-          /*
-            if (isset($_SESSION["useruid"])) {
+          
+            if (isset($_COOKIE['username'])) {
               echo "<li><a href='profile.php'>Profile Page</a></li>";
-              echo "<li><a href='logout.php'>Logout</a></li>";
+              echo "<li><a href='logout.html'>Logout</a></li>";
             }
-          */  
-           // else {
+            
+            else {
               echo "<li><a href='signup.php'>Sign up</a></li>";
               echo "<li><a href='login.php'>Log in</a></li>";
-           // }
+            }
           ?>
 
         </ul>
