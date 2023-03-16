@@ -144,6 +144,32 @@ function doLogin($username,$password)
 	}
 }
 
+function createEvent($conn, $title, $desc, $date, $days, $color)
+{
+
+    $sql = "INSERT INTO events (title, desc, startDate, endDate, createdDate, userID, color) VALUES (?, ?, ?, ?, ?, ?);";
+
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        $myNum= 0;
+        $myJSON = json_encode($myNum);
+        return $myJSON;
+    }
+
+    $startDate = $date;
+    $endDate = $date('d-m-y h:i:s', strtotime($date . ' +'.$days.' day'));
+
+    $currentDate = date('d-m-y h:i:s');
+
+    mysqli_stmt_bind_param($stmt, "ssssss", $title, $desc, $startDate, $endDate, $currentDate, $userId, $color);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+    $myNum= 1;
+    $myJSON = json_encode($myNum);
+    return $myJSON;
+}
+
 function logClient($type, $machine, $log)
 {
     echo "logFunctions log client called";

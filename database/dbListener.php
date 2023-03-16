@@ -1,8 +1,8 @@
 #!/usr/bin/php
 <?php
-require_once('sampleFiles/path.inc');
-require_once('sampleFiles/get_host_info.inc');
-require_once('sampleFiles/rabbitMQLib.inc');
+require_once('../sampleFiles/path.inc');
+require_once('../sampleFiles/get_host_info.inc');
+require_once('../sampleFiles/rabbitMQLib.inc');
 require_once('dbFunctions.php');
 //require_once('mysqlConnect.php');
 
@@ -33,6 +33,8 @@ function requestProcessor($request)
 			return doValidate($request['sessionId']);
 		case "signup":
             return createUser($conn,$request['name'],$request['email'],$request['username'],$request['password']);
+        case "cal":
+            return createEvent($conn, $request['title'], $request['desc'], $request['date'], $request['days'], $request['color']);
 
 	}
 	return array("returnCode" => '0', 'message'=>"Server received request and processed");
