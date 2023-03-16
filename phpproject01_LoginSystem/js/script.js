@@ -20,11 +20,13 @@ for (let i = 0; i < getNav.length; i++) {
     getNav[0].style.cssText = "color: #31a6ff;";
   }
 }
-function setCookie(cname, cvalue, exminutes) {
+function setCookie(cusername, csessionvalue, exminutes) {
   const d = new Date();
   d.setTime(d.getTime() + (exminutes*60*1000));
   let expires = "expires="+ d.toUTCString();
-  document.cookie = '"' + cname + '=' + cvalue + ';' + expires + ';path=/"';
+  // document.cookie = '"' + cname + '=' + cvalue + ';' + expires + ';path=/"';
+  document.cookie = '"username=' + cusername + ';' + expires + ';path=/"';
+
 }
 function getCookie(cname) {
   let name = cname + "=";
