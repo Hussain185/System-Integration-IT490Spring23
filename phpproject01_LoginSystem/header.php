@@ -24,7 +24,7 @@
           <li><a href="blog.php">Find Blogs</a></li>
           <?php
           
-            if (isset($_COOKIE["username"])) {
+            if (isset($_COOKIE['username'])) {
               echo "<li><a href='profile.php'>Profile Page</a></li>";
               echo "<li><a href='logout.php'>Logout</a></li>";
             }
