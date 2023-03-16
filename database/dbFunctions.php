@@ -95,7 +95,7 @@ function doLogin($username,$password)
 
     if ($uidExists === false) {
     	echo("No users in table.");
-        logClient('DB Error','database','No users in table');
+        //logClient('DB Error','database','No users in table');
 	// $event = date("Y-m-d") . "  " . date("h:i:sa") . " [ DB ] " . "ERROR: this user does not exist: $username" . "\n";
 	// log_event($event);
 	$myNum= 0;
