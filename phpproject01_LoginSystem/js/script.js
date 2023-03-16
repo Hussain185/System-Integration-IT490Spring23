@@ -25,7 +25,7 @@ function setCookie(cusername, csessionvalue, exminutes) {
   d.setTime(d.getTime() + (exminutes*60*1000));
   let expires = "expires="+ d.toUTCString();
   // document.cookie = '"' + cname + '=' + cvalue + ';' + expires + ';path=/"';
-  document.cookie = '"username=' + cusername + ';' + expires + ';path=/"';
+  document.cookie = 'username=' + cusername + ';' + expires + ';path=/';
 
 }
 function getCookie(cname) {
