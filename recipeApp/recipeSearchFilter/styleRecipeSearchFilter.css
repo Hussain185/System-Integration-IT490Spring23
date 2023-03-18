@@ -128,3 +128,55 @@ form i{
     color:whitesmoke;
     font-style:italic;
 }
+
+.calories{
+    width:100%;
+    height:auto;
+    max-width:200px;
+}
+
+/* #search-container button {
+    padding: 1em 2em;
+    margin-left: 1em;
+    background-color: #6759ff;
+    color: #ffffff;
+    border-radius: 5px;
+    margin-top: 0.5em;
+  }
+  .button-value {
+    border: 2px solid #6759ff;
+    padding: 1em 2.2em;
+    border-radius: 3em;
+    background-color: transparent;
+    color: #6759ff;
+    cursor: pointer;
+  } */
+
+
+/* Filter dropdown */
+/* .multiselect {
+ width:200px;
+}
+.selectBox {
+ position:relative;
+}
+.selectBox select {
+ width: 100%;
+ font-weight: bold;
+}
+.overSelect {
+ position: absolute;
+ left:0; right:0; top:0; bottom:0;
+}
+#checkboxes {
+ display: none;
+ border: 1px #dadada solid;
+}
+#checkboxes label {
+ display: block;
+ color: blue;
+ font-size: medium;
+}
+#checkboxes label:hover {
+ background-color: #1e90ff;
+} */
