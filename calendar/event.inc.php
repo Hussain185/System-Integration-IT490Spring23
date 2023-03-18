@@ -3,11 +3,6 @@ require_once('../sampleFiles/path.inc');
 require_once('../sampleFiles/get_host_info.inc');
 require_once('../sampleFiles/rabbitMQLib.inc');
 
-    $txt = $_POST["title"];
-    $desc = $_POST["description"];
-    $date = $_POST["startDate"];
-    $days = $_POST["length"];
-    $color = $_POST["color"];
 
     $client = new rabbitMQClient("../database/db.ini","dbServer");
     if (isset($argv[1]))
@@ -21,11 +16,11 @@ require_once('../sampleFiles/rabbitMQLib.inc');
 
     $request = array();
     $request['type'] = "event";
-    $request['title'] = $txt;
-    $request['desc'] = $desc;
-    $request['date'] = $date;
-    $request['days'] = $days;
-    $request['color'] = $color;
+    $request['title'] = $_POST["title"];
+    $request['desc'] = $_POST["description"];
+    $request['date'] = $_POST["startDate"];
+    $request['days'] = $_POST["length"];
+    $request['color'] = $_POST["color"];
     $response = $client->send_request($request);
 
     echo $response;
