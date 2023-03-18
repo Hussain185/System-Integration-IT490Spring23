@@ -37,23 +37,23 @@ include 'calendarFunctions.php';
                 <button class="create-event-button" onclick="newEventForm()">Create Event</button>
 
                 <div class="event-form id="myEvent">
-                    <form action="/action_page.php" class="form-container">
-                        <h1>Login</h1>
+                    <form action="event.inc.php" class="form-container">
+                        <h1>Create Event</h1>
 
                         <label for="eventTitle"><b>Event Title</b></label>
-                        <input type="text" placeholder="Enter Event Name" name="event" required>
+                        <input type="text" placeholder="Enter Event Name" name="eventTitle" required>
 
                         <label for="description"><b>Description</b></label>
-                        <input type="text" placeholder="Enter Description" name="desc" required>
+                        <input type="text" placeholder="Enter Description" name="description" required>
 
                         <label for="startDate"><b>Start Date</b></label>
-                        <input type="datetime-local" name="eventDate" required>
+                        <input type="datetime-local" name="startDate" required>
 
                         <label for="eventLength"><b>Length of Event</b></label>
-                        <input type="number" name="days">
+                        <input type="number" name="eventLength">
 
                         <label for="color"><b>Event Color</b></label>
-                        <input type="color">
+                        <input type="color" name="color">
 
                         <button type="submit" class="btn">Login</button>
                         <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
@@ -62,4 +62,7 @@ include 'calendarFunctions.php';
             </div>
 		</div>
 	</body>
+    <?php
+    include_once '../phpproject01_LoginSystem/footer.php'
+    ?>
 </html>
