@@ -9,6 +9,7 @@ include 'calendarFunctions.php';
 		<meta charset="utf-8">
 		<title>Event Calendar</title>
 		<link href="calendar.css" rel="stylesheet" type="text/css">
+        <script src="calendar.js"></script>
 	</head>
 	<body>
 	    <nav class="navtop">
@@ -40,23 +41,17 @@ include 'calendarFunctions.php';
                     <form action="event.inc.php" class="form-container">
                         <h1>Create Event</h1>
 
-                        <label for="eventTitle"><b>Event Title</b></label>
-                        <input type="text" placeholder="Enter Event Name" name="eventTitle" required>
+                        <input type="text" placeholder="Enter Event Name" id="eventTitle" required>
 
-                        <label for="description"><b>Description</b></label>
-                        <input type="text" placeholder="Enter Description" name="description" required>
+                        <input type="text" placeholder="Enter Description" id="eventDescription" required>
 
-                        <label for="startDate"><b>Start Date</b></label>
-                        <input type="datetime-local" name="startDate" required>
+                        <input type="datetime-local" id="startDate" required>
 
-                        <label for="eventLength"><b>Length of Event</b></label>
-                        <input type="number" name="eventLength">
+                        <input type="number" id="eventLength">
 
-                        <label for="color"><b>Event Color</b></label>
-                        <input type="color" name="color">
+                        <input type="color" id="eventColor">
 
-                        <button type="submit" class="btn">Login</button>
-                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                        <button type="submit" id="eventButton">Create</button>
                     </form>
                 </div>
             </div>
@@ -65,4 +60,13 @@ include 'calendarFunctions.php';
     <?php
     include_once '../phpproject01_LoginSystem/footer.php'
     ?>
+    <script>
+        document.getElementById("eventButton").addEventListener('click', function() {
+            const title = document.getElementById("eventTitle").value;
+            const description = document.getElementById("eventDescription").value;
+            const startDate = document.getElementById("startDate").value;
+            const length = document.getElementById("eventLength").value;
+            const color = document.getElementById("eventColor").value;
+            SendEventRequest(title, description, startDate, length, color); }, false);
+    </script>
 </html>
