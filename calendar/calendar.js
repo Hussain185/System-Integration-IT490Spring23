@@ -14,7 +14,7 @@ function SendEventRequest(title, description, startDate, length, color)
             alert("There was an issue with the request.");
         }
     }
-    eventRequest.send("type=event&title="+title+"&desc="+description+"&startDate="+startDate+"&length="+length+"&color="+color);
+    eventRequest.send("type=event&title="+title+"&description="+description+"&startDate="+startDate+"&length="+length+"&color="+color);
 }
 
 function HandleEventResponse(response)
