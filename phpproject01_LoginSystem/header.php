@@ -30,7 +30,7 @@
 			</div>
 			<i class="fa fa-bars menu-toggle"></i>
 			<ul class="nav">
-				<li><a href="#">Home</a></li>
+				<li><a href="index.php">Home</a></li>
 				<li><a href="#">About</a></li>
 				<?php
           
