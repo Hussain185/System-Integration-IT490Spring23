@@ -2,7 +2,7 @@
 <html lang="en">
 
     <head>
-        <title>Register</title>
+        <title>Sign In</title>
         <?php
 			include_once 'header.php';
 		?>
@@ -18,14 +18,6 @@
       </div> -->
 
 	  <div>
-        <label>Full Name</label>
-        <input type="text" id="ajaxTextName" class="text-input">
-      </div>
-      <div>
-        <label>Email</label>
-        <input type="email" id="ajaxTextEmail" class="text-input">
-      </div>
-	  <div>
         <label>Username</label>
         <input type="text" id="ajaxTextUser" class="text-input">
       </div>
@@ -34,13 +26,9 @@
         <input type="password" id="ajaxTextPwd" class="text-input">
       </div>
       <div>
-        <label>Password Confirmation</label>
-        <input type="password" id="ajaxTextRptPwd" class="text-input">
-      </div>
-      <div>
         <button type="submit" id="ajaxButton" class="btn btn-big">Register</button>
       </div>
-      <p>Or <a href="login.php">Sign In</a></p>
+      <p>Or <a href="signup.php">Sign In</a></p>
     </section>
 
   </div>
@@ -49,11 +37,5 @@
  	<?php 
 		include_once 'footer.php';
 	?>
-<script>
-  document.getElementById("ajaxButton").addEventListener('click', function() {
-    const userName = document.getElementById("ajaxTextUser").value;
-    const passWord = document.getElementById("ajaxTextPwd").value;
-    SendLoginRequest(userName,passWord); }, false); 
-</script>
-</html>
 
+</html>
