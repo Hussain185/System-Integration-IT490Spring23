@@ -1,43 +1,54 @@
 <?php
   include_once 'includes/functions.inc.php';
 ?>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>PHP Project 01</title>
-    <!--I won't do more than barebone HTML, since this isn't an HTML tutorial.-->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
+        <!-- Font Awesome -->
+        <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+            crossorigin="anonymous">
 
-    <!--A quick navigation-->
-    <nav>
-      <div class="wrapper">
-        <a href="index.php"><img src="img/logo-white.png" alt="Blogs logo"></a>
-        <ul>
-          <li><a href="index.php">Home</a></li>
-          <li><a href="discover.php">About Us</a></li>
-          <li><a href="blog.php">Find Blogs</a></li>
-          <?php
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Candal|Lora"
+            rel="stylesheet">
+
+        <!-- Custom Styling -->
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- Admin Styling 
+        <link rel="stylesheet" href="css/admin.css">
+		-->
+    </head>
+
+    <body>
+		<header>
+			<div class="logo">
+				<h1 class="logo-text"><span>Compile</span>Cart</h1>
+			</div>
+			<i class="fa fa-bars menu-toggle"></i>
+			<ul class="nav">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>
+				<?php
           
-            if (isset($_COOKIE['username'])) {
-              echo "<li><a href='profile.php'>Profile Page</a></li>";
-              echo "<li><a href='logout.html'>Logout</a></li>";
-            }
-            
-            else {
-              echo "<li><a href='signup.php'>Sign up</a></li>";
-              echo "<li><a href='login.php'>Log in</a></li>";
-            }
-          ?>
-
-        </ul>
-      </div>
-    </nav>
-
-<!--A quick wrapper to align the content (ends in footer.php)-->
-<div class="wrapper">
+				if (isset($_COOKIE['username'])) {
+					echo "<li>";
+						echo "<a href='#'>Services";
+							echo "<i class='fa fa-chevron-down' style='font-size: .8em;'></i>";
+						echo "</a>";
+						echo "<ul>";
+							echo"<li><a href='create.php'>Create Food Post!</a></li>";
+						echo "</ul>";
+					echo "</li>"; 
+					echo "<li><a href='logout.html' class='logout'>Logout</a></li>";
+				}
+				else {
+					echo "<li><a href='signup.php'>Sign Up</a></li>";
+					echo "<li><a href='login.php'>Login</a></li>";
+				}
+				?>
+			</ul>
+		</header>
