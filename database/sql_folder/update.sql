@@ -1,5 +1,7 @@
+
+--testing purpose 
 CREATE TABLE recipeSearch (
-    int (11) not null,
+    id int (11) not null,
     cal DOUBLE NOT NULL
 );
 
