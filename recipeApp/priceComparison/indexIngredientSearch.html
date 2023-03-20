@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ingredient Search</title>
+  </head>
+  <body>
+    <h1>Ingredient Search</h1>
+    <!-- <form onsubmit="search(event)"> -->
+    <form></form>
+      <input type="text" id="search-box" placeholder="Search for items" />
+      <!-- <button type="submit">Search</button> -->
+      <button type="submit" onclick="shoprite()">ShopRite</button>
+      <button type="submit" onclick="traderjoes()">Trader Joe's</button>
+      <button type="submit" onclick="walmart()">Walmart</button>
+      <button type="submit" onclick="wholefoods()">Whole Foods</button>
+    </form>
+    <!-- <iframe id="search-results-fr" name="iframefr" width="500" height="300"></iframe>
+    <iframe id="search-results-en" name="iframeen" width="500" height="300"></iframe> -->
+  </body>
+  <script>
+    // function search(event) {
+    //   event.preventDefault();
+    //   var keywords = document.getElementById("search-box").value;
+    //   var url1 = "https://www.traderjoes.com/home/search?q=" + keywords;
+    //   var url2 = "https://www.vistaprint.com/search?query=" + keywords;
+    //   var iframefr = document.getElementById("search-results-fr");
+    //   var iframeen = document.getElementById("search-results-en");
+    //   iframefr.src = url1;
+    //   iframeen.src = url2;
+    // }
+
+    function shoprite() {
+        var keywords = document.getElementById("search-box").value;
+        var urlShoprite = "https://www.shoprite.com/results?q=" + keywords;
+        window.open(urlShoprite);
+    }
+
+    function traderjoes() {
+        var keywords = document.getElementById("search-box").value;
+        var urlTraderJoes = "https://www.traderjoes.com/home/search?q=" + keywords;
+        window.open(urlTraderJoes);
+    }
+
+    function walmart() {
+        var keywords = document.getElementById("search-box").value;
+        var urlWalmart = "https://www.walmart.com/search?q=" + keywords;
+        window.open(urlWalmart);
+    }
+
+    function wholefoods() {
+        var keywords = document.getElementById("search-box").value;
+        var urlWholeFoods = "https://www.wholefoodsmarket.com/search?text=" + keywords;
+        window.open(urlWholeFoods);
+    }
+  </script>
+</html>
