@@ -1,6 +1,5 @@
---all the uuuupdates will be in this file 
 CREATE TABLE recipeSearch (
-    
+    int (11) not null,
     cal DOUBLE NOT NULL
 );
 
