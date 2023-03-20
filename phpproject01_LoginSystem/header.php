@@ -31,7 +31,7 @@
 			<i class="fa fa-bars menu-toggle"></i>
 			<ul class="nav">
 				<li><a href="index.php">Home</a></li>
-				<li><a href="#">About</a></li>
+				<li><a href="index.php">About</a></li>
 				<?php
           
 				if (isset($_COOKIE['username'])) {
