@@ -102,3 +102,32 @@ function createContent(results){
 
     searchResult.innerHTML = initialContent;
 }
+
+function sendSearchRequest(label)
+{
+    let request = new XMLHttpRequest();
+    request.open("POST","searchDB.inc.php",true);
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    request.onreadystatechange= function ()
+    {
+
+        if (this.status == 200)
+        {
+            HandleSignupResponse(this.responseText);
+        }
+        else {
+            alert("There was an issue with the search recipe request.");
+        }
+    }
+    request.send("type=search&label="+label);
+}
+
+function HandleSignupResponse(response)
+{
+    if(response === 0) {
+        alert("DB search Fail.")
+    }
+    else{
+        alert("DB search Sucessful!");
+    }
+}

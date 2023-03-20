@@ -34,7 +34,7 @@ include_once '../phpproject01_LoginSystem/header.php';
                 </div>
             </div>
             <div class="newEventButton">
-                <button class="create-event-button" onclick="newEventForm()">Create Event</button>
+                <button class="create-event-button">Create Event</button>
 
                 <div class="event-form id="myEvent">
                     <form action="event.inc.php" class="form-container">

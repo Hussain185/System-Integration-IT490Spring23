@@ -2,6 +2,7 @@
   "require": {
       "videlalvaro/php-amqplib": "2.5.*",
     "ext-json": "*",
-    "ext-amqp": "*"
+    "ext-amqp": "*",
+    "ext-mysqli": "*"
   }
 }

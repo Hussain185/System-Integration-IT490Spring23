@@ -184,6 +184,52 @@ function logClient($type, $machine, $log)
     echo $response;
 }
 
+function searchDB($conn, $label)
+{
+    $recipeExists = recipeExists($conn, $label);
+
+    if ($recipeExists === false) {
+        echo("No recipes in table.");
+
+        //establish rabbitMQ client for dmz.ini
+
+        //request relevant information
+
+        //store it in database table
+
+        //no execute original sql query and return database entries
+
+    } else {
+
+        //search and return database entries
+    }
+}
+
+function recipeExists($conn, $label) {
+    $sql = "SELECT * FROM recipeSearch WHERE label = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        $result = false;
+        return $result;
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss", $label);
+    mysqli_stmt_execute($stmt);
+
+    // "Get result" returns the results from a prepared statement
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($resultData)) {
+        return $row;
+    }
+    else {
+        $result = false;
+        return $result;
+    }
+
+    mysqli_stmt_close($stmt);
+}
+
 //function returnToFrontend($returnMsg)
 //{
 //    $client = new rabbitMQClient("../incFiles/testRabbitMQ.ini","");
