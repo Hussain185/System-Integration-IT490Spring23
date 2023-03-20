@@ -11,7 +11,7 @@
 
     <!-- <form action="register.html" method="post"> -->
 	<section class="signup-form">
-      <h2 class="form-title">Register</h2>
+      <h2 class="form-title">Login</h2>
 
       <!-- <div class="msg error">
         <li>Username required</li>
@@ -26,9 +26,9 @@
         <input type="password" id="ajaxTextPwd" class="text-input">
       </div>
       <div>
-        <button type="submit" id="ajaxButton" class="btn btn-big">Register</button>
+        <button type="submit" id="ajaxButton" class="btn btn-big">Log In</button>
       </div>
-      <p>Or <a href="signup.php">Sign In</a></p>
+      <p>Don't have an account? <a href="signup.php">Sign up</a></p>
     </section>
 
   </div>
