@@ -3,6 +3,7 @@ CREATE TABLE recipeSearch (
     image VARCHAR(255)NOT NULL,
     label VARCHAR(255) NOT NULL,
     url VARCHAR(255) NOT NULL,
-    cal DOUBLE NOT NULL,
-
+    cal DOUBLE NOT NULL
 );
+
+
