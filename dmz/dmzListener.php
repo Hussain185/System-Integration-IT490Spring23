@@ -19,7 +19,9 @@ function requestProcessor($request)
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://api.edamam.com/search?q='.$request['query'].'&app_id=b14f1b2d&app_key=b7d53cad8c74e29b857054d820b2ab4c',
+                CURLOPT_URL => 'https://api.edamam.com/search?q='.$request['query'].'&app_id=b14f1b2d&app_key=b7d53cad8c74e29b857054d820b2ab4c'
+                    .'dietLabels='.$request['dietLabels'].'cuisineType='.$request['cuisineType']
+                    .'mealType='.$request['mealType'],
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,

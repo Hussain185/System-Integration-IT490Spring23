@@ -184,8 +184,9 @@ function logClient($type, $machine, $log)
     echo $response;
 }
 
-function searchDB($conn, $label, $query)
+function searchDB($conn, $label, $query, $dietLabels, $cuisineType, $mealType)
 {
+
     $recipeExists = recipeExists($conn, $label);
 
     //$sql = ;
@@ -200,9 +201,10 @@ function searchDB($conn, $label, $query)
         //request relevant information
         $request = array();
         $request['type'] = 'searchAPI';
-        //label and query
-        $request['label'] = $label;
         $request['query'] = $query;
+        $request['dietLabels'] = $dietLabels;
+        $request['cuisineType'] = $cuisineType;
+        $request['mealType'] = $mealType;
         $response = $client->send_request($request);
 
         //store it in database table
@@ -245,6 +247,7 @@ function recipeExists($conn, $label) {
     $resultData = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($resultData)) {
+        echo $row;
         return $row;
     }
     else {
