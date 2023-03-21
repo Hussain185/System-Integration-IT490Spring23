@@ -59,18 +59,8 @@ form.addEventListener('submit', (e)=>{
         // minCal = document.querySelector('input[name="minCalories"]');
         // maxCal = document.querySelector('input[name="maxCalories"]');
 
-    fetchData();
-})
-
-async function fetchData(){
-
     sendSearchRequest()
-
-    // const response = await fetch(baseURL);
-    // const data = await response.json();
-    createContent(data.hits);
-    console.log(data);
-}
+})
 
 function createContent(results){
     let initialContent = '';
@@ -89,7 +79,7 @@ function createContent(results){
     searchResult.innerHTML = initialContent;
 }
 
-function sendSearchRequest(label, query)
+function sendSearchRequest()
 {
     let request = new XMLHttpRequest();
     request.open("POST","searchDB.inc.php",true);
@@ -105,7 +95,7 @@ function sendSearchRequest(label, query)
             alert("There was an issue with the search recipe request.");
         }
     }
-    request.send("type=search&label="+label+"&query="+query+"&dietLabels="+dietLabels+"&cuisineType="+cuisineType+"&mealType="+mealType);
+    request.send("type=search&query="+userQuery+"&dietLabels="+dietLabels+"&cuisineType="+cuisineType+"&mealType="+mealType);
 }
 
 function HandleSignupResponse(response)
