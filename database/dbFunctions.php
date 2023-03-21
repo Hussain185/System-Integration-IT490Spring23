@@ -234,7 +234,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
 }
 
 function recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType) {
-    $sql = "SELECT * FROM recipeSearch WHERE query = ? AND diet_label = ? AND cuisine_type = ? AND meal_type = ?;";
+    $sql = "SELECT * FROM recipeSearch WHERE add_query = ? AND diet_label = ? AND cuisine_type = ? AND meal_type = ?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         return false;
