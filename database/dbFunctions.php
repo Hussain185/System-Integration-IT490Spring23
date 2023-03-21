@@ -194,7 +194,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
         echo("No recipes in table.");
 
         //establish rabbitMQ client for dmz.ini
-        $client = new RabbitMQClient("../../dmz/dmz.ini","dmzServer");
+        $client = new RabbitMQClient("../dmz/dmz.ini","dmzServer");
         $msg = $argv[1] ?? "test message";
 
         //request relevant information

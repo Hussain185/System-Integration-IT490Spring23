@@ -43,7 +43,7 @@ function requestProcessor($request)
 
 $server = new rabbitMQServer("db.ini",'dbServer');
 
-echo "testRabbitMQServer BEGIN".PHP_EOL;
+echo "database listener service BEGIN".PHP_EOL;
 $server->process_requests('requestProcessor');
-echo "testRabbitMQServer END".PHP_EOL;
+echo "database listener service END".PHP_EOL;
 exit();
