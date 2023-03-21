@@ -46,7 +46,7 @@ function requestProcessor($request)
                 $response[] = $hit['recipe']['url'];
                 $response[] = $hit['recipe']['image'];
             }
-            return $response;
+            //return $response;
         case "dietCalc":
 
             //return a response
