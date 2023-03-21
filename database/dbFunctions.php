@@ -183,10 +183,10 @@ function logClient($type, $machine, $log)
     echo $response;
 }
 
-function searchDB($conn, $label, $query, $dietLabels, $cuisineType, $mealType)
+function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
 {
 
-    $recipeExists = recipeExists($conn, $label);
+    $recipeExists = recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType);
 
     //$sql = ;
 
@@ -207,7 +207,7 @@ function searchDB($conn, $label, $query, $dietLabels, $cuisineType, $mealType)
         $response = $client->send_request($request);
 
         //store it in database table
-        $sql = "INSERT INTO recipeSearch (label, calories, url, image) VALUES (?,?,?,?);";
+        $sql = "INSERT INTO recipeSearch (label, calories, url, image, query, dietLabels, cuisineType, mealType) VALUES (?,?,?,?,?,?,?,?);";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
             $myNum= 0;
@@ -215,14 +215,15 @@ function searchDB($conn, $label, $query, $dietLabels, $cuisineType, $mealType)
             return $myJSON;
         }
         for($i = 0;$i < sizeof($response);$i+4){
-            mysqli_stmt_bind_param($stmt, "ssss", $response[$i],$response[$i+1],$response[$i+2],$response[$i+3]);
+            mysqli_stmt_bind_param($stmt, "ssssssss", $response[$i],$response[$i+1],$response[$i+2],$response[$i+3],
+            $query, $dietLabels, $cuisineType, $mealType);
             mysqli_stmt_execute($stmt);
         }
 
         mysqli_stmt_close($stmt);
         mysqli_close($conn);
 
-        $response = recipeExists($conn, $label);
+        $response = recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType);
 
         //no execute original sql query and return database entries
         return $response;
@@ -232,14 +233,14 @@ function searchDB($conn, $label, $query, $dietLabels, $cuisineType, $mealType)
     }
 }
 
-function recipeExists($conn, $label) {
-    $sql = "SELECT * FROM recipeSearch WHERE label = ?;";
+function recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType) {
+    $sql = "SELECT * FROM recipeSearch WHERE query = ? AND diet_label = ? AND cuisine_type = ? AND meal_type = ?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         return false;
     }
 
-    mysqli_stmt_bind_param($stmt, "ss", $label);
+    mysqli_stmt_bind_param($stmt, "ssss", $query, $dietLabels, $cuisineType, $mealType);
     mysqli_stmt_execute($stmt);
 
     // "Get result" returns the results from a prepared statement

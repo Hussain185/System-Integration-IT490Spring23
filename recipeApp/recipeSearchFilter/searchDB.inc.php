@@ -10,7 +10,6 @@ $msg = $argv[1] ?? "test message";
 
 $request = array();
 $request['type'] = "searchAPI";
-$request['label'] = $_POST['label'];
 $request['query'] = $_POST['query'];
 $request['dietLabels'] = $_POST['dietLabels'];
 $request['cuisineType'] = $_POST['cuisineType'];
