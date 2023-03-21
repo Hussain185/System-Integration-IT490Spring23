@@ -23,14 +23,15 @@ function uidExists($conn, $username) {
     $resultData = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($resultData)) {
+        mysqli_stmt_close($stmt);
         return $row;
     }
     else {
+        mysqli_stmt_close($stmt);
         $result = false;
         return $result;
     }
 
-    mysqli_stmt_close($stmt);
 }
 
 // Insert new user into database
@@ -65,18 +66,14 @@ function loginUser($conn, $username, $pwd) {
     $uidExists = uidExists($conn, $username);
 
     if ($uidExists === false) {
-		$myNum= 0;
-		$myJSON = json_encode($myNum);
-		return $myJSON;
+        return json_encode(0);
 	}
 
     $pwdHashed = $uidExists["usersPwd"];
     $checkPwd = password_verify($pwd, $pwdHashed);
 
     if ($checkPwd === false) {
-		$myNum= 0;
-		$myJSON = json_encode($myNum);
-		return $myJSON; 
+        return json_encode(0);
 	}
 	
     elseif ($checkPwd === true) {
@@ -85,8 +82,9 @@ function loginUser($conn, $username, $pwd) {
         $_SESSION["userid"] = $uidExists["usersId"];
         $_SESSION["useruid"] = $uidExists["usersUid"];
         header("location: ../index.php?error=none");
-        exit();
+        return json_encode(1);
     }
+    return json_encode(0);
 }
 
 function doLogin($username,$password)
@@ -142,6 +140,7 @@ function doLogin($username,$password)
 			}
 		}
 	}
+    return json_encode(1);
 }
 
 function createEvent($conn, $title, $desc, $date, $days, $color)
@@ -195,7 +194,7 @@ function searchDB($conn, $label, $query, $dietLabels, $cuisineType, $mealType)
         echo("No recipes in table.");
 
         //establish rabbitMQ client for dmz.ini
-        $client = newRabbitMQClient("../../dmz/dmz.ini","dmzServer");
+        $client = new RabbitMQClient("../../dmz/dmz.ini","dmzServer");
         $msg = $argv[1] ?? "test message";
 
         //request relevant information
