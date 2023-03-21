@@ -28,8 +28,8 @@ curl_close($curl);
 foreach($result['hits'] as $hit){
     print_r($hit['recipe']['label'] . "\n");
     print_r($hit['recipe']['calories'] . "\n");
-    print_r($hit['recipe']['image'] . "\n");
     print_r($hit['recipe']['url'] . "\n");
+    print_r($hit['recipe']['image'] . "\n");
 }
 
 //foreach($result->hits as $recipe){

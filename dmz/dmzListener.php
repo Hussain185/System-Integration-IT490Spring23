@@ -40,6 +40,9 @@ function requestProcessor($request)
             $response = array();
             foreach($result['hits'] as $hit){
                 $response[] = $hit['recipe']['label'];
+                $response[] = $hit['recipe']['calories'];
+                $response[] = $hit['recipe']['url'];
+                $response[] = $hit['recipe']['image'];
             }
             return $response;
         case "dietCalc":

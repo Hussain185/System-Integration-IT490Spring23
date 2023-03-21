@@ -213,8 +213,22 @@ function searchDB($conn, $label, $query)
         $response = $client->send_request($request);
 
         //store it in database table
+        $sql = "INSERT INTO recipeSearch (label, calories, url, image) VALUES (?,?,?,?);";
+        $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            $myNum= 0;
+            $myJSON = json_encode($myNum);
+            return $myJSON;
+        }
+        for($i = 0;$i < sizeof($response);$i+4){
+            mysqli_stmt_bind_param($stmt, "ssss", $response[$i],$response[$i+1],$response[$i+2],$response[$i+3]);
+            mysqli_stmt_execute($stmt);
+        }
 
-        //calorie = $reponse['cal'] I think?
+        mysqli_stmt_close($stmt);
+        mysqli_close($conn);
+
+        $response = recipeExists($conn, $label);
 
         //no execute original sql query and return database entries
         return $response;
