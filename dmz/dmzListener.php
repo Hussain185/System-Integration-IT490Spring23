@@ -15,6 +15,7 @@ function requestProcessor($request)
 
     switch($request['type']){
         case "searchAPI":
+            //install php curl library for this section
             $curl = curl_init();
 
             curl_setopt_array($curl, array(

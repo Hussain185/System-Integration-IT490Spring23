@@ -16,7 +16,7 @@ else
 
 $request = array();
 $request['type'] = "searchAPI";
-$request['label'] = $_POST["label"];
+$request['label'] = $_POST['label'];
 $request['query'] = $_POST['query'];
 $response = $client->send_request($request);
 

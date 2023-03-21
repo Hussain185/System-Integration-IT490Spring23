@@ -214,7 +214,7 @@ function searchDB($conn, $label, $query)
         //calorie = $reponse['cal'] I think?
 
         //no execute original sql query and return database entries
-
+        return $response;
     } else {
 
         //search and return database entries
