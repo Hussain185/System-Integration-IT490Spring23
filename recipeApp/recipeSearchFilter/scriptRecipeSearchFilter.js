@@ -41,9 +41,6 @@ let mealType = [];
 // let minCal = '';
 // let maxCal = '';
 
-const ID = "b14f1b2d";
-const key = "b7d53cad8c74e29b857054d820b2ab4c";
-
 form.addEventListener('submit', (e)=>{
         e.preventDefault();
 
@@ -66,22 +63,11 @@ form.addEventListener('submit', (e)=>{
 })
 
 async function fetchData(){
-    let baseURL = `https://api.edamam.com/search?q=${userQuery}&app_id=${ID}&app_key=${key}`; //&diet=${dietLabels}&cuisineType=${cuisineType}&mealType=${mealType}&calories=${minCal}-${maxCal}`;   //&diet=${dietLabels}
-    
-    if (dietLabels.length) {
-        baseURL += "&diet=" + dietLabels;
-    }
 
-    if (mealType.length) {
-        baseURL += "&mealType=" + mealType;
-    }
+    sendSearchRequest()
 
-    if (cuisineType.length) {
-        baseURL += "&cuisineType=" + cuisineType;
-    }
-
-    const response = await fetch(baseURL);
-    const data = await response.json();
+    // const response = await fetch(baseURL);
+    // const data = await response.json();
     createContent(data.hits);
     console.log(data);
 }
@@ -119,7 +105,7 @@ function sendSearchRequest(label, query)
             alert("There was an issue with the search recipe request.");
         }
     }
-    request.send("type=search&label="+label+"&query="+userQuery+"&dietLabels="+dietLabels+"&cuisineType="+cuisineType+"&mealType="+mealType);
+    request.send("type=search&label="+label+"&query="+query+"&dietLabels="+dietLabels+"&cuisineType="+cuisineType+"&mealType="+mealType);
 }
 
 function HandleSignupResponse(response)
