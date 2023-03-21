@@ -45,22 +45,22 @@ const ID = "b14f1b2d";
 const key = "b7d53cad8c74e29b857054d820b2ab4c";
 
 form.addEventListener('submit', (e)=>{
-    e.preventDefault();
-
-    userQuery = e.target.querySelector('input').value;
-    console.log(userQuery);
-
-    dietLabels = e.target.querySelector('select[name="dietLabels"]').value;
-    console.log(dietLabels);
-
-    cuisineType = e.target.querySelector('select[name="cuisineType"]').value;
-    console.log(cuisineType);
-
-    mealType = e.target.querySelector('select[name="mealType"]').value;
-    console.log(mealType);
-
-    // minCal = document.querySelector('input[name="minCalories"]');
-    // maxCal = document.querySelector('input[name="maxCalories"]');
+    //     e.preventDefault();
+    //
+    //     userQuery = e.target.querySelector('input').value;
+    //     console.log(userQuery);
+    //
+    //     dietLabels = e.target.querySelector('select[name="dietLabels"]').value;
+    //     console.log(dietLabels);
+    //
+    //     cuisineType = e.target.querySelector('select[name="cuisineType"]').value;
+    //     console.log(cuisineType);
+    //
+    //     mealType = e.target.querySelector('select[name="mealType"]').value;
+    //     console.log(mealType);
+    //
+    //     // minCal = document.querySelector('input[name="minCalories"]');
+    //     // maxCal = document.querySelector('input[name="maxCalories"]');
 
     fetchData();
 })
@@ -103,7 +103,7 @@ function createContent(results){
     searchResult.innerHTML = initialContent;
 }
 
-function sendSearchRequest(label)
+function sendSearchRequest(label, query)
 {
     let request = new XMLHttpRequest();
     request.open("POST","searchDB.inc.php",true);
@@ -119,7 +119,7 @@ function sendSearchRequest(label)
             alert("There was an issue with the search recipe request.");
         }
     }
-    request.send("type=search&label="+label);
+    request.send("type=search&label="+label+"&query="+query);
 }
 
 function HandleSignupResponse(response)

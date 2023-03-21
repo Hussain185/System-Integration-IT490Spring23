@@ -184,7 +184,7 @@ function logClient($type, $machine, $log)
     echo $response;
 }
 
-function searchDB($conn, $label)
+function searchDB($conn, $label, $query)
 {
     $recipeExists = recipeExists($conn, $label);
 
@@ -192,10 +192,26 @@ function searchDB($conn, $label)
         echo("No recipes in table.");
 
         //establish rabbitMQ client for dmz.ini
+        $client = newRabbitMQClient("../../dmz/dmz.ini","dmzServer");
+        if (isset($argv[1]))
+        {
+            $msg = $argv[1];
+        }
+        else
+        {
+            $msg = "test message";
+        }
 
         //request relevant information
+        $request = array();
+        $request['type'] = 'searchAPI';
+        //label and query
+        $request['label'] = $label;
+        $request['query'] = $query;
+        $response = $client->send_request($request);
 
         //store it in database table
+        //calorie = $reponse['cal'] I think?
 
         //no execute original sql query and return database entries
 
