@@ -17,7 +17,12 @@ curl_setopt_array($curl, array(
     ),
 ));
 
-$response = curl_exec($curl);
+$jsonResult = curl_exec($curl);
+$result = json_decode($jsonResult);
 
 curl_close($curl);
-echo $response;
+
+echo $result->hits[0];
+
+
+//echo $response;
