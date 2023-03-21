@@ -22,7 +22,10 @@ $result = json_decode($jsonResult);
 
 curl_close($curl);
 
-echo $result->hits[0];
+foreach($result->hits->recipe as $recipe){
+    echo $recipe->label;
+}
 
+//echo $result->hits[0];
 
 //echo $response;
