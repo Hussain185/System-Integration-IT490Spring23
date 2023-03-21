@@ -82,7 +82,7 @@ function createContent(results){
 function sendSearchRequest()
 {
     let request = new XMLHttpRequest();
-    request.open("POST","searchDB.inc.php",true);
+    request.open("POST","../includes/searchDB.inc.php",true);
     request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     request.onreadystatechange= function ()
     {
