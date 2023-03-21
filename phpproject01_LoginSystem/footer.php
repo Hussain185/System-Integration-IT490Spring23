@@ -56,9 +56,9 @@
 
     </div>
 
-    <div class="footer-bottom">
+     <!-- <div class="footer-bottom">
       &copy; codingpoets.com | Designed by Awa Melvine
-    </div>
+    </div> -->
   </div>
   <!-- // footer -->
 
