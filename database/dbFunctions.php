@@ -188,6 +188,8 @@ function searchDB($conn, $label, $query)
 {
     $recipeExists = recipeExists($conn, $label);
 
+    //$sql = ;
+
     if ($recipeExists === false) {
         echo("No recipes in table.");
 

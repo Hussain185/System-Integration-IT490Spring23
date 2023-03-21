@@ -32,9 +32,15 @@ function requestProcessor($request)
                 ),
             ));
 
-            $response = curl_exec($curl);
+            $jsonResult = curl_exec($curl);
+            $result = json_decode($jsonResult, true);
 
             curl_close($curl);
+
+            $response = array();
+            foreach($result['hits'] as $hit){
+                $response[] = $hit['recipe']['label'];
+            }
             return $response;
         case "dietCalc":
 
