@@ -30,14 +30,7 @@ require_once('functions.inc.php');
   
   
   $client = new rabbitMQClient("../../db.ini","dbServer");
-  if (isset($argv[1]))
-  {
-    $msg = $argv[1];
-  }
-  else
-  {
-    $msg = "test message";
-  }
+  $msg = $argv[1] ?? "test message";
 
   $request = array();
   $request['type'] = "login";

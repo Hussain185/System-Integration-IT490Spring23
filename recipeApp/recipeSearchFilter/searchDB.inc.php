@@ -5,14 +5,8 @@ require_once('../../sampleFiles/rabbitMQLib.inc');
 
 
 $client = new rabbitMQClient("../../database/db.ini","dbServer");
-if (isset($argv[1]))
-{
-    $msg = $argv[1];
-}
-else
-{
-    $msg = "test message";
-}
+//?? operator introduced in php 7
+$msg = $argv[1] ?? "test message";
 
 $request = array();
 $request['type'] = "searchAPI";
