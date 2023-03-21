@@ -18,7 +18,7 @@ curl_setopt_array($curl, array(
 ));
 
 $jsonResult = curl_exec($curl);
-$result = json_decode($jsonResult);
+$result = (array) json_decode($jsonResult);
 
 curl_close($curl);
 
