@@ -15,5 +15,3 @@ $request['dietLabels'] = $_POST['dietLabels'];
 $request['cuisineType'] = $_POST['cuisineType'];
 $request['mealType'] = $_POST['mealType'];
 $response = $client->send_request($request);
-
-echo $response;

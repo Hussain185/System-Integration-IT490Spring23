@@ -35,7 +35,7 @@ function requestProcessor($request)
             return createUser($conn,$request['name'],$request['email'],$request['username'],$request['password']);
         case "event":
             return createEvent($conn, $request['title'], $request['desc'], $request['date'], $request['days'], $request['color']);
-        case "search":
+        case "searchAPI":
             return searchDB($conn,$request['query'].$request['dietLabels'],$request['cuisineType'],$request['mealType']);
 	}
 	return array("returnCode" => '0', 'message'=>"Server received request and processed");
