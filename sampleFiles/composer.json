@@ -3,6 +3,7 @@
       "videlalvaro/php-amqplib": "2.5.*",
     "ext-json": "*",
     "ext-amqp": "*",
-    "ext-mysqli": "*"
+    "ext-mysqli": "*",
+    "ext-curl": "*"
   }
 }
