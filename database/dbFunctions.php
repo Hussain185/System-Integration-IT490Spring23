@@ -213,12 +213,13 @@ function searchDB($conn, $label, $query)
         $response = $client->send_request($request);
 
         //store it in database table
+
         //calorie = $reponse['cal'] I think?
 
         //no execute original sql query and return database entries
         return $response;
     } else {
-
+        return $recipeExists;
         //search and return database entries
     }
 }
@@ -227,8 +228,7 @@ function recipeExists($conn, $label) {
     $sql = "SELECT * FROM recipeSearch WHERE label = ?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        $result = false;
-        return $result;
+        return false;
     }
 
     mysqli_stmt_bind_param($stmt, "ss", $label);
@@ -241,8 +241,7 @@ function recipeExists($conn, $label) {
         return $row;
     }
     else {
-        $result = false;
-        return $result;
+        return false;
     }
 
     mysqli_stmt_close($stmt);
