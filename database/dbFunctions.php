@@ -195,14 +195,7 @@ function searchDB($conn, $label, $query)
 
         //establish rabbitMQ client for dmz.ini
         $client = newRabbitMQClient("../../dmz/dmz.ini","dmzServer");
-        if (isset($argv[1]))
-        {
-            $msg = $argv[1];
-        }
-        else
-        {
-            $msg = "test message";
-        }
+        $msg = $argv[1] ?? "test message";
 
         //request relevant information
         $request = array();
@@ -255,10 +248,11 @@ function recipeExists($conn, $label) {
         return $row;
     }
     else {
+        mysqli_stmt_close($stmt);
+
         return false;
     }
 
-    mysqli_stmt_close($stmt);
 }
 
 //function returnToFrontend($returnMsg)
