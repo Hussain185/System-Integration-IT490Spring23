@@ -26,7 +26,7 @@ print_r($result['hits'][0]['label']);
 
 
 foreach($result['hits'] as $hit){
-    print_r($hit['label']);
+    print_r($hit['recipe']['label']);
 }
 
 //foreach($result->hits as $recipe){
