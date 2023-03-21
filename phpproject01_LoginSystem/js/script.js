@@ -84,7 +84,7 @@ function HandleLoginResponse(response)
 function SendLoginRequest(username,password)
 {
 	var request = new XMLHttpRequest();
-	request.open("POST","includes/login.inc.php",true);
+	request.open("POST","../includes/login.inc.php",true);
 	request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	request.onreadystatechange= function ()
 	{
