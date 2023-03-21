@@ -24,7 +24,7 @@ curl_close($curl);
 
 //print_r($result['hits'][0]['label']);
 
-foreach($result->hits->recipe as $recipe){
+foreach($result->hits as $recipe){
     echo $recipe->label;
 }
 
