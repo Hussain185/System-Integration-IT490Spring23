@@ -35,15 +35,15 @@ function requestProcessor($request)
             return createUser($conn,$request['name'],$request['email'],$request['username'],$request['password']);
         case "event":
             return createEvent($conn, $request['title'], $request['desc'], $request['date'], $request['days'], $request['color']);
-        case "search":
-            return searchDB($conn,$request['label'],$request['query']);
+        case "searchAPI":
+            return searchDB($conn,$request['query'],$request['dietLabels'],$request['cuisineType'],$request['mealType']);
 	}
 	return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
 
 $server = new rabbitMQServer("db.ini",'dbServer');
 
-echo "testRabbitMQServer BEGIN".PHP_EOL;
+echo "database listener service BEGIN".PHP_EOL;
 $server->process_requests('requestProcessor');
-echo "testRabbitMQServer END".PHP_EOL;
+echo "database listener service END".PHP_EOL;
 exit();

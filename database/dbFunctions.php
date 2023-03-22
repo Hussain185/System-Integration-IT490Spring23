@@ -23,14 +23,15 @@ function uidExists($conn, $username) {
     $resultData = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($resultData)) {
+        mysqli_stmt_close($stmt);
         return $row;
     }
     else {
+        mysqli_stmt_close($stmt);
         $result = false;
         return $result;
     }
 
-    mysqli_stmt_close($stmt);
 }
 
 // Insert new user into database
@@ -65,18 +66,14 @@ function loginUser($conn, $username, $pwd) {
     $uidExists = uidExists($conn, $username);
 
     if ($uidExists === false) {
-		$myNum= 0;
-		$myJSON = json_encode($myNum);
-		return $myJSON;
+        return json_encode(0);
 	}
 
     $pwdHashed = $uidExists["usersPwd"];
     $checkPwd = password_verify($pwd, $pwdHashed);
 
     if ($checkPwd === false) {
-		$myNum= 0;
-		$myJSON = json_encode($myNum);
-		return $myJSON; 
+        return json_encode(0);
 	}
 	
     elseif ($checkPwd === true) {
@@ -85,8 +82,9 @@ function loginUser($conn, $username, $pwd) {
         $_SESSION["userid"] = $uidExists["usersId"];
         $_SESSION["useruid"] = $uidExists["usersUid"];
         header("location: ../index.php?error=none");
-        exit();
+        return json_encode(1);
     }
+    return json_encode(0);
 }
 
 function doLogin($username,$password)
@@ -142,6 +140,7 @@ function doLogin($username,$password)
 			}
 		}
 	}
+    return json_encode(1);
 }
 
 function createEvent($conn, $title, $desc, $date, $days, $color)
@@ -184,9 +183,10 @@ function logClient($type, $machine, $log)
     echo $response;
 }
 
-function searchDB($conn, $label, $query)
+function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
 {
-    $recipeExists = recipeExists($conn, $label);
+
+    $recipeExists = recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType);
 
     //$sql = ;
 
@@ -194,41 +194,37 @@ function searchDB($conn, $label, $query)
         echo("No recipes in table.");
 
         //establish rabbitMQ client for dmz.ini
-        $client = newRabbitMQClient("../../dmz/dmz.ini","dmzServer");
-        if (isset($argv[1]))
-        {
-            $msg = $argv[1];
-        }
-        else
-        {
-            $msg = "test message";
-        }
+        $client = new RabbitMQClient("../dmz/dmz.ini","dmzServer");
+        $msg = $argv[1] ?? "test message";
 
         //request relevant information
         $request = array();
         $request['type'] = 'searchAPI';
-        //label and query
-        $request['label'] = $label;
         $request['query'] = $query;
+        $request['dietLabels'] = $dietLabels;
+        $request['cuisineType'] = $cuisineType;
+        $request['mealType'] = $mealType;
         $response = $client->send_request($request);
 
         //store it in database table
-        $sql = "INSERT INTO recipeSearch (label, calories, url, image) VALUES (?,?,?,?);";
+        $sql = "INSERT INTO recipeSearch (label, cal, url, image, add_query, diet_labels, cuisine_type, meal_type) VALUES (?,?,?,?,?,?,?,?);";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
             $myNum= 0;
             $myJSON = json_encode($myNum);
             return $myJSON;
         }
+        print_r($response);
         for($i = 0;$i < sizeof($response);$i+4){
-            mysqli_stmt_bind_param($stmt, "ssss", $response[$i],$response[$i+1],$response[$i+2],$response[$i+3]);
+            mysqli_stmt_bind_param($stmt, "ssssssss", $response[$i],$response[$i+1],$response[$i+2],$response[$i+3],
+            $query, $dietLabels, $cuisineType, $mealType);
             mysqli_stmt_execute($stmt);
         }
 
         mysqli_stmt_close($stmt);
         mysqli_close($conn);
 
-        $response = recipeExists($conn, $label);
+        $response = recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType);
 
         //no execute original sql query and return database entries
         return $response;
@@ -238,27 +234,29 @@ function searchDB($conn, $label, $query)
     }
 }
 
-function recipeExists($conn, $label) {
-    $sql = "SELECT * FROM recipeSearch WHERE label = ?;";
+function recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType) {
+    $sql = "SELECT * FROM recipeSearch WHERE add_query = ? AND diet_labels = ? AND cuisine_type = ? AND meal_type = ?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         return false;
     }
 
-    mysqli_stmt_bind_param($stmt, "ss", $label);
+    mysqli_stmt_bind_param($stmt, "ssss", $query, $dietLabels, $cuisineType, $mealType);
     mysqli_stmt_execute($stmt);
 
     // "Get result" returns the results from a prepared statement
     $resultData = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($resultData)) {
+        echo $row;
         return $row;
     }
     else {
+        mysqli_stmt_close($stmt);
+
         return false;
     }
 
-    mysqli_stmt_close($stmt);
 }
 
 //function returnToFrontend($returnMsg)

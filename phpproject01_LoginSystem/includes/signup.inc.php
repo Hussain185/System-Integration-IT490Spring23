@@ -16,31 +16,34 @@ require_once('functions.inc.php');
   // These functions can be found in functions.inc.php
 
   // require_once "dbh.inc.php";
-  require_once 'functions.inc.php';
 
   // Left inputs empty
   // We set the functions "!== false" since "=== true" has a risk of giving us the wrong outcome
   if (emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat) !== false) {
-    header("location: ../signup.php?error=emptyinput");
-		exit();
+   // header("location: ../signup.php?error=emptyinput");
+    logClient('User Input', 'frontend', 'Signup form empty');
+//		exit();
   }
 	// Proper username chosen
   if (invalidUid($username) !== false) {
-    header("location: ../signup.php?error=invaliduid");
-		exit();
+    // header("location: ../signup.php?error=invaliduid");
+    logClient('User Input','frontend','User UID invalid');
+//		exit();
   }
   // Proper email chosen
   if (invalidEmail($email) !== false) {
-    header("location: ../signup.php?error=invalidemail");
-		exit();
+  //  header("location: ../signup.php?error=invalidemail");
+    logClient('User Input','frontend','Invalid Email');
+//		exit();
   }
   // Do the two passwords match?
   if (pwdMatch($pwd, $pwdRepeat) !== false) {
-    header("location: ../signup.php?error=passwordsdontmatch");
-		exit();
+  //  header("location: ../signup.php?error=passwordsdontmatch");
+    logClient('User Input','frontend','Passwords do not match');
+	exit();
   }
 
-    $client = new rabbitMQClient("../../db.ini","dbServer");
+    $client = new rabbitMQClient("../../database/db.ini","dbServer");
     //?? operator introduced in php 7
     $msg = $argv[1] ?? "test message";
 
