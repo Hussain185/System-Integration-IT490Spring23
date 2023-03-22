@@ -207,7 +207,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
         $response = $client->send_request($request);
 
         //store it in database table
-        $sql = "INSERT INTO recipeSearch (label, cal, url, image, query, dietLabels, cuisineType, mealType) VALUES (?,?,?,?,?,?,?,?);";
+        $sql = "INSERT INTO recipeSearch (label, cal, url, image, add_query, diet_labels, cuisine_type, meal_type) VALUES (?,?,?,?,?,?,?,?);";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
             $myNum= 0;
