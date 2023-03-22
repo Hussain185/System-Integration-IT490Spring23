@@ -43,11 +43,6 @@ function requestProcessor($request)
             $response = array();
             //print_r($result);
 
-            print_r($result[0]);
-            print_r($result[1]);
-
-            print_r($result[2]);
-
             if($result['status'] = 'error') {
                 print_r("Returned error status from API");
                 //print_r($result);
@@ -55,18 +50,18 @@ function requestProcessor($request)
                 exit();
             }
 
-            print_r($result[1]);
+            //print_r($result[1]);
 
             foreach($result['hits'] as $hit){
-                $response[] = $hit['recipe']['label'];
-                $response[] = $hit['recipe']['calories'];
-                $response[] = $hit['recipe']['url'];
-                $response[] = $hit['recipe']['image'];
+                $response[] = ['$hit'][$hit]['recipe']['label'];
+                $response[] = ['$hit'][$hit]['recipe']['calories'];
+                $response[] = ['$hit'][$hit]['recipe']['url'];
+                $response[] = ['$hit'][$hit]['recipe']['image'];
             }
 
-            for($i = 0;i < $result['hits']; $i++) {
-
-            }
+//            for($i = 0;i < $result['hits']; $i++) {
+//
+//            }
 
             return $response;
         case "dietCalc":
