@@ -41,12 +41,14 @@ function requestProcessor($request)
             curl_close($curl);
 
             $response = array();
-            print_r($result);
+            //print_r($result);
             if($result['status'] = 'error') {
                 print_r("Returned error status from API");
                 //logClient('API error','dmz','API request returned error status');
                 exit();
             }
+
+            print_r($result[0]);
 
             foreach($result['hits'] as $hit){
                 $response[] = $hit['recipe']['label'];
@@ -54,6 +56,11 @@ function requestProcessor($request)
                 $response[] = $hit['recipe']['url'];
                 $response[] = $hit['recipe']['image'];
             }
+
+            for($i = 0;i < $result['hits']; $i++) {
+
+            }
+
             return $response;
         case "dietCalc":
 
