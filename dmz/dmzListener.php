@@ -44,12 +44,12 @@ function requestProcessor($request)
             //print_r($result);
             if($result['status'] = 'error') {
                 print_r("Returned error status from API");
-                print_r($result);
+                //print_r($result);
                 //logClient('API error','dmz','API request returned error status');
                 exit();
             }
 
-            print_r($result[0]);
+            print_r($result[1]);
 
             foreach($result['hits'] as $hit){
                 $response[] = $hit['recipe']['label'];
