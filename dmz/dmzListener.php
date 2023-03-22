@@ -43,12 +43,12 @@ function requestProcessor($request)
             $response = array();
             //print_r($result);
 
-            if($result['status'] = 'error') {
-                print_r("Returned error status from API");
-                //print_r($result);
-                //logClient('API error','dmz','API request returned error status');
-                exit();
-            }
+//            if($result['status'] = 'error') {
+//                print_r("Returned error status from API");
+//                //print_r($result);
+//                //logClient('API error','dmz','API request returned error status');
+//                exit();
+//            }
 
             //print_r($result[1]);
 
