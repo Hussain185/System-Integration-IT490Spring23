@@ -23,11 +23,12 @@
 
             <!-- Admin Content -->
             <div class="admin-content">
+		<!--
                 <div class="button-group">
                     <a href="create.html" class="btn btn-big">Add Post</a>
                     <a href="index.html" class="btn btn-big">Manage Posts</a>
                 </div>
-
+		-->
 
                 <div class="content">
 
@@ -42,6 +43,7 @@
                             <label>Body</label>
                             <textarea name="body" id="body"></textarea>
                         </div>
+			<!--
                         <div>
                             <label>Image</label>
                             <input type="file" name="image" class="text-input">
@@ -53,6 +55,7 @@
                                 <option value="Life Lessons">Life Lessons</option>
                             </select>
                         </div>
+			-->
                         <div>
                             <button type="submit" class="btn btn-big">Add Post</button>
                         </div>
