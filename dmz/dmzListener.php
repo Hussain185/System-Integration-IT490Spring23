@@ -42,6 +42,12 @@ function requestProcessor($request)
 
             $response = array();
             //print_r($result);
+
+            print_r($result[0]);
+            print_r($result[1]);
+
+            print_r($result[2]);
+
             if($result['status'] = 'error') {
                 print_r("Returned error status from API");
                 //print_r($result);
