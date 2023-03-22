@@ -129,6 +129,35 @@ function SendSignupRequest(name,email,username,password,passwordrpt)
 	request.send("type=signup&name="+name+"&email="+email+"&uname="+username+"&pword="+password+"&rptpword="+passwordrpt);
 }
 
+function HandleBlogPostResponse(response)
+{
+	if(response == 0) {
+		alert("Failed to Create Blog Post.")
+	}
+	else{
+		alert("Blog Post was maded!");
+	}
+}
+
+function SendBlogPostRequest(title,body)
+{
+	var request = new XMLHttpRequest();
+	request.open("POST","includes/post.php",true);
+	request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	request.onreadystatechange= function ()
+	{
+		
+		if (this.status == 200)
+		{
+			HandleSignupResponse(this.responseText);	   
+		}		
+		else {
+          		alert("There was an issue with the request.");
+        	}
+	}
+	request.send("type=post&title="+title+"&body="+body);
+}
+
 ClassicEditor.create(document.querySelector("#body"), {
   toolbar: [
     "heading",
