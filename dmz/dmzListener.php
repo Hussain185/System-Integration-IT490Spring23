@@ -3,7 +3,7 @@
 require_once('../sampleFiles/path.inc');
 require_once('../sampleFiles/get_host_info.inc');
 require_once('../sampleFiles/rabbitMQLib.inc');
-require_once('../eventLogs/logFunctions.php');
+//require_once('../eventLogs/logFunctions.php');
 
 function requestProcessor($request)
 {
@@ -21,8 +21,8 @@ function requestProcessor($request)
 
             curl_setopt_array($curl, array(
                 CURLOPT_URL => 'https://api.edamam.com/search?q='.$request['query'].'&app_id=b14f1b2d&app_key=b7d53cad8c74e29b857054d820b2ab4c'
-                    .'dietLabels='.$request['dietLabels'].'cuisineType='.$request['cuisineType']
-                    .'mealType='.$request['mealType'],
+                    .'&dietLabels='.$request['dietLabels'].'&cuisineType='.$request['cuisineType']
+                    .'&mealType='.$request['mealType'],
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -41,19 +41,29 @@ function requestProcessor($request)
             curl_close($curl);
 
             $response = array();
-            print_r($result);
-            if($result['status'] = 'error') {
-                print_r("Returned error status from API");
-                //logClient('API error','dmz','API request returned error status');
-                exit();
-            }
+            //print_r($result);
+
+//            if($result['status'] = 'error') {
+//                print_r("Returned error status from API");
+//                //print_r($result);
+//                //logClient('API error','dmz','API request returned error status');
+//                exit();
+//            }
+
+            //print_r($result[1]);
 
             foreach($result['hits'] as $hit){
+                //print_r($hit);
                 $response[] = $hit['recipe']['label'];
                 $response[] = $hit['recipe']['calories'];
                 $response[] = $hit['recipe']['url'];
                 $response[] = $hit['recipe']['image'];
             }
+
+//            for($i = 0;i < $result['hits']; $i++) {
+//
+//            }
+            print_r($response);
             return $response;
         case "dietCalc":
 

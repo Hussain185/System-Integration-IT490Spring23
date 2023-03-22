@@ -205,6 +205,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
         $request['cuisineType'] = $cuisineType;
         $request['mealType'] = $mealType;
         $response = $client->send_request($request);
+        print_r($response);
 
         //store it in database table
         $sql = "INSERT INTO recipeSearch (label, cal, url, image, add_query, diet_labels, cuisine_type, meal_type) VALUES (?,?,?,?,?,?,?,?);";
@@ -214,7 +215,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
             $myJSON = json_encode($myNum);
             return $myJSON;
         }
-        print_r($response);
+
         for($i = 0;$i < sizeof($response);$i+4){
             mysqli_stmt_bind_param($stmt, "ssssssss", $response[$i],$response[$i+1],$response[$i+2],$response[$i+3],
             $query, $dietLabels, $cuisineType, $mealType);
