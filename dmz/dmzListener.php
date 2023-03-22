@@ -58,6 +58,6 @@ function requestProcessor($request)
 $server = new rabbitMQServer("dmz.ini",'dmzServer');
 
 echo "testRabbitMQServer BEGIN".PHP_EOL;
-$server->process_message('requestProcessor');
+$server->send_request('requestProcessor');
 echo "testRabbitMQServer END".PHP_EOL;
 exit();
