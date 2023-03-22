@@ -31,7 +31,7 @@ function requestProcessor($request)
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => 'GET',
                 CURLOPT_HTTPHEADER => array(
-                    //'b14f1b2d: b7d53cad8c74e29b857054d820b2ab4c'
+                    'b14f1b2d: b7d53cad8c74e29b857054d820b2ab4c'
                 ),
             ));
 
@@ -42,10 +42,11 @@ function requestProcessor($request)
 
             $response = array();
             print_r($result);
-//            if($result['status'] = 'error') {
-//                //logClient('API error','dmz','API request returned error status');
-//                exit();
-//            }
+            if($result['status'] = 'error') {
+                print_r("Returned error status from API");
+                //logClient('API error','dmz','API request returned error status');
+                exit();
+            }
 
             foreach($result['hits'] as $hit){
                 $response[] = $hit['recipe']['label'];
