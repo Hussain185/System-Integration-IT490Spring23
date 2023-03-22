@@ -54,7 +54,7 @@ function requestProcessor($request)
 
             foreach($result['hits'] as $hit){
                 print_r($hit);
-                $response[$result['$hit']] = $result['$hit']['recipe']['label'];
+                $response[$hit] = $hit['recipe']['label'];
 //                $response = $result['$hit']['recipe']['calories'];
 //                $response = $result['$hit']['recipe']['url'];
 //                $response = $result['$hit']['recipe']['image'];
