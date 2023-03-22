@@ -123,6 +123,7 @@ function SendSignupRequest(name,email,username,password,passwordrpt)
 			HandleSignupResponse(this.responseText);	   
 		}		
 		else {
+
           		alert("There was an issue with the request.");
         	}
 	}
