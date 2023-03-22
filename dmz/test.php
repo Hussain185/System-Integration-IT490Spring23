@@ -23,6 +23,6 @@ curl_close($curl);
 
 $result = json_decode($jsonResult, true);
 
-print_r($result);
+print_r($result['hits'][1]['recipe']['label']);
 
 curl_close($curl);
