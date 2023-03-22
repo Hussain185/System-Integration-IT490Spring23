@@ -205,6 +205,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
         $request['cuisineType'] = $cuisineType;
         $request['mealType'] = $mealType;
         $response = $client->send_request($request);
+        print_r($response);
 
         //store it in database table
         $sql = "INSERT INTO recipeSearch (label, cal, url, image, add_query, diet_labels, cuisine_type, meal_type) VALUES (?,?,?,?,?,?,?,?);";
