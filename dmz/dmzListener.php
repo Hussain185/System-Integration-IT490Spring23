@@ -54,10 +54,10 @@ function requestProcessor($request)
 
             foreach($result['hits'] as $hit){
                 print_r($hit);
-                $response = $result['$hit'][$hit]['recipe']['label'];
-                $response = $result['$hit'][$hit]['recipe']['calories'];
-                $response = $result['$hit'][$hit]['recipe']['url'];
-                $response = $result['$hit'][$hit]['recipe']['image'];
+                $response[$result[$hit]] = $result['$hit']['recipe']['label'];
+//                $response = $result['$hit']['recipe']['calories'];
+//                $response = $result['$hit']['recipe']['url'];
+//                $response = $result['$hit']['recipe']['image'];
             }
 
 //            for($i = 0;i < $result['hits']; $i++) {
