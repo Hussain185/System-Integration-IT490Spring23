@@ -4,7 +4,6 @@ require_once('../../sampleFiles/get_host_info.inc');
 require_once('../../sampleFiles/rabbitMQLib.inc');
 //require_once("dbh.inc.php");
 require_once('functions.inc.php');
-require_once('../../eventLogs/logFunctions.php');
 
   // First we get the form data from the URL
   $name = $_POST["name"];
