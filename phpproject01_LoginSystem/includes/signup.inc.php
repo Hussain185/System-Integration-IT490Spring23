@@ -16,7 +16,6 @@ require_once('functions.inc.php');
   // These functions can be found in functions.inc.php
 
   // require_once "dbh.inc.php";
-  require_once 'functions.inc.php';
 
   // Left inputs empty
   // We set the functions "!== false" since "=== true" has a risk of giving us the wrong outcome
