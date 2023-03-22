@@ -46,6 +46,10 @@
   </div>
   
   <!-- // Page Wrapper -->
+ 	<?php 
+		include_once 'footer.php';
+	?>
+
 <script>
   document.getElementById("ajaxButton").addEventListener('click', function() {
     const name = document.getElementById("ajaxTextName").value;
