@@ -40,7 +40,7 @@ function requestProcessor($request)
             curl_close($curl);
 
             $response = array();
-            echo $result;
+            print_r($result);
             foreach($result['hits'] as $hit){
                 $response[] = $hit['recipe']['label'];
                 $response[] = $hit['recipe']['calories'];
