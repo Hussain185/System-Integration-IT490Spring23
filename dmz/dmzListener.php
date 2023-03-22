@@ -3,7 +3,7 @@
 require_once('../sampleFiles/path.inc');
 require_once('../sampleFiles/get_host_info.inc');
 require_once('../sampleFiles/rabbitMQLib.inc');
-require_once('../eventLogs/logFunctions.php');
+//require_once('../eventLogs/logFunctions.php');
 
 function requestProcessor($request)
 {
@@ -21,8 +21,8 @@ function requestProcessor($request)
 
             curl_setopt_array($curl, array(
                 CURLOPT_URL => 'https://api.edamam.com/search?q='.$request['query'].'&app_id=b14f1b2d&app_key=b7d53cad8c74e29b857054d820b2ab4c'
-                    .'dietLabels='.$request['dietLabels'].'cuisineType='.$request['cuisineType']
-                    .'mealType='.$request['mealType'],
+                    .'&dietLabels='.$request['dietLabels'].'&cuisineType='.$request['cuisineType']
+                    .'&mealType='.$request['mealType'],
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
