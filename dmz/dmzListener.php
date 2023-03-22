@@ -63,7 +63,7 @@ function requestProcessor($request)
 //            for($i = 0;i < $result['hits']; $i++) {
 //
 //            }
-
+            print_r($response);
             return $response;
         case "dietCalc":
 
