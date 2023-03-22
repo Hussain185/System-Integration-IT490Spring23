@@ -53,10 +53,11 @@ function requestProcessor($request)
             //print_r($result[1]);
 
             foreach($result['hits'] as $hit){
-                $response[] = ['$hit'][$hit]['recipe']['label'];
-                $response[] = ['$hit'][$hit]['recipe']['calories'];
-                $response[] = ['$hit'][$hit]['recipe']['url'];
-                $response[] = ['$hit'][$hit]['recipe']['image'];
+                print_r($hit);
+                $response = $result['$hit'][$hit]['recipe']['label'];
+                $response = $result['$hit'][$hit]['recipe']['calories'];
+                $response = $result['$hit'][$hit]['recipe']['url'];
+                $response = $result['$hit'][$hit]['recipe']['image'];
             }
 
 //            for($i = 0;i < $result['hits']; $i++) {
