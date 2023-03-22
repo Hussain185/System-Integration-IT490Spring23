@@ -41,7 +41,7 @@ require_once('functions.inc.php');
   if (pwdMatch($pwd, $pwdRepeat) !== false) {
   //  header("location: ../signup.php?error=passwordsdontmatch");
     logClient('User Input','frontend','Passwords do not match');
-//		exit();
+	exit();
   }
 
     $client = new rabbitMQClient("../../db.ini","dbServer");
