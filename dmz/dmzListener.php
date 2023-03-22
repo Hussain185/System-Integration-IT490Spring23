@@ -46,7 +46,7 @@ function requestProcessor($request)
                 $response[] = $hit['recipe']['url'];
                 $response[] = $hit['recipe']['image'];
             }
-            //return $response;
+            return $response;
         case "dietCalc":
 
             //return a response
@@ -58,6 +58,6 @@ function requestProcessor($request)
 $server = new rabbitMQServer("dmz.ini",'dmzServer');
 
 echo "testRabbitMQServer BEGIN".PHP_EOL;
-$server->process_requests('requestProcessor');
+$server->process_message('requestProcessor');
 echo "testRabbitMQServer END".PHP_EOL;
 exit();

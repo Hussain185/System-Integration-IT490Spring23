@@ -214,6 +214,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
             $myJSON = json_encode($myNum);
             return $myJSON;
         }
+        echo $response;
         for($i = 0;$i < sizeof($response);$i+4){
             mysqli_stmt_bind_param($stmt, "ssssssss", $response[$i],$response[$i+1],$response[$i+2],$response[$i+3],
             $query, $dietLabels, $cuisineType, $mealType);
