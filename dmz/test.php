@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 $curl = curl_init();
@@ -21,5 +22,7 @@ $jsonResult = curl_exec($curl);
 curl_close($curl);
 
 $result = json_decode($jsonResult, true);
+
+print_r($result);
 
 curl_close($curl);
