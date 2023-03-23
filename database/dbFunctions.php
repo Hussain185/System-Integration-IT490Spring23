@@ -264,7 +264,7 @@ function recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType) {
 }
 
 
-}
+
 
 //function returnToFrontend($returnMsg)
 //{
