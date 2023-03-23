@@ -397,7 +397,7 @@ header .menu-toggle {
   text-align: center;
   margin-bottom: 1.5rem;
 }
-form div {
+.admin-content .blog-form div {
   margin-bottom: 15px;
 }
 
