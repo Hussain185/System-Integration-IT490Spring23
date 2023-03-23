@@ -60,9 +60,6 @@ function requestProcessor($request)
                 $response[] = $hit['recipe']['image'];
             }
 
-//            for($i = 0;i < $result['hits']; $i++) {
-//
-//            }
             print_r($response);
             return $response;
         case "dietCalc":
