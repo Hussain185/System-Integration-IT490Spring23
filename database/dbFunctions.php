@@ -217,7 +217,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
 
         mysqli_stmt_bind_param($stmt, "ssssssss", $response[0],$response[1],$response[2],$response[3],
             $query, $dietLabels, $cuisineType, $mealType);
-
+        mysqli_stmt_execute($stmt);
 
 
         for($i = 0;$i < count($response);$i+4){
