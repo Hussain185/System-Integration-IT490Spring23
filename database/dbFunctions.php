@@ -228,7 +228,6 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
             $query, $dietLabels, $cuisineType, $mealType);
             mysqli_stmt_execute($stmt);
         }
-	*/
 
         mysqli_stmt_close($stmt);
         mysqli_close($conn);
