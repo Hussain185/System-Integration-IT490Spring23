@@ -34,10 +34,10 @@
 
                     <h2 class="page-title">Manage Posts</h2>
 
-                    <form action="create.php" method="post">
+                    <section class="blog-form">
                         <div>
                             <label>Title</label>
-                            <input type="text" name="title" class="text-input">
+                            <input type="text" name="title" id="AjaxTitle" class="text-input">
                         </div>
                         <div>
                             <label>Body</label>
@@ -72,5 +72,11 @@
 		<?php 
 			include_once 'footer.php';
 		?>
+		<script>
+			document.getElementById("ajaxButton").addEventListener('click', function() {
+				const title = document.getElementById("ajaxTitle").value;
+				const bodytext = document.getElementById("body").value;
+				SendPostRequest(title,bodytext); }, false); 
+		</script>
 
 </html>
