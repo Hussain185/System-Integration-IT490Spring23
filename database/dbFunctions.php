@@ -206,6 +206,8 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
         $request['mealType'] = $mealType;
         $response = $client->send_request($request);
 
+        echo($response);
+
         //store it in database table
         $sql = "INSERT INTO recipeSearch (label, cal, url, image, add_query, diet_labels, cuisine_type, meal_type) VALUES (?,?,?,?,?,?,?,?);";
         $stmt = mysqli_stmt_init($conn);
@@ -231,6 +233,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
 
         $response = recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType);
 
+        echo $response;
         //no execute original sql query and return database entries
         return $response;
     } else {
