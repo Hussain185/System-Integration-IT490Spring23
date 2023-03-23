@@ -222,12 +222,13 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
             $query, $dietLabels, $cuisineType, $mealType);
         mysqli_stmt_execute($stmt);
 
-	// Check this block of code
-        for($i = 0;$i < count($response);$i+=4){
+
+        for($i = 0;$i < count($response);$i+4){
             mysqli_stmt_bind_param($stmt, "ssssssss", $response[$i],$response[$i+1],$response[$i+2],$response[$i+3],
             $query, $dietLabels, $cuisineType, $mealType);
             mysqli_stmt_execute($stmt);
         }
+	*/
 
         mysqli_stmt_close($stmt);
         mysqli_close($conn);
@@ -249,31 +250,19 @@ function recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType) {
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         return false;
     }
-
     mysqli_stmt_bind_param($stmt, "ssss", $query, $dietLabels, $cuisineType, $mealType);
     mysqli_stmt_execute($stmt);
-
     // "Get result" returns the results from a prepared statement
     $resultData = mysqli_stmt_get_result($stmt);
-
     if ($row = mysqli_fetch_assoc($resultData)) {
         echo $row;
         return $row;
     }
     else {
-	$sql2 = "INSERT INTO recipeSearch (add_query, diet_labels, cuisine_type, meal_type) VALUES (?, ?, ?, ?);";
-   	 $stmt2 = mysqli_stmt_init($conn);
-   	 if (!mysqli_stmt_prepare($stmt2, $sql2)) {
-        	return false;
-    	}
-
-    mysqli_stmt_bind_param($stmt2, "ssss", $query, $dietLabels, $cuisineType, $mealType);
-    mysqli_stmt_execute($stmt2);
-        mysqli_stmt_close($stmt2);
-	mysqli_close($conn);
-
+        mysqli_stmt_close($stmt);
         return false;
     }
+}
 
 
 }
