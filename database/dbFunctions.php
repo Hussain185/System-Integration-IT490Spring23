@@ -230,7 +230,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
         mysqli_stmt_close($stmt);
         mysqli_close($conn);
 
-        echo $response;
+        print_r($response);
         //no execute original sql query and return database entries
         return $response;
     } else {
