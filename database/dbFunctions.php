@@ -231,13 +231,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
         //no execute original sql query and return database entries
         return $response;
     } else {
-	    $myObj = new stdClass();
-	    $myObj->label = $recipeExists['label'];
-	    $myObj->cal = $recipeExists['cal'];
-	    $myObj->url = $recipeExists['url'];
-	    $myObj->image = $recipeExists['image'];
-	    $myJSON = json_encode($myObj);
-        return $myJSON;
+        return json_encode($recipeExists);
         //search and return database entries
     }
 }
@@ -251,15 +245,19 @@ function recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType) {
     }
     mysqli_stmt_bind_param($stmt, "ssss", $query, $dietLabels, $cuisineType, $mealType);
     mysqli_stmt_execute($stmt);
+
+    $result = array();
+
     // "Get result" returns the results from a prepared statement
     $resultData = mysqli_stmt_get_result($stmt);
 	if ($row = mysqli_fetch_assoc($resultData)) {
         print_r($row);
-        return $row;
+        array_push($result, $row);
     }
 	else{
 		return false;
 	}
+    return $result;
 }
 
 // Insert new post into database
