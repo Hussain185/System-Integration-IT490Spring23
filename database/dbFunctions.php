@@ -250,9 +250,9 @@ function recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType) {
     $resultData = mysqli_stmt_get_result($stmt);
     while($row = mysqli_fetch_assoc($resultData)) {
 	    $myObj = new stdClass();
-	    $myObj -> label = $row['label'];
-	    $myObj -> label = $row['cal'];
-	    $myObj -> label = $row['url'];
+	    $myObj->label = $row['label'];
+	    $myObj->cal = $row['cal'];
+	    $myObj->url = $row['url'];
 	    $myObj -> label = $row['image'];
 	    $myJSON = json_encode($myObj);
         return $myJSON;
