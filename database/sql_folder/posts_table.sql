@@ -1,10 +1,9 @@
 CREATE TABLE posts (
-  id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  user_id INT(11) NOT NULL,
-  title VARCHAR(255) NOT NULL,
-  image VARCHAR(255)NOT NULL,
-  body TEXT NOT NULL,
-  published TINYINT(1) DEFAULT 0,
-  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+	postsId int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	userId int(11) NOT NULL,
+	title varchar(255) NOT NULL,
+	content text NOT NULL,
+	created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	image varchar(255) DEFAULT NULL,
+	FOREIGN KEY (userId) REFERENCES users(usersId)
 );
-
