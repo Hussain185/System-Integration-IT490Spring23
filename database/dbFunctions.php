@@ -224,10 +224,11 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
             mysqli_stmt_execute($stmt);
         }
 
-        mysqli_stmt_close($stmt);
-        mysqli_close($conn);
 
         $response = recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType);
+
+        mysqli_stmt_close($stmt);
+        mysqli_close($conn);
 
         echo $response;
         //no execute original sql query and return database entries
@@ -240,6 +241,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
 
 function recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType) {
     $sql = "SELECT * FROM recipeSearch WHERE add_query = ? AND diet_labels = ? AND cuisine_type = ? AND meal_type = ?;";
+
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         return false;
