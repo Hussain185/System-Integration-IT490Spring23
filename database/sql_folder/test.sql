@@ -1,1 +1,1 @@
-DELETE FROM users WHERE usersId = 1;
+ALTER TABLE recipeSearch MODIFY image VARCHAR(4000) DEFAULT NULL;
