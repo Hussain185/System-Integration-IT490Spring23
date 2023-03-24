@@ -223,7 +223,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
         mysqli_stmt_execute($stmt);
 
 
-        for($i = 0;$i < count($response);$i+4){
+        for($i = 0;$i < count($response);$i+=4){
             mysqli_stmt_bind_param($stmt, "ssssssss", $response[$i],$response[$i+1],$response[$i+2],$response[$i+3],
             $query, $dietLabels, $cuisineType, $mealType);
             mysqli_stmt_execute($stmt);
@@ -262,6 +262,27 @@ function recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType) {
         return false;
     }
 }
+
+// Insert new post into database
+function addPost($title, $content, $userid) {
+    $conn = dbConnection();
+
+    $sql = "INSERT INTO posts (postTitle, postContent, postUserId) VALUES (?, ?, ?);";
+
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        return "error";
+    }
+
+    mysqli_stmt_bind_param($stmt, "ssi", $title, $content, $userid);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+
+    return "success";
+}
+
 
 
 
