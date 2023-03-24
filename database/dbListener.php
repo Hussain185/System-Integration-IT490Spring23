@@ -33,6 +33,8 @@ function requestProcessor($request)
 			return doValidate($request['sessionId']);
 		case "signup":
             return createUser($conn,$request['name'],$request['email'],$request['username'],$request['password']);
+		case "add_post":
+			return addPost($request['title'], $request['content'], $request['userid']);
         case "event":
             return createEvent($conn, $request['title'], $request['desc'], $request['date'], $request['days'], $request['color']);
         case "searchAPI":
