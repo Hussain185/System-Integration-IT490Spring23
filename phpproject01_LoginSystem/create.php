@@ -91,7 +91,7 @@
             formData.append('body', body);
            // formData.append('topic', topic);
           //  formData.append('image', image);
-            xhr.open('POST', 'add_post.php', true);
+            xhr.open('POST', 'addpost.inc.php', true);
             xhr.send(formData);
         }
 		</script>
