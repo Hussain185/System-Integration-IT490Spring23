@@ -231,6 +231,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
         //no execute original sql query and return database entries
         return $response;
     } else {
+        print_r($recipeExists);
         return $recipeExists;
         //search and return database entries
     }

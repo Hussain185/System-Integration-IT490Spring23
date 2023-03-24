@@ -58,7 +58,6 @@ function requestProcessor($request)
                 $response[] = $hit['recipe']['calories'];
                 $response[] = $hit['recipe']['url'];
                 $response[] = $hit['recipe']['image'];
-                break;
             }
 
             print_r($response);
