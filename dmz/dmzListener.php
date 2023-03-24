@@ -58,6 +58,7 @@ function requestProcessor($request)
                 $response[] = $hit['recipe']['calories'];
                 $response[] = $hit['recipe']['url'];
                 $response[] = $hit['recipe']['image'];
+                break;
             }
 
             print_r($response);
@@ -72,7 +73,7 @@ function requestProcessor($request)
 
 $server = new rabbitMQServer("dmz.ini",'dmzServer');
 
-echo "testRabbitMQServer BEGIN".PHP_EOL;
+echo "dmz Server BEGIN".PHP_EOL;
 $server->process_requests('requestProcessor');
-echo "testRabbitMQServer END".PHP_EOL;
+echo "dmz Server END".PHP_EOL;
 exit();
