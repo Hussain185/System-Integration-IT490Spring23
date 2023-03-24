@@ -253,7 +253,7 @@ function recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType) {
 	    $myObj->label = $row['label'];
 	    $myObj->cal = $row['cal'];
 	    $myObj->url = $row['url'];
-	    $myObj -> label = $row['image'];
+	    $myObj->image = $row['image'];
 	    $myJSON = json_encode($myObj);
         return $myJSON;
     }
