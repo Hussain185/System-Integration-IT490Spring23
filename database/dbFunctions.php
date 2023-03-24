@@ -249,17 +249,13 @@ function recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType) {
     // "Get result" returns the results from a prepared statement
     $resultData = mysqli_stmt_get_result($stmt);
     while($row = mysqli_fetch_assoc($resultData)) {
-	$myObj = new stdClass();
-	$myObj -> label = $row['label'];
-	$myObj -> label = $row['cal'];
-	$myObj -> label = $row['url'];
-	$myObj -> label = $row['image'];
-	$myJSON = json_encode($myObj);
+	    $myObj = new stdClass();
+	    $myObj -> label = $row['label'];
+	    $myObj -> label = $row['cal'];
+	    $myObj -> label = $row['url'];
+	    $myObj -> label = $row['image'];
+	    $myJSON = json_encode($myObj);
         return $myJSON;
-    }
-    else {
-        mysqli_stmt_close($stmt);
-        return false;
     }
 }
 
