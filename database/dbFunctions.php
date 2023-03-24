@@ -253,6 +253,7 @@ function recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType) {
     mysqli_stmt_execute($stmt);
     // "Get result" returns the results from a prepared statement
     $resultData = mysqli_stmt_get_result($stmt);
+    print_r($resultData);
     if ($row = mysqli_fetch_assoc($resultData)) {
         echo $row;
         return $row;
