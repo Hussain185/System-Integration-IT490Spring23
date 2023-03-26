@@ -92,7 +92,7 @@
         <h1 class="recent-post-title">Recent Posts</h1>
 
         <div class="post clearfix">
-         <!-- <img src="images/image_3.png" alt="" class="post-image"> -->
+         <!-- <img src="img/image_3.png" alt="" class="post-image"> -->
           <div class="post-preview">
             <h2><a href="single.html">The strongest and sweetest songs yet remain to be sung</a></h2>
             <i class="far fa-user"> Awa Melvine</i>
@@ -102,12 +102,13 @@
             The company itself is a very successful company. 
             We can choose an exercise from the inventor of most of the exercises.
             </p>
-            <a href="single.html" class="btn read-more">Read More</a>
+            <a href="single.php" class="btn read-more">Read More</a>
           </div>
         </div>
 
         <?php
         /*
+        //To display the posts, where the posts are intended to be displayed:
         require_once('../sampleFiles/path.inc');
         require_once('../sampleFiles/get_host_info.inc');
         require_once('../sampleFiles/rabbitMQLib.inc');
@@ -130,7 +131,7 @@
                 &nbsp;
                 <i class="far fa-calendar"> <?php echo $post['created_at']; ?></i>
                 <p class="preview-text"><?php echo $post['body']; ?></p>
-                <a href="single.html" class="btn read-more">Read More</a>
+                <a href="single.php" class="btn read-more">Read More</a>
             </div>
         </div>
         <?php }} */?>
