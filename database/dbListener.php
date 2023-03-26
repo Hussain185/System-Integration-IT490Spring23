@@ -35,6 +35,11 @@ function requestProcessor($request)
             return createUser($conn,$request['name'],$request['email'],$request['username'],$request['password']);
 		case "add_post":
 			return addPost($request['title'], $request['content'], $request['userid']);
+		//new case to handle the request for getting posts and invoke the getPosts() function:
+		case "get_posts":
+				$response['status'] = 'success';
+				$response['data'] = getPosts();
+				break;	
         case "event":
             return createEvent($conn, $request['title'], $request['desc'], $request['date'], $request['days'], $request['color']);
         case "searchAPI":

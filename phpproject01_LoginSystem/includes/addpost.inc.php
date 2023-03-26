@@ -12,7 +12,7 @@ require_once('../../sampleFiles/get_host_info.inc');
 require_once('../../sampleFiles/rabbitMQLib.inc');
 require_once('../../database/mysqlConnect.php');
 
-$client = new rabbitMQClient("../../database/login.ini", "testServer");
+$client = new rabbitMQClient("../../database/login.ini", "dbServer");
 
 if (isset($_POST['title']) && isset($_POST['body'])) {
     $title = $_POST['title'];

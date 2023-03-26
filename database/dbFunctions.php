@@ -283,6 +283,34 @@ function addPost($title, $content, $userid) {
 }
 
 
+//Retrieve posts from the database and return the results as an array:
+function getPosts() {
+
+    $sql = "SELECT p.postsId, p.title, p.content, p.created_at, u.usersName as author FROM posts p JOIN users u ON p.userId = u.usersId ORDER BY p.created_at DESC";
+
+    $result = mysqli_query($conn, $sql);
+
+    $posts = array();
+
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $post = array(
+                "id" => $row["postsId"],
+                "title" => $row["title"],
+                "body" => $row["content"],
+                "created_at" => $row["created_at"],
+                "author" => $row["author"]
+            );
+            $posts[] = $post;
+        }
+    }
+
+
+    return $posts;
+}
+
+
+
 
 
 
