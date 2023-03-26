@@ -99,13 +99,42 @@
             &nbsp;
             <i class="far fa-calendar"> Mar 11, 2019</i>
             <p class="preview-text">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Exercitationem optio possimus a inventore maxime laborum.
+            The company itself is a very successful company. 
+            We can choose an exercise from the inventor of most of the exercises.
             </p>
             <a href="single.html" class="btn read-more">Read More</a>
           </div>
         </div>
 
+        <?php
+        /*
+        require_once('../sampleFiles/path.inc');
+        require_once('../sampleFiles/get_host_info.inc');
+        require_once('../sampleFiles/rabbitMQLib.inc');
+
+        $client = new rabbitMQClient("../database/db.ini", "dbServer");
+
+        $request['type'] = 'get_posts';
+        $response = $client->send_request($request);
+
+        if (!empty($response)) {
+            $posts = $response;
+            foreach ($posts as $post) {
+        ?>
+
+        <div class="post clearfix">
+            <img src="<?php echo $post['image']; ?>" alt="" class="post-image">
+            <div class="post-preview">
+                <h2><a href="#"><?php echo $post['title']; ?></a></h2>
+                <i class="far fa-user"><?php echo $post['author']; ?></i>
+                &nbsp;
+                <i class="far fa-calendar"> <?php echo $post['created_at']; ?></i>
+                <p class="preview-text"><?php echo $post['body']; ?></p>
+                <a href="single.html" class="btn read-more">Read More</a>
+            </div>
+        </div>
+        <?php }} */?>
+        
 
       </div>
       <!-- // Main Content -->
