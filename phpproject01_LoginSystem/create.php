@@ -83,17 +83,6 @@
 
         });
 
-       // function SendPostRequest(title, body, topic, image) {
-        function SendPostRequest(title, body) {
-            const xhr = new XMLHttpRequest();
-            const formData = new FormData();
-            formData.append('title', title);
-            formData.append('body', body);
-           // formData.append('topic', topic);
-          //  formData.append('image', image);
-            xhr.open('POST', 'addpost.inc.php', true);
-            xhr.send(formData);
-        }
 		</script>
 
 </html>
