@@ -143,7 +143,7 @@ function HandleBlogPostResponse(response)
 function SendBlogPostRequest(title,body)
 {
 	var request = new XMLHttpRequest();
-	request.open("POST","includes/post.php",true);
+	request.open("POST","includes/addpost.inc.php",true);
 	request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	request.onreadystatechange= function ()
 	{
