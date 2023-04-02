@@ -59,7 +59,7 @@
                         <div>
                             <button type="submit" id="ajaxButton" class="btn btn-big">Add Post</button>
                         </div>
-                    </form>
+                    </section>
 
                 </div>
 
