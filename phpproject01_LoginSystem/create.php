@@ -79,7 +79,7 @@
            // const topic = document.getElementsByName("topic")[0].value;
             //const image = document.getElementsByName("image")[0].files[0];
            // SendPostRequest(title, bodytext,topic,image);
-            SendPostRequest(title, bodytext);
+            SendBlogPostRequest(title, bodytext);
 
         });
 
