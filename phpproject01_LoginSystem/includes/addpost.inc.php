@@ -1,12 +1,4 @@
 <?php
-session_start();
-
-// Check if user is logged in
-if (!isset($_SESSION['userid'])) {
-    header("location: login.php");
-    exit();
-}
-
 require_once('../../sampleFiles/path.inc');
 require_once('../../sampleFiles/get_host_info.inc');
 require_once('../../sampleFiles/rabbitMQLib.inc');
