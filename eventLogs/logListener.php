@@ -25,7 +25,7 @@ function logHandler($request) {
 }
 
 
-$server = new rabbitMQServer("log.ini","logServer");
+$server = new rabbitMQServer("../ini/log.ini","logServer");
 
 echo "logServer BEGIN".PHP_EOL;
 $server->process_requests('logHandler');

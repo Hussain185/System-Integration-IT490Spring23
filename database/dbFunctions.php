@@ -172,7 +172,7 @@ function createEvent($conn, $title, $desc, $date, $days, $color)
 function logClient($type, $machine, $log)
 {
     echo "logFunctions log client called";
-    $client = new rabbitMQClient("eventLogs/log.ini","logServer");
+    $client = new rabbitMQClient("../ini/log.ini","logServer");
 
     $request = array();
     $request['type'] = $type;
@@ -194,7 +194,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
         echo("No recipes in table.");
 
         //establish rabbitMQ client for dmz.ini
-        $client = new RabbitMQClient("../dmz/dmz.ini","dmzServer");
+        $client = new RabbitMQClient("../ini/dmz.ini","dmzServer");
         $msg = $argv[1] ?? "test message";
 
         //request relevant information

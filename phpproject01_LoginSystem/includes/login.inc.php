@@ -30,7 +30,7 @@ require_once('functions.inc.php');
   //loginUser($conn, $username, $pwd);
   
   
-  $client = new rabbitMQClient("../../database/db.ini","dbServer");
+  $client = new rabbitMQClient("../../ini/db.ini","dbServer");
   $msg = $argv[1] ?? "test message";
 
   $request = array();

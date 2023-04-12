@@ -48,7 +48,7 @@ function requestProcessor($request)
 	return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
 
-$server = new rabbitMQServer("db.ini",'dbServer');
+$server = new rabbitMQServer("../ini/db.ini",'dbServer');
 
 echo "database listener service BEGIN".PHP_EOL;
 $server->process_requests('requestProcessor');

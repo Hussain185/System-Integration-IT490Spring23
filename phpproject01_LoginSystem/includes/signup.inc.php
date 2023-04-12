@@ -43,7 +43,7 @@ require_once('functions.inc.php');
 	exit();
   }
 
-    $client = new rabbitMQClient("../../database/db.ini","dbServer");
+    $client = new rabbitMQClient("../../ini/db.ini","dbServer");
     //?? operator introduced in php 7
     $msg = $argv[1] ?? "test message";
 

@@ -70,7 +70,7 @@ function requestProcessor($request)
     return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
 
-$server = new rabbitMQServer("dmz.ini",'dmzServer');
+$server = new rabbitMQServer("../ini/dmz.ini",'dmzServer');
 
 echo "dmz Server BEGIN".PHP_EOL;
 $server->process_requests('requestProcessor');

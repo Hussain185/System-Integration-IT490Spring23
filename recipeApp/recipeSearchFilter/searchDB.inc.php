@@ -4,7 +4,7 @@ require_once('../../sampleFiles/get_host_info.inc');
 require_once('../../sampleFiles/rabbitMQLib.inc');
 
 
-$client = new rabbitMQClient("../../database/db.ini","dbServer");
+$client = new rabbitMQClient("../../ini/db.ini","dbServer");
 //?? operator introduced in php 7
 $msg = $argv[1] ?? "test message";
 
