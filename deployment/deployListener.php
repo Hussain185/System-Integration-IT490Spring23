@@ -8,15 +8,26 @@ function requestProcessor($request)
 {
 	echo "received request".PHP_EOL;
 	var_dump($request);
-	if(!isset($request['type']))
+	if(!isset($request['from_machine'],$request['to_machine'],$request['feature'],$request['version'],$request['file_path']))
 	{
-		return "ERROR: unsupported message type";
+		return 0;
 	}
+//    Example Variables
+//    $request['from_machine']
+//    $request['to_machine']
+//    $request['feature']
+//    $request['version']
+//    $request['file_path']
 
-	switch($request['type'])
-	{
-		case "update":
-	}
+    //add zip file to changes directory
+    //unzip directory
+    //open ssh connection
+    //use ssh to delete the feature directory on the destination machine
+    //use ssh to send zip to destination
+    //unzip and replace deleted directory
+    //restart services
+    //close ssh connection
+    //return 1 for success
 }
 
 $server = new rabbitMQServer('deploy.ini', 'deployServer');
