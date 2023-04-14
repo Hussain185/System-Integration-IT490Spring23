@@ -4,7 +4,7 @@ require_once('../sampleFiles/path.inc');
 require_once('../sampleFiles/get_host_info.inc');
 require_once('../sampleFiles/rabbitMQLib.inc');
 
-function requestProcessor($request)
+function requestProcessor($request): int
 {
 	echo "received request".PHP_EOL;
 	var_dump($request);
