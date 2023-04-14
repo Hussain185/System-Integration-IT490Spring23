@@ -28,6 +28,7 @@ function requestProcessor($request)
     //restart services
     //close ssh connection
     //return 1 for success
+    return 1;
 }
 
 $server = new rabbitMQServer('deploy.ini', 'deployServer');
