@@ -19,15 +19,15 @@ function requestProcessor($request): int
 //    $request['version']
 //    $request['file_path']
 
-    //add zip file to changes directory
-    //unzip directory
-    //open ssh connection
-    //use ssh to delete the feature directory on the destination machine
-    //use ssh to send zip to destination
-    //unzip and replace deleted directory
-    //restart services
-    //close ssh connection
-    //return 1 for success
+//  add zip file to changes directory
+//  unzip directory
+//  open ssh connection
+//  use ssh to delete the feature directory on the destination machine
+//  use ssh to send zip to destination
+//  unzip and replace deleted directory
+//  restart services
+//  close ssh connection
+//  return 1 for success
     return 1;
 }
 
