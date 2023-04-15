@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 require_once('../sampleFiles/path.inc');
 require_once('../sampleFiles/get_host_info.inc');
@@ -6,7 +7,7 @@ require_once('../sampleFiles/rabbitMQLib.inc');
 $client = new rabbitMQClient("deploy.ini","deployServer");
 //$msg = $argv[1] ?? "test message";
 
-echo "Machine name examples: db-dev, front-dev, qa-dmz";
+echo "Machine name examples: db-dev, front-dev, dmz-qa";
 echo "Feature name is directory name";
 echo "Version number should change the decimal place for minor edits and reserve the whole number for tested and confirmed working changes";
 echo "\n";
