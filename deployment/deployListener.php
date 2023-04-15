@@ -12,12 +12,12 @@ function requestProcessor($request): int
 	{
 		return 0;
 	}
-//    Example Variables
-//    $request['from_machine']
-//    $request['to_machine']
-//    $request['feature']
-//    $request['version']
-//    $request['file_path']
+
+    echo $request['from_machine'];
+    echo $request['to_machine'];
+    echo $request['feature'];
+    echo $request['version'];
+    echo $request['file_path'];
 
 //  add zip file to changes directory
 //  unzip directory
