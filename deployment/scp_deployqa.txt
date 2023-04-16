@@ -7,7 +7,7 @@ file_path = $3
 #Copy file to Deployment
 filename = "${feature}${version}.tar"
 ssh deploy_hostname
-scp "$filename" deploy_hostname:"path to changes dir"
+scp "$filename" deploy_hostname:"~/changes"
 exit
 
 #Send file to QA
