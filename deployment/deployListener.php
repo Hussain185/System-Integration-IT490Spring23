@@ -12,7 +12,8 @@ function requestProcessor($request): int
 	{
 		return 0;
 	}
-	exec("./scp_deployqa.txt $request['feature'] $request['version'] $request['file_path']")
+	exec("./scp_deployqa.txt $request['feature'] $request['version'] $request['file_path']", $output);
+	echo $output;
 
 //  add zip file to changes directory
 //  unzip directory
