@@ -10,10 +10,11 @@ ssh deploy_hostname
 scp "$filename" deploy_hostname:"~/changes"
 exit
 
+ls
 #Send file to QA
 # old_version = "variable that store value of mysql query from deploy table"
 # Later on, we have to ssh first to check for old dir and delete before copy new dir
 
 #Send file to QA and unzip
-scp "$filename" qa_hostname:"$filepath"
+# scp "$filename" qa_hostname:"$filepath"
 # Deployment only have to copy zip to QA. Unzipping can be done manually
