@@ -15,8 +15,8 @@ function requestProcessor($request): int
 	$feature = $request['feature'];
 	$version = $request['version'];
 	$file_path = $request['file_path'];
-	exec("./scp_deployqa.txt", $output);
-	echo $output;
+	exec("sudo ./scp_deployqa.txt", $output);
+	print_r($output);
 
 //  add zip file to changes directory
 //  unzip directory
