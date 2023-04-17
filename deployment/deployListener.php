@@ -16,8 +16,8 @@ function requestProcessor($request): int
 	$version = $request['version'];
 	$file_path = $request['file_path'];
 	$filename = $feature . $version . ".tar";
-	// exec("sudo ./scp_deployqa.txt $feature $version $file_path", $output);
-	shell_exec("ssh front-dev");
+	exec("sudo ./scp_deployqa.txt $feature $version $file_path", $output);
+	// shell_exec("ssh front-dev");
 	// shell_exec("scp '$filename' brandon@10.147.18.0:'~/changes'");
 	// shell_exec("exit");
 	// $output = shell_exec("ls");
