@@ -21,7 +21,7 @@ function requestProcessor($request): int
 	// shell_exec("scp '$filename' brandon@10.147.18.0:'~/changes'");
 	// shell_exec("exit");
 	// $output = shell_exec("ls");
-	// print_r($output);
+	print_r($output);
 
 //  add zip file to changes directory
 //  unzip directory
