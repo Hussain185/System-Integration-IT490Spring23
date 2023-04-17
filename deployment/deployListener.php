@@ -19,6 +19,7 @@ function requestProcessor($request): int
 	// exec("sudo ./scp_deployqa.txt $feature $version $file_path", $output);
 	shell_exec("ssh front-dev");
 	shell_exec("scp '$filename' brandon@10.147.18.0:'~/changes'");
+	shell_exec("logout");
 	// print_r($output);
 
 //  add zip file to changes directory
