@@ -117,7 +117,7 @@ function doLogin($username,$password)
     		if($resultt){
 			if($resultt->num_rows == 0){
 				echo("No user in table. Create new sessionID");
-				$sessionId = hash("sha256",$row['usersPwd']);
+				$sessionId = hash("sha256",$uidExists['usersPwd']);
 				$queryyy = "INSERT INTO user_session(user_id,session_id) VALUES ('$username','$sessionId');";
 				$resulttt = mysqli_query(dbConnection(), $queryyy);
 				// return $sessionId;	
