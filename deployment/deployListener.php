@@ -17,8 +17,8 @@ function requestProcessor($request): int
 	$file_path = $request['file_path'];
 	$filename = $feature . $version . ".tar";
 	// exec("sudo ./scp_deployqa.txt $feature $version $file_path", $output);
-	shellexec("ssh front_dev");
-	shellexec("scp '$filename' brandon@10.147.18.0:'~/changes'");
+	shell_exec("ssh front_dev");
+	shell_exec("scp '$filename' brandon@10.147.18.0:'~/changes'");
 	// print_r($output);
 
 //  add zip file to changes directory
