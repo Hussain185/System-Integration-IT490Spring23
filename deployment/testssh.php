@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 $sshServer = "10.147.18.0";
 $user = "brandon";
