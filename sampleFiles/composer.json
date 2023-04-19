@@ -4,6 +4,7 @@
     "ext-json": "*",
     "ext-amqp": "*",
     "ext-mysqli": "*",
-    "ext-curl": "*"
+    "ext-curl": "*",
+    "ext-ssh2": "*"
   }
 }

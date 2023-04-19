@@ -5,10 +5,15 @@ $user = "brandon";
 $password = "password";
 $command = "ls -la";
 
-$conn = ssh2_connect($sshServer,22);
-ssh2_auth_password($conn, $user, $password);
-$stream = ssh2_exec($conn,$command);
-stream_set_blocking($stream, true);
-$output = stream_get_contents($stream);
+$session = ssh2_connect($sshServer,22);
+ssh2_auth_password($session, $user, $password);
+
+ssh2_scp_send($session, '../test.txt','~/changes/test/test.txt', true);
+
+//$stream = ssh2_exec($session,$command);
+//stream_set_blocking($stream, true);
+//$output = stream_get_contents($stream);
 
 echo $output;
+
+echo 'done';
