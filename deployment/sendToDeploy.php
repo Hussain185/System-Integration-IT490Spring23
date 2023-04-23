@@ -4,6 +4,51 @@ require_once('../sampleFiles/path.inc');
 require_once('../sampleFiles/get_host_info.inc');
 require_once('../sampleFiles/rabbitMQLib.inc');
 
+function Zip($source, $destination)
+{
+    if (!extension_loaded('zip') || !file_exists($source)) {
+        return false;
+    }
+
+    $zip = new ZipArchive();
+    if (!$zip->open($destination, ZIPARCHIVE::CREATE)) {
+        return false;
+    }
+
+    $source = str_replace('\\', '/', realpath($source));
+
+    if (is_dir($source) === true)
+    {
+        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
+
+        foreach ($files as $file)
+        {
+            $file = str_replace('\\', '/', $file);
+
+            // Ignore "." and ".." folders
+            if( in_array(substr($file, strrpos($file, '/')+1), array('.', '..')) )
+                continue;
+
+            $file = realpath($file);
+
+            if (is_dir($file) === true)
+            {
+                $zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
+            }
+            else if (is_file($file) === true)
+            {
+                $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
+            }
+        }
+    }
+    else if (is_file($source) === true)
+    {
+        $zip->addFromString(basename($source), file_get_contents($source));
+    }
+
+    return $zip->close();
+}
+
 $client = new rabbitMQClient("deploy.ini","deployServer");
 //$msg = $argv[1] ?? "test message";
 
@@ -22,6 +67,12 @@ echo "\nWhat is the new version of this feature? ";
 $version = rtrim(fgets(STDIN));
 echo "\nWhat is the file path for your changes? ";
 $file_path = rtrim(fgets(STDIN));
+
+Zip($file_path, "./".$feature.$version.".tar");
+
+$sshConnection = ssh2_connect('10.147.18.0', 22);
+ssh2_auth_password($sshConnection, 'brandon', 'password');
+ssh2_scp_send($sshConnection, "./".$feature.$version.".tar", '~/changes/'.$feature.$version.".tar", 0644);
 
 $request = array();
 $request['type'] = "update";

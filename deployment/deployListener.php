@@ -12,27 +12,49 @@ function requestProcessor($request): int
 	{
 		return 0;
 	}
+    $from_machine = $request['from_machine'];
+    $to_machine = $request['to_machine'];
 	$feature = $request['feature'];
 	$version = $request['version'];
 	$file_path = $request['file_path'];
-	$filename = $feature . $version . ".tar";
-	exec("sudo ./scp_deployqa.txt $feature $version $file_path", $output);
+	$filename = $feature.$version.".tar";
+	//exec("sudo ./scp_deployqa.txt $feature $version $file_path", $output);
 	// shell_exec("ssh front-dev");
 	// shell_exec("scp '$filename' brandon@10.147.18.0:'~/changes'");
 	// shell_exec("exit");
 	// $output = shell_exec("ls");
-	print_r($output);
+	//print_r($output);
 
-//  add zip file to changes directory
-//  unzip directory
-//  open ssh connection
-//  use ssh to delete the feature directory on the destination machine
-//  use ssh to send zip to destination
-//  unzip and replace deleted directory
-//  restart services
-//  close ssh connection
-//  return 1 for success
+    $conn = dbConn();
+    $sql = "INSERT INTO deployment (from_machine, to_machine, feature, file_path, version)
+    VALUES ($from_machine,$to_machine,$feature,$file_path,$feature)";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: ".$sql."<br>".mysqli_error($conn);
+    }
+
+    mysqli_close($conn);
+
+    //$client = new rabbitMQServer('qa.ini', 'qaServer');
+
     return 1;
+}
+
+function dbConn()
+{
+    $servername = "localhost";
+    $dBUsername = "username";
+    $dBPassword = "password";
+    $dBName = "data";
+
+    $conn = new mysqli($servername, $dBUsername, $dBPassword, $dBName);
+
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    return $conn;
 }
 
 $server = new rabbitMQServer('deploy.ini', 'deployServer');
