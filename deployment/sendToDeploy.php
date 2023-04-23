@@ -68,11 +68,11 @@ $version = rtrim(fgets(STDIN));
 echo "\nWhat is the file path for your changes? ";
 $file_path = rtrim(fgets(STDIN));
 
-Zip($file_path, "./".$feature.$version.".tar");
+Zip($file_path, "/zips/".$feature.$version.".tar");
 
 $sshConnection = ssh2_connect('10.147.18.0', 22);
 ssh2_auth_password($sshConnection, 'brandon', 'password');
-ssh2_scp_send($sshConnection, "./".$feature.$version.".tar", '~/changes/'.$feature.$version.".tar", 0644);
+ssh2_scp_send($sshConnection, "/zips/".$feature.$version.".tar", '~/changes/'.$feature.$version.".tar", 0644);
 
 $request = array();
 $request['type'] = "update";
