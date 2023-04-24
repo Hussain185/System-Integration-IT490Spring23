@@ -53,8 +53,7 @@ if (isset($_POST['title']) && isset($_POST['body']) && isset($_FILES['image'])) 
     // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($image["tmp_name"], $target_file)) {
-            $conn = dbConnection();
-            $response = addPost($conn, $title, $body, $target_file);
+            
 
             if ($response == 1) {
                 echo 'Post added successfully '; //successfully added the post to the home page
