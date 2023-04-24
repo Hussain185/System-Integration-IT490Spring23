@@ -53,7 +53,6 @@ if (isset($_POST['title']) && isset($_POST['body']) && isset($_FILES['image'])) 
             $request['type'] = 'add_post';
             $request['title'] = $title;
             $request['body'] = $body;
-            $request['topic'] = $topic;
             $request['image'] = $target;
             $response = $client->send_request($request);
             
