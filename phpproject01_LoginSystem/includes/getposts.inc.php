@@ -11,7 +11,7 @@ require_once('functions.inc.php');
 $client = new rabbitMQClient("../../ini/db.ini","dbServer");
 $msg = $argv[1] ?? "test message";
 $request = array();
-$request['type'] = 'get_post';
+$request['type'] = 'get_posts';
 
 $response = $client->send_request($request);
 
