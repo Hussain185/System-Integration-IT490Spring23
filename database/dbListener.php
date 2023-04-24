@@ -34,7 +34,7 @@ function requestProcessor($request)
 		case "signup":
             return createUser($conn,$request['name'],$request['email'],$request['username'],$request['password']);
 		case "add_post":
-			return addPost($request['title'], $request['content'], $request['userid']);
+			return addPost($request['title'], $request['body'], $request['image']);
 		//new case to handle the request for getting posts and invoke the getPosts() function:
 		case "get_posts":
 				$response['status'] = 'success';
