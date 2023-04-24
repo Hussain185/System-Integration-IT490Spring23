@@ -262,52 +262,72 @@ function recipeExists($conn, $query, $dietLabels, $cuisineType, $mealType) {
 	}
 }
 
-// Insert new post into database
-function addPost($title, $content, $userid) {
-    $conn = dbConnection();
+// Add post to database
+function addPost($conn, $title, $body, $destination)
+{
+	$sql = "INSERT INTO posts (post_title, post_body, post_image,created_at) VALUES (?,?,?, NOW());";
+	$stmt = mysqli_stmt_init($conn);
+	if (!mysqli_stmt_prepare($stmt, $sql)) {
+		$myNum = 0;
+		$myJSON = json_encode($myNum);
+		return $myJSON;
+	}
 
-    $sql = "INSERT INTO posts (postTitle, postContent, postUserId) VALUES (?, ?, ?);";
-
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        return "error";
-    }
-
-    mysqli_stmt_bind_param($stmt, "ssi", $title, $content, $userid);
-    mysqli_stmt_execute($stmt);
-
-    mysqli_stmt_close($stmt);
-    mysqli_close($conn);
-
-    return "success";
+	mysqli_stmt_bind_param($stmt, "sss", $title, $body, $destination);
+	if(mysqli_stmt_execute($stmt)){
+	    mysqli_stmt_close($stmt);
+	    mysqli_close($conn);
+	    $myNum = 1;
+	    $myJSON = json_encode($myNum);
+	    return $myJSON;
+	} else {
+		$myObj = new stdClass();
+	    $error = mysqli_error($conn);
+	    mysqli_stmt_close($stmt);
+	    mysqli_close($conn);
+	    $myObj->result = 0;
+	    $myObj->error = $error;
+	    $myJSON = json_encode($myObj);
+	    return $myJSON;
+	}
 }
 
+// Retrieve a single post from database
+function getPost($conn, $id)
+{
+	$sql = "SELECT * FROM posts WHERE post_id = ?;";
+	$stmt = mysqli_stmt_init($conn);
+	if (!mysqli_stmt_prepare($stmt, $sql)) {
+		$myNum = 0;
+		$myJSON = json_encode($myNum);
+		return $myJSON;
+	}
 
-//Retrieve posts from the database and return the results as an array:
-function getPosts() {
+	mysqli_stmt_bind_param($stmt, "i", $id);
+	mysqli_stmt_execute($stmt);
 
-    $sql = "SELECT p.postsId, p.title, p.content, p.created_at, u.usersName as author FROM posts p JOIN users u ON p.userId = u.usersId ORDER BY p.created_at DESC";
-
-    $result = mysqli_query($conn, $sql);
-
-    $posts = array();
-
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $post = array(
-                "id" => $row["postsId"],
-                "title" => $row["title"],
-                "body" => $row["content"],
-                "created_at" => $row["created_at"],
-                "author" => $row["author"]
-            );
-            $posts[] = $post;
-        }
-    }
-
-
-    return $posts;
+	$resultData = mysqli_stmt_get_result($stmt);
+	if ($row = mysqli_fetch_assoc($resultData)) {
+		return $row;
+	} else {
+		$myNum = 0;
+		$myJSON = json_encode($myNum);
+		return $myJSON;
+	}
 }
+
+// retrieve all posts
+function getAllPosts($conn)
+{
+	$sql = "SELECT * FROM posts;";
+	$result = mysqli_query($conn, $sql);
+	$posts = array();
+	while ($row = mysqli_fetch_assoc($result)) {
+		$posts[] = $row;
+	}
+	return $posts;
+}
+
 
 
 
