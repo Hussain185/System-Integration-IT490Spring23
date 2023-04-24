@@ -130,33 +130,66 @@ function SendSignupRequest(name,email,username,password,passwordrpt)
 	request.send("type=signup&name="+name+"&email="+email+"&uname="+username+"&pword="+password+"&rptpword="+passwordrpt);
 }
 
-function HandleBlogPostResponse(response)
-{
-	if(response == 0) {
-		alert("Failed to Create Blog Post.")
-	}
-	else{
-		alert("Blog Post was maded!");
-	}
+function HandleBlogPostResponse(response) {
+  if (response == 0) {
+    alert("Failed to Create Blog Post.")
+  }
+  else {
+    alert("Blog Post was made!");
+  }
 }
 
-function SendBlogPostRequest(title,body)
-{
-	var request = new XMLHttpRequest();
-	request.open("POST","includes/addpost.inc.php",true);
-	request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	request.onreadystatechange= function ()
-	{
-		
-		if (this.status == 200)
-		{
-			HandleSignupResponse(this.responseText);	   
-		}		
-		else {
-          		alert("There was an issue with the request.");
-        	}
-	}
-	request.send("type=post&title="+title+"&body="+body);
+function SendBlogPostRequest(title, body, image) {
+  var request = new XMLHttpRequest();
+  request.open("POST", "includes/addpost.inc.php", true);
+  // request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  var formData = new FormData();
+  formData.append('title', title);
+  formData.append('body', body);
+  formData.append('image', image);
+  console.log(image);
+  request.onreadystatechange = function () {
+    if (this.status == 200) {
+      alert(this.responseText);
+      HandleBlogPostResponse(this.responseText);
+    }
+    else {
+      alert("There was an issue with the request.");
+    }
+  }
+  console.log(formData.get('title'));
+  console.log(formData.get('body'));
+  console.log(formData.get('image'));
+  console.log(body);
+  // request.send("type=createpost&title=" + title + "&body=" + body+ "&image=" + image);
+  request.send(formData);
+}
+
+// get All posts function
+function HandleGetAllPostsResponse(response, callback) {
+  if (response == 0) {
+    alert("Failed to get posts.")
+    console.log("Failed to get posts.");
+  }
+  else {
+    // alert("Posts were fetched!");
+    const myObj = JSON.parse(response);
+    console.log(myObj);
+    callback(myObj);
+  }
+}
+
+function SendGetAllPostsRequest(callback) {
+  var request = new XMLHttpRequest();
+  request.open("GET", "includes/getposts.inc.php", true);
+  request.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      HandleGetAllPostsResponse(this.responseText, callback);
+    } else if (this.readyState == 4 && this.status != 200) {
+      alert("There was an issue with the request.");
+    }
+  };
+  request.send();
 }
 
 ClassicEditor.create(document.querySelector("#body"), {
