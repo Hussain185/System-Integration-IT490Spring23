@@ -3,68 +3,54 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <title>CompileCart</title>
-        <?php
-			include_once 'header.php';
-		?>
-  <!-- Page Wrapper -->
-  <div class="page-wrapper">
-
-    <!-- Post Slider
-    <div class="post-slider">
-      <h1 class="slider-title">Trending Posts</h1>
-      <i class="fas fa-chevron-left prev"></i>
-      <i class="fas fa-chevron-right next"></i>
-      <div class="post-wrapper">
-        <div class="post">
-          <img src="images/image_1.png" alt="" class="slider-image">
-          <div class="post-info">
-            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-            <i class="far fa-user"> Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calendar"> Mar 8, 2019</i>
-          </div>
-        </div>
-        <div class="post">
-          <img src="images/image_1.png" alt="" class="slider-image">
-          <div class="post-info">
-            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-            <i class="far fa-user"> Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calendar"> Mar 8, 2019</i>
-          </div>
-        </div>
-        <div class="post">
-          <img src="images/image_1.png" alt="" class="slider-image">
-          <div class="post-info">
-            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-            <i class="far fa-user"> Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calendar"> Mar 8, 2019</i>
-          </div>
-        </div>
-        <div class="post">
-          <img src="images/image_1.png" alt="" class="slider-image">
-          <div class="post-info">
-            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-            <i class="far fa-user"> Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calendar"> Mar 8, 2019</i>
-          </div>
-        </div>
-        <div class="post">
-          <img src="images/image_1.png" alt="" class="slider-image">
-          <div class="post-info">
-            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-            <i class="far fa-user"> Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calendar"> Mar 8, 2019</i>
-          </div>
+<head>
+  <title>CompileCart</title>
+  <script src="script.js"></script>
+  <script>
+    const templatePost = (post) => `
+      <div class="post clearfix">
+        <img src="${post.post_image}" alt="" class="post-image">
+        <div class="post-preview">
+          <h2>
+            <a href="single.html">
+                ${post.post_title}
+            </a>
+          </h2>
+          <!--  <i class="far fa-user"> Awa Melvine</i> // this is the author name commented out-->
+          &nbsp;
+          <i class="far fa-calendar">
+            ${post.created_at}
+          </i>
+          <p class="preview-text">
+          ${post.post_body.slice(0, 50)}
+          </p>
+          <a href="single.php?title=${post.post_title}&body=${post.post_body}&image=${post.post_image}&createdAt=${post.created_at}" class="btn read-more">Read More</a>
         </div>
       </div>
-    </div> -->
-    <!-- // Post Slider -->
+      `;
+
+    function onPostsReady(posts) {
+      console.log(posts);
+      const postContainer = document.getElementById('posts-container');
+      posts.forEach((post) => {
+        postContainer.innerHTML += templatePost(post);
+      });
+    }
+
+    window.onload = () => {
+      SendGetAllPostsRequest(onPostsReady);
+    };
+  </script>
+</head>
+
+
+<body>
+  <?php
+  include_once 'header.php';
+  ?>
+
+  <!-- Page Wrapper -->
+  <div class="page-wrapper">
 
     <!-- Main Content (By Abdelmalek Benaissa) -->
     <div class="main-content-compilecart">
@@ -90,85 +76,50 @@
       <!-- Main Content -->
       <div class="main-content">
         <h1 class="recent-post-title">Recent Posts</h1>
+        <div id="posts-container">
 
-        <div class="post clearfix">
-         <!-- <img src="img/image_3.png" alt="" class="post-image"> -->
-          <div class="post-preview">
-            <h2><a href="single.html">The strongest and sweetest songs yet remain to be sung</a></h2>
-            <i class="far fa-user"> Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calendar"> Mar 11, 2019</i>
-            <p class="preview-text">
-            The company itself is a very successful company. 
-            We can choose an exercise from the inventor of most of the exercises.
-            </p>
-            <a href="single.php" class="btn read-more">Read More</a>
-          </div>
         </div>
 
         <?php
         /*
-        //To display the posts, where the posts are intended to be displayed:
+        // Mohamed: To display the posts, where the posts are intended to be displayed:
+        // Abdelmalek: You need to fix the way you close the first php tag
+        // It is invalid syntax, try looking at header.php for an example
         require_once('../sampleFiles/path.inc');
         require_once('../sampleFiles/get_host_info.inc');
         require_once('../sampleFiles/rabbitMQLib.inc');
-
         $client = new rabbitMQClient("../database/db.ini", "dbServer");
-
         $request['type'] = 'get_posts';
         $response = $client->send_request($request);
-
         if (!empty($response)) {
-            $posts = $response;
-            foreach ($posts as $post) {
+        $posts = $response;
+        foreach ($posts as $post) {
         ?>
-
         <div class="post clearfix">
-            <img src="<?php echo $post['image']; ?>" alt="" class="post-image">
-            <div class="post-preview">
-                <h2><a href="#"><?php echo $post['title']; ?></a></h2>
-                <i class="far fa-user"><?php echo $post['author']; ?></i>
-                &nbsp;
-                <i class="far fa-calendar"> <?php echo $post['created_at']; ?></i>
-                <p class="preview-text"><?php echo $post['body']; ?></p>
-                <a href="single.php" class="btn read-more">Read More</a>
-            </div>
+        <img src="<?php echo $post['image']; ?>" alt="" class="post-image">
+        <div class="post-preview">
+        <h2><a href="#"><?php echo $post['title']; ?></a></h2>
+        <i class="far fa-user"><?php echo $post['author']; ?></i>
+        &nbsp;
+        <i class="far fa-calendar"> <?php echo $post['created_at']; ?></i>
+        <p class="preview-text"><?php echo $post['body']; ?></p>
+        <a href="single.php" class="btn read-more">Read More</a>
+        </div>
         </div>
         <?php }} */?>
-        
+
 
       </div>
       <!-- // Main Content -->
 
-      <!--
-      <div class="sidebar">
-        <div class="section search">
-          <h2 class="section-title">Search</h2>
-          <form action="index.html" method="post">
-            <input type="text" name="search-term" class="text-input" placeholder="Search...">
-          </form>
-        </div>
-        <div class="section topics">
-          <h2 class="section-title">Topics</h2>
-          <ul>
-            <li><a href="#">Poems</a></li>
-            <li><a href="#">Quotes</a></li>
-            <li><a href="#">Fiction</a></li>
-            <li><a href="#">Biography</a></li>
-            <li><a href="#">Motivation</a></li>
-            <li><a href="#">Inspiration</a></li>
-            <li><a href="#">Life Lessons</a></li>
-          </ul>
-        </div>
-      </div>
-      -->
     </div>
     <!-- // Content -->
 
   </div>
   <!-- // Page Wrapper -->
- 	<?php 
-		include_once 'footer.php';
-	?>
+  <?php
+  include_once 'footer.php';
+  ?>
+</body>
 
 </html>
