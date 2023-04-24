@@ -1,11 +1,12 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-//require_once('../../sampleFiles/path.inc');
-//require_once('../../sampleFiles/get_host_info.inc');
-//require_once('../../sampleFiles/rabbitMQLib.inc');
-require_once 'dbh.inc.php';
-require_once 'functions.inc.php';
+require_once('../../sampleFiles/path.inc');
+require_once('../../sampleFiles/get_host_info.inc');
+require_once('../../sampleFiles/rabbitMQLib.inc');
+//require_once("dbh.inc.php");
+require_once('functions.inc.php');
+
 //$client = new rabbitMQClient("../../ini/login.ini", "testServer");
 
 if (isset($_POST['title']) && isset($_POST['body']) && isset($_FILES['image'])) {
@@ -39,27 +40,25 @@ if (isset($_POST['title']) && isset($_POST['body']) && isset($_FILES['image'])) 
         echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
         $uploadOk = 0;
     }
-//     // Send request to server
-//     // $request = array();
-//     // $request['type'] = 'add_post';
-//     // $request['title'] = $title;
-//     // $request['body'] = $body;
-//     // $request['topic'] = $topic;
-//     // $request['image'] = $target;
-//     //$response = $client->send_request($request);
+
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
         echo "Sorry, your file was not uploaded.";
     // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($image["tmp_name"], $target_file)) {
+            $client = new rabbitMQClient("../../ini/db.ini","dbServer");
+            $msg = $argv[1] ?? "test message";
+            $request = array();
+            $request['type'] = 'add_post';
+            $request['title'] = $title;
+            $request['body'] = $body;
+            $request['topic'] = $topic;
+            $request['image'] = $target;
+            $response = $client->send_request($request);
             
-
-            if ($response == 1) {
-                echo 'Post added successfully '; //successfully added the post to the home page
-            } else {
-                echo 'Error adding post';
-            }
+            echo $response;
+            
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
