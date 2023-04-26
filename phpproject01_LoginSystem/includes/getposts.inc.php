@@ -16,4 +16,4 @@ $request['type'] = 'get_posts';
 $response = $client->send_request($request);
 
 // Encode the results as JSON and send them back to the client
-echo json_encode($posts);
+echo json_encode($response);
