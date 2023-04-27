@@ -38,8 +38,6 @@ function requestProcessor($request)
             $jsonResult = curl_exec($curl);
             $result = json_decode($jsonResult, true);
 
-            echo $result;
-
             curl_close($curl);
 
             $response = array();
