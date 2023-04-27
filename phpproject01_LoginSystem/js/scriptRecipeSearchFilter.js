@@ -67,12 +67,12 @@ function createContent(results){
     results.map(result => {
         initialContent += 
         `<div class="item">
-        <img src="${result.recipe.image}" alt="">
+        <img src="${result.image}" alt="">
         <div class="flex-container">
-            <h1 class='title'>${result.recipe.label}</h1>
-            <a class='view-btn' href='${result.recipe.url}'>View</a>
+            <h1 class='title'>${result.label}</h1>
+            <a class='view-btn' href='${result.url}'>View</a>
         </div>
-        <p class='recipe-desc'>Calories: ${result.recipe.calories.toFixed(2)}</p>
+        <p class='recipe-desc'>Calories: ${result.calories.toFixed(2)}</p>
     </div>`
     })
 
@@ -105,5 +105,7 @@ function HandleSignupResponse(response)
     }
     else{
         alert("DB search Sucessful!");
+        const myObj = JSON.parse(response);
+        createContent(myObj);
     }
 }
