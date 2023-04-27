@@ -211,7 +211,7 @@ class rabbitMQClient
       $exchange->setType($this->exchange_type);
 
       $callback_queue = new AMQPQueue($channel);
-      $callback_queue->setName("problemChildQ");
+      $callback_queue->setName($this->$message."problemChildQ");
       $callback_queue->declareQueue();
 			$callback_queue->bind($exchange->getName(),$this->routing_key.".response");
 
