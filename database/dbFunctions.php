@@ -238,6 +238,7 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
         $myRecipe['cal'] = $recipeExists['cal'];
         $myRecipe['url'] = $recipeExists['url'];
         $myRecipe['image'] = $recipeExists['image'];
+	print_r($myRecipe);
         $myJSON = json_encode($myRecipe);
         return $myJSON;
         //search and return database entries
