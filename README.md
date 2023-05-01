@@ -1,4 +1,4 @@
-# IT490Spring23
+# CompileCart
 This git repo contains our main SaaS called CompileCart. 
 **CompileCart** is a website that’s main feature is to enable registered users to search for recipes using the **Edaman API**. 
 Users would be able to filter their search based on dropdown menus titled **dietLabel, cuisineType, mealType**
