@@ -64,13 +64,13 @@ form.addEventListener('submit', (e)=>{
 
 function createContent(results){
     let initialContent = '';
-    results.map(result => {
+    // results.map(result => {
         initialContent += 
         `<div class="item">
-        <img src="${result.image}" alt="">
+        <img src="${results[3]}" alt="">
         <div class="flex-container">
-            <h1 class='title'>${result.label}</h1>
-            <a class='view-btn' href='${result.url}'>View</a>
+            <h1 class='title'>${results[0]}</h1>
+            <a class='view-btn' href='${result[2]}'>View</a>
         </div>
     </div>`
     })
@@ -105,7 +105,8 @@ function HandleSignupResponse(response)
     else{
         alert("DB search Sucessful!");
         const myObj = JSON.parse(response);
-        console.log(myObj);
-        createContent(myObj);
+        const results = Object.values(myObj);
+        console.log(results);
+        createContent(results);
     }
 }
