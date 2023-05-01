@@ -72,7 +72,7 @@ function createContent(results){
             <h1 class='title'>${result.label}</h1>
             <a class='view-btn' href='${result.url}'>View</a>
         </div>
-        <p class='recipe-desc'>Calories: ${result.calories.toFixed(2)}</p>
+        <p class='recipe-desc'>Calories: ${result.cal.toFixed(2)}</p>
     </div>`
     })
 
