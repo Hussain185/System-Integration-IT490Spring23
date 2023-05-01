@@ -70,7 +70,7 @@ function createContent(results){
         <img src="${results[3]}" alt="">
         <div class="flex-container">
             <h1 class='title'>${results[0]}</h1>
-            <a class='view-btn' href='${result[2]}'>View</a>
+            <a class='view-btn' href='${results[2]}'>View</a>
         </div>
     </div>`
     // })
