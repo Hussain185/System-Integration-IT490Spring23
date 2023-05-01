@@ -3,6 +3,7 @@ This git repo contains our main SaaS called CompileCart.
 **CompileCart** is a website that’s main feature is to enable registered users to search for recipes using the **Edaman API**. 
 Users would be able to filter their search based on dropdown menus titled **dietLabel, cuisineType, mealType**
 > (Ex. Search: Cake, dietLabel: Low-Fat, cuisineType: American, mealType: Teatime)
+
 Once the user clicks Enter, the page will display the top result of their search providing: 
 the **image** of the recipe, the **title** of the recipe, the **url** to the source of the recipe, and the amount of **calories** the recipe has. 
 This feature is planned to be finished before the final deadline.
