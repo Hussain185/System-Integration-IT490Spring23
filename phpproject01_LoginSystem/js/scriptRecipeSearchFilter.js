@@ -105,7 +105,8 @@ function HandleSignupResponse(response)
     }
     else{
         alert("DB search Sucessful!");
-        const myObj = JSON.parse(response);
+        // const myObj = JSON.parse(response);
+        const myObj = Object.values(response);
         createContent(myObj);
     }
 }
