@@ -73,7 +73,7 @@ function createContent(results){
             <a class='view-btn' href='${result[2]}'>View</a>
         </div>
     </div>`
-    })
+    // })
 
     searchResult.innerHTML = initialContent;
 }
