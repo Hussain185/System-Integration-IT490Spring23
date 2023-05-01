@@ -233,12 +233,12 @@ function searchDB($conn, $query, $dietLabels, $cuisineType, $mealType)
         //no execute original sql query and return database entries
         return $response;
     } else {
-        $myObj = new stdClass();
-        $myObj->label = $recipeExists['label'];
-        $myObj->cal = $recipeExists['cal'];
-        $myObj->url = $recipeExists['url'];
-        $myObj->image = $recipeExists['image'];
-        $myJSON = json_encode($myObj);
+        $myRecipe = array();
+        $myRecipe['label'] = $recipeExists['label'];
+        $myRecipe['cal'] = $recipeExists['cal'];
+        $myRecipe['url'] = $recipeExists['url'];
+        $myRecipe['image'] = $recipeExists['image'];
+        $myJSON = json_encode($myRecipe);
         return $myJSON;
         //search and return database entries
     }
