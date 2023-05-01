@@ -104,8 +104,7 @@ function HandleSignupResponse(response)
     }
     else{
         alert("DB search Sucessful!");
-        // const myObj = JSON.parse(response);
-        const myObj = Object.values(response);
+        const myObj = JSON.parse(response);
         console.log(myObj);
         createContent(myObj);
     }
