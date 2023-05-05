@@ -238,6 +238,8 @@ if(isset($_POST['submitCode'])) {
 	$numrows = mysqli_num_rows($result);
 	if($numrows == 1){
 		echo '<script>alert("Logged in!")</script>';
+		$erase_otp_sql = "UPDATE `users` SET otp = NULL WHERE usersUid = '{$username}' ";
+		$erase_otp = mysqli_query(dbConnection(), $erase_otp_sql);
 		header('Location: index.php');
 		exit;
 	}
