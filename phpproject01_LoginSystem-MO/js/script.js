@@ -79,18 +79,23 @@ function HandleLoginResponse(response) {
   else {
     alert("Login Sucessful!");
     //const myObj = JSON.parse(response);
-    const myObj = JSON.parse(JSON.stringify(response));
-
+    //const myObj = JSON.parse(JSON.stringify(response));
+    const myObj = JSON.parse(response);
+    
+    // var name = JSON.stringify(myObj.username);
+    var name = myObj.username;
+    alert(name);
     // if ('username' in myObj) {alert("not undefined");}
     // else {alert("is undefined");}
 
-    var name = myObj.username;
+    //var name = myObj.username;
 
     //document.querySelector('#username').value = myObj.username;
     //var name = document.querySelector('username').value;
     //alert(name);
 
-    alert(myObj[1]);
+    
+    //alert(name);
 
     var session = myObj.sessionId;
     var exp = 10;

@@ -8,6 +8,7 @@ require 'includes/functions.inc.php';
 <!DOCTYPE html>
 <html lang="en">
     <head>
+
         <title>2-Factor Authentication</title>
 		<link rel="stylesheet" href="css/style.css">
 		<!-- Font Awesome -->
@@ -28,25 +29,45 @@ require 'includes/functions.inc.php';
 		-->
 
     <div class="auth-content">
-    <form>
+    <form method="POST" id="2fa-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <section class="2fa-form">
             <h2 class="form-title">2-Factor Authentication</h2>
-            <div>
-                <label>Code</label>
-                <input type="code" id="code" class="text-input">
+			<div id="generateOTP">
+                <button type="generateOTP" id="generateOTP" name="generateOTP" class="btn btn-big">Send Code</button>
             </div>
-            <div>
-                <button type="submitCode" id="submitCode" class="btn btn-big">Submit</button>
+			<br><br><br><br><br>
+            <div id="submitCode">
+                <input type="code" id="code" name="code" class="text-input" placeholder="Code">
+                <button type="submitCode" id="submitCode" name="submitCode" class="btn btn-big">Submit</button>
             </div>
         </section>
     </form>
     </div>
+	<script>
+		// const generateOTPDiv = document.getElementById("generateOTP");
+		// const generateOTPButton = document.getElementById("generateOTP");
+		// const submitCodeDiv = document.getElementById("submitCode");
+		// generateOTPButton.onclick = function () {
+		// 	if (generateOTPDiv.style.display !== "none") {
+		// 		generateOTPDiv.style.display = "none";
+		// 		submitCodeDiv.style.display = "block";
+		// 	} 
+		// 	else {
+		// 		generateOTPDiv.style.display = "block";
+		// 		submitCodeDiv.style.display = "none";
+		// 	}
+		// };
 
-    
+		// document.getElementById("generateOTP").onclick=function show(event){
+		// 	event.preventDefault();
+		// 	document.getElementById("submitCode").style.visibility='visible';
+		// 	//document.getElementById("generateOTP").style.visibility='hidden';
+		// };
+  	</script>
+
 <?php
 
 //$username=$_COOKIE['usersUid'];
-// generate_otp(usersId);
 // send_mail($to="",$pin="");
 
 // function GetUsernameInput(username) {
@@ -75,6 +96,8 @@ require 'includes/functions.inc.php';
 	
 // }
 
+// $conn=$this->db;
+
 $username = $_COOKIE['username'];
 //$username = $_POST['ajaxTextUser'];
 //$request['username'] = $username;
@@ -86,6 +109,11 @@ if (isset($username)) {
 	echo "Username is ".$username.".";
 }
 else {echo "Username is not set.";}
+
+
+if(isset($_POST['generateOTP'])) {
+	generate_otp($username);
+}
 
 function generate_otp($username){
 	//uidExists($conn, $username);
@@ -100,8 +128,12 @@ function generate_otp($username){
 		//$email = $conn->query("SELECT email FROM `users` where usersId = '{$usersId}'")->fetch_array()[0];
 		$email_sql = "SELECT usersEmail FROM `users` where usersUid = '{$username}'";
 		$email =  mysqli_query(dbConnection(), $email_sql)->fetch_array()[0];
+		//$email = $conn->query($email_sql)->fetch_array()[0];
 		//$this->send_mail($email,$otp);
-		send_mail($email,$otp);
+
+		//send_mail($email,$otp);	//Uncomment/Comment to disable/run (disable API for testing purposes).
+
+		//echo $email;
 	}
 	else{
 		$resp['status'] = 'failed';
@@ -158,6 +190,63 @@ function send_mail($to="",$pin=""){
 		echo "cURL Error #:" . $err;
 	} else {
 		echo $response;
+	}
+}
+
+if(isset($_POST['submitCode'])) {
+	//otp_verify();
+
+	// //$otp_submitted = $_POST["code"];
+	// $_SESSION['code'] = $_POST['code'];
+ 	// //$username = $_COOKIE['username'];
+	// header ('Location: 2faverify.php');
+//}
+
+//function otp_verify() {
+	// extract($_POST);
+	//  $sql = "SELECT * FROM `users` where usersUid = ? and otp = ? ";
+	//  $stmt = $conn->prepare($sql);
+	//  //$stmt = mysqli_query(dbConnection(), $sql);
+	//  //$update_otp = mysqli_query(dbConnection(), $update_sql);
+	//  $stmt->bind_param('is', $username, $otp);
+	//  $stmt->execute();
+	//  $result = $stmt->get_result();
+	//  if($result->num_rows > 0){
+	// 	 $resp['status'] = 'success';
+	// 	 $conn->query("UPDATE `users` set otp = NULL, otp_expiration = NULL where usersUid = '{$username}'");
+	// 	 $_SESSION['user_login'] = 1;
+	// 	 foreach($result->fetch_array() as $k => $v){
+	// 		 if(!is_numeric($k))
+	// 		 $_SESSION[$k] = $v;
+	// 	 }
+	//  }
+	//  else{
+	// 	 $resp['status'] = 'failed';
+	// 	 $_SESSION['flashdata']['type'] = 'danger';
+	// 	 $_SESSION['flashdata']['msg'] = ' Incorrect OTP.';
+	//  }
+	//  return json_encode($resp);
+
+	//extract($_POST);
+	//event.preventDefault();
+
+	$otp_submitted = $_POST["code"];
+	$username = $_COOKIE['username'];
+	$sql_otp_verify = "SELECT * FROM `users` WHERE usersUid = '$username' AND otp = '$otp_submitted'";
+	//$result = mysqli_query($conn,$sql_otp_verify);
+	$result = mysqli_query(dbConnection(), $sql_otp_verify);
+	$numrows = mysqli_num_rows($result);
+	if($numrows == 1){
+		echo '<script>alert("Logged in!")</script>';
+		header('Location: index.php');
+		exit;
+	}
+	else if($numrows == 0){
+		echo '<script>alert("Code not correct.")</script>';
+		exit;
+	}
+	else {
+		echo '<script>alert("Multiple accounts with this username and otp code!")</script>';
 	}
 }
 
