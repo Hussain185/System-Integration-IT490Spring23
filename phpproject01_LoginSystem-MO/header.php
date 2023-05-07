@@ -42,7 +42,10 @@
 						echo "</a>";
 						echo "<ul>";
 							echo"<li><a href='create.php'>Create Food Post!</a></li>";
-							// echo "<li><a href='indexRecipeSearchFilter.html'>Search Recipe!</a></li>";
+							echo "<li><a href='indexRecipeSearchFilter.html'>Search Recipe!</a></li>";
+							echo "<li><a href='priceComparison/index.php'>Search Ingredients</a></li>";
+							echo "<li><a href='dietaryCalculator/indexDietaryCalculator.html'>Dietary Calculator</a></li>";
+							echo "<li><a href='mealPlanner/index.php'>Meal Planner</a></li>";
 						echo "</ul>";
 					echo "</li>";
 					echo "<li><a href='logout.html' class='logout'>Logout</a></li>";
