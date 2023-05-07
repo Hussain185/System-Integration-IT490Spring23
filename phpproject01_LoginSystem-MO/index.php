@@ -1,125 +1,151 @@
-<!--This code was created by Dani Krossing, in his YouTube video "How to create a login system in PHP" and is used as a base to test the Authentication System -->
-<!--Above comment: OUTDATED. Edit it with new author of source code-->
+<?php require '../includes/dbh.inc.php'; ?>
+<a href="../index.php">HOME</a>
 <!DOCTYPE html>
+<!-- Used template by CodexWorld, and library "fullcalendar" -->
 <html lang="en">
 
 <head>
-  <title>CompileCart</title>
-  <script src="script.js"></script>
-  <script>
-    const templatePost = (post) => `
-      <div class="post clearfix">
-        <img src="${post.post_image}" alt="" class="post-image">
-        <div class="post-preview">
-          <h2>
-            <a href="single.html">
-                ${post.post_title}
-            </a>
-          </h2>
-          <!--  <i class="far fa-user"> Awa Melvine</i> // this is the author name commented out-->
-          &nbsp;
-          <i class="far fa-calendar">
-            ${post.created_at}
-          </i>
-          <p class="preview-text">
-          ${post.post_body.slice(0, 50)}
-          </p>
-          <a href="single.php?title=${post.post_title}&body=${post.post_body}&image=${post.post_image}&createdAt=${post.created_at}" class="btn read-more">Read More</a>
-        </div>
-      </div>
-      `;
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planner</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./fullcalendar/lib/main.min.css">
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./fullcalendar/lib/main.min.js"></script>
+    <style>
+        :root {
+            --bs-success-rgb: 71, 222, 152 !important;
+        }
 
-    function onPostsReady(posts) {
-      console.log(posts);
-      const postContainer = document.getElementById('posts-container');
-      posts.forEach((post) => {
-        postContainer.innerHTML += templatePost(post);
-      });
-    }
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            /* font-family: Apple Chancery, cursive; */
+        }
 
-    window.onload = () => {
-      SendGetAllPostsRequest(onPostsReady);
-    };
-  </script>
+        .btn-info.text-light:hover,
+        .btn-info.text-light:focus {
+            background: #000;
+        }
+        table, tbody, td, tfoot, th, thead, tr {
+            border-color: #ededed !important;
+            border-style: solid;
+            border-width: 1px !important;
+        }
+    </style>
 </head>
 
+<body class="bg-light">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient" id="topNavBar">
+        <div class="container">
+            <a class="navbar-brand" href="https://sourcecodester.com">
+            Sourcecodester
+            </a>
 
-<body>
-  <?php
-  include_once 'header.php';
-  ?>
-
-  <!-- Page Wrapper -->
-  <div class="page-wrapper">
-
-    <!-- Main Content (By Abdelmalek Benaissa) -->
-    <div class="main-content-compilecart">
-      <h1 class="welcome-title">Welcome!</h1>
-      <p class="main-text">
-        For the newcomers who are visiting this website for the first time,
-        let me introduce you to our Meal Planner service called CompileCart.
-        CompileCart is a software that allows any register user to
-        select a recipe for a meal that they want to cook for the day. The
-        software will then return the user a list of the ingredients needed
-        to create the meal. There will also be a price comparison chart
-        that shows the most affordable places to purchase the ingredients
-        in. Registered users can also share the food that they plan to make
-        by filling out a blogging form. Any blog posts that has been
-        published can be seen at the bottom of our home page. I hope you
-        enjoy your stay in this website, and make good use of our services!
-      </p>
+            <div>
+                <b class="text-light">Sample Scheduling</b>
+            </div>
+        </div>
+    </nav> -->
+    <div class="container py-5" id="page-container">
+        <div class="row">
+            <div class="col-md-9">
+                <div id="calendar"></div>
+            </div>
+            <div class="col-md-3">
+                <div class="cardt rounded-0 shadow">
+                    <div class="card-header bg-gradient bg-primary text-light">
+                        <h5 class="card-title">Meal Form</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <form action="save_schedule.php" method="post" id="schedule-form">
+                                <input type="hidden" name="id" value="">
+                                <div class="form-group mb-2">
+                                    <label for="title" class="control-label">Title</label>
+                                    <input type="text" class="form-control form-control-sm rounded-0" name="title" id="title" required>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="description" class="control-label">Description</label>
+                                    <textarea rows="3" class="form-control form-control-sm rounded-0" name="description" id="description" required></textarea>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="start_datetime" class="control-label">Start</label>
+                                    <input type="datetime-local" class="form-control form-control-sm rounded-0" name="start_datetime" id="start_datetime" required>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="end_datetime" class="control-label">End</label>
+                                    <input type="datetime-local" class="form-control form-control-sm rounded-0" name="end_datetime" id="end_datetime">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-center">
+                            <button class="btn btn-primary btn-sm rounded-0" type="submit" form="schedule-form"><i class="fa fa-save"></i> Save</button>
+                            <button class="btn btn-default border btn-sm rounded-0" type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Content -->
-    <div class="content clearfix">
-
-      <!-- Main Content -->
-      <div class="main-content">
-        <h1 class="recent-post-title">Recent Posts</h1>
-        <div id="posts-container">
-
+    <!-- Event Details Modal -->
+    <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-0">
+                <div class="modal-header rounded-0">
+                    <h5 class="modal-title">Meal Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body rounded-0">
+                    <div class="container-fluid">
+                        <dl>
+                            <dt class="text-muted">Title</dt>
+                            <dd id="title" class="fw-bold fs-4"></dd>
+                            <dt class="text-muted">Description</dt>
+                            <a id="descriptionLink" href="#" onclick="myFunction()"> <dd id="description" class=""></dd> </a>
+                            <dt class="text-muted">Start</dt>
+                            <dd id="start" class=""></dd>
+                            <dt class="text-muted">End</dt>
+                            <dd id="end" class=""></dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="modal-footer rounded-0">
+                    <div class="text-end">
+                        <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit" data-id="">Edit</button>
+                        <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete" data-id="">Delete</button>
+                        <button type="button" class="btn btn-secondary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <?php
-        /*
-        // Mohamed: To display the posts, where the posts are intended to be displayed:
-        // Abdelmalek: You need to fix the way you close the first php tag
-        // It is invalid syntax, try looking at header.php for an example
-        require_once('../sampleFiles/path.inc');
-        require_once('../sampleFiles/get_host_info.inc');
-        require_once('../sampleFiles/rabbitMQLib.inc');
-        $client = new rabbitMQClient("../database/db.ini", "dbServer");
-        $request['type'] = 'get_posts';
-        $response = $client->send_request($request);
-        if (!empty($response)) {
-        $posts = $response;
-        foreach ($posts as $post) {
-        ?>
-        <div class="post clearfix">
-        <img src="<?php echo $post['image']; ?>" alt="" class="post-image">
-        <div class="post-preview">
-        <h2><a href="#"><?php echo $post['title']; ?></a></h2>
-        <i class="far fa-user"><?php echo $post['author']; ?></i>
-        &nbsp;
-        <i class="far fa-calendar"> <?php echo $post['created_at']; ?></i>
-        <p class="preview-text"><?php echo $post['body']; ?></p>
-        <a href="single.php" class="btn read-more">Read More</a>
-        </div>
-        </div>
-        <?php }} */?>
-
-
-      </div>
-      <!-- // Main Content -->
-
     </div>
-    <!-- // Content -->
+    <!-- Event Details Modal -->
 
-  </div>
-  <!-- // Page Wrapper -->
-  <?php
-  include_once 'footer.php';
-  ?>
+<?php 
+$username = $_COOKIE['username'];
+//$schedules = $conn->query("SELECT * FROM `schedule_list`");
+$schedules = mysqli_query(dbConnection(), "SELECT * FROM `schedule_list` WHERE usersUid = '{$username}'");
+$sched_res = [];
+foreach($schedules->fetch_all(MYSQLI_ASSOC) as $row){
+    $row['sdate'] = date("F d, Y h:i A",strtotime($row['start_datetime']));
+    $row['edate'] = date("F d, Y h:i A",strtotime($row['end_datetime']));
+    $sched_res[$row['id']] = $row;
+}
+?>
+<?php 
+if(isset($conn)) $conn->close();
+?>
 </body>
+<script>
+    var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')                     
+</script>
+<script src="./js/script.js"></script>
 
 </html>
