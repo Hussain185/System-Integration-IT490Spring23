@@ -331,6 +331,16 @@ function getAllPosts($conn)
 	return $posts;
 }
 
+function fa($query,$conn)
+{
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        return false;
+    }
+    mysqli_stmt_execute($stmt);
+    return mysqli_stmt_get_result($stmt);
+}
+
 
 
 

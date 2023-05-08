@@ -38,7 +38,8 @@ function requestProcessor($request)
 		//new case to handle the request for getting posts and invoke the getPosts() function:
 		case "get_posts":
 			return getAllPosts($conn);
-			
+        case "2fa":
+			return fa($request['query'],$conn);
         case "event":
             return createEvent($conn, $request['title'], $request['desc'], $request['date'], $request['days'], $request['color']);
         case "searchAPI":
