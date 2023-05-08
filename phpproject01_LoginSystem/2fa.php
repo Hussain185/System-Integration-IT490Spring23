@@ -47,6 +47,7 @@ require_once('../sampleFiles/rabbitMQLib.inc');
 
     <?php
 
+    $client = new rabbitMQClient("../ini/db.ini","dbServer");
     $username = $_COOKIE['username'];
     //$username = $_POST['ajaxTextUser'];
     //$request['username'] = $username;
@@ -72,7 +73,7 @@ require_once('../sampleFiles/rabbitMQLib.inc');
         $request = array();
         $request['type'] = "2fa";
         $request['query'] = "UPDATE `users` set otp_expiration = '{$expiration}', otp = '{$otp}' where usersUid = '{$username}' ";
-        $client = new rabbitMQClient("../ini/db.ini","dbServer");
+
         $response = $client->send_request($request);
 
         echo $response;
@@ -160,7 +161,8 @@ require_once('../sampleFiles/rabbitMQLib.inc');
         //$result = mysqli_query(dbConnection(), $sql_otp_verify);
         //$numrows = mysqli_num_rows($result);
         $request['query'] = $sql_otp_verify;
-        $client = new rabbitMQClient("../ini/db.ini", "dbServer");
+        $request['type'] = "2fa";
+
         $response = $client->send_request($request);
         if($response){
             echo '<script>alert("Logged in!")</script>';
