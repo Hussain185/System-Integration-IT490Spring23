@@ -40,6 +40,8 @@ function requestProcessor($request)
 			return getAllPosts($conn);
         case "2fa":
 			return fa($request['query'],$conn);
+        case "getEmail":
+            return getEmail($request['username'],$conn);
         case "event":
             return createEvent($conn, $request['title'], $request['desc'], $request['date'], $request['days'], $request['color']);
         case "searchAPI":

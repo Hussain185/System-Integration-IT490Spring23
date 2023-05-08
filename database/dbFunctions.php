@@ -342,6 +342,12 @@ function fa($query,$conn)
     return mysqli_stmt_get_result($stmt);
 }
 
+function getEmail($username,$conn) {
+    $email_sql = "SELECT usersEmail FROM `users` where usersUid = '{$username}'";
+    $email =  mysqli_query($conn, $email_sql)->fetch_array()[0];
+    return $email;
+}
+
 
 
 

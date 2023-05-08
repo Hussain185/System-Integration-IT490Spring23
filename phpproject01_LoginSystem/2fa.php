@@ -80,8 +80,9 @@ require_once('../sampleFiles/rabbitMQLib.inc');
         if($response){
             $resp['status'] = 'success';
             //$email = $conn->query("SELECT email FROM `users` where usersId = '{$usersId}'")->fetch_array()[0];
-            $request['type'] = "fa";
-            $request['query'] = "SELECT email FROM `users` where usersUid = '{$username}'";
+            $request['type'] = "getEmail";
+            $request['username'] = $username;
+            //$request['query'] = "SELECT email FROM `users` where usersUid = '{$username}'";
             //$email =  mysqli_query(dbConnection(), $email_sql)->fetch_array()[0];
             //$email = $conn->query($email_sql)->fetch_array()[0];
             //$this->send_mail($email,$otp);
