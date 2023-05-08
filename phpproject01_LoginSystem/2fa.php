@@ -88,7 +88,7 @@ require_once('../sampleFiles/rabbitMQLib.inc');
             $email = $client->send_request($request);
 
             print_r($response,$email);
-            //send_mail($email,$otp);	//Uncomment/Comment to disable/run (disable API for testing purposes).
+            send_mail($email,$otp);	//Uncomment/Comment to disable/run (disable API for testing purposes).
 
             echo "Sending to $email";
         }
