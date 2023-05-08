@@ -4,8 +4,6 @@ ini_set('display_errors', 1);
 require_once('../sampleFiles/path.inc');
 require_once('../sampleFiles/get_host_info.inc');
 require_once('../sampleFiles/rabbitMQLib.inc');
-require 'includes/dbh.inc.php';
-require 'includes/functions.inc.php';
 ?>
 
 <!DOCTYPE html>
