@@ -165,6 +165,7 @@ require_once('../sampleFiles/rabbitMQLib.inc');
             $erase_otp_sql = "UPDATE `users` SET otp = NULL WHERE usersUid = '{$username}' ";
             $request['query'] = $erase_otp_sql;
             $client = new rabbitMQClient("../ini/db.ini", "dbServer");
+            $response = $client->send_request($request);
             header('Location: index.php');
             exit;
         }
