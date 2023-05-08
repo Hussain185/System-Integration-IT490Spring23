@@ -176,7 +176,7 @@ function send_mail($to="",$pin=""){
 		]),
 		CURLOPT_HTTPHEADER => [
 			"X-RapidAPI-Host: rapidprod-sendgrid-v1.p.rapidapi.com",
-			"X-RapidAPI-Key: 47b2b87e8bmshf6c6fbb4614c38bp1111e3jsn6f0ed72720ed",
+			"X-RapidAPI-Key: 3d4e258e95msh4612816ee7ad0fdp1d8657jsn6637d8bca200",
 			"content-type: application/json"
 		],
 	]);
