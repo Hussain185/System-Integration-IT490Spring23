@@ -75,6 +75,7 @@ require_once('../sampleFiles/rabbitMQLib.inc');
         $client = new rabbitMQClient("../ini/db.ini","dbServer");
         $response = $client->send_request($request);
 
+        echo $response;
         //$update_otp = mysqli_query(dbConnection(), $update_sql);
 
         if($response){
