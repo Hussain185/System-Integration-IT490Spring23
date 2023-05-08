@@ -158,13 +158,13 @@ require_once('../sampleFiles/rabbitMQLib.inc');
         //$result = mysqli_query(dbConnection(), $sql_otp_verify);
         //$numrows = mysqli_num_rows($result);
         $request['query'] = $sql_otp_verify;
-        $client = new rabbitMQClient("../../ini/db.ini", "dbServer");
+        $client = new rabbitMQClient("../ini/db.ini", "dbServer");
         $response = $client->send_request($request);
         if($response){
             echo '<script>alert("Logged in!")</script>';
             $erase_otp_sql = "UPDATE `users` SET otp = NULL WHERE usersUid = '{$username}' ";
             $request['query'] = $erase_otp_sql;
-            $client = new rabbitMQClient("../../ini/db.ini", "dbServer");
+            $client = new rabbitMQClient("../ini/db.ini", "dbServer");
             header('Location: index.php');
             exit;
         }
