@@ -338,6 +338,7 @@ function fa($query,$conn)
         return false;
     }
     mysqli_stmt_execute($stmt);
+    print_r(mysqli_stmt_get_result($stmt));
     return mysqli_stmt_get_result($stmt);
 }
 
