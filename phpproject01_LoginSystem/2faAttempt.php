@@ -1,8 +1,9 @@
 <?php session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-require 'includes/dbh.inc.php';
-require 'includes/functions.inc.php';
+require_once('../sampleFiles/path.inc');
+require_once('../sampleFiles/get_host_info.inc');
+require_once('../sampleFiles/rabbitMQLib.inc');
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +45,6 @@ require 'includes/functions.inc.php';
         </form>
     </div>
 
-
     <?php
 
     $username = $_COOKIE['username'];
@@ -68,17 +68,29 @@ require 'includes/functions.inc.php';
         //uidExists($conn, $username);
         $otp = sprintf("%'.06d",mt_rand(0,999999));
         $expiration = date("Y-m-d H:i" ,strtotime(date('Y-m-d H:i')." +1 mins"));
-        $update_sql = "UPDATE `users` set otp_expiration = '{$expiration}', otp = '{$otp}' where usersUid = '{$username}' ";
-        //$update_otp = $conn->query($update_sql);
-        $update_otp = mysqli_query(dbConnection(), $update_sql);
 
-        if($update_otp){
+        $request = array();
+        $request['type'] = "2fa";
+        $request['query'] = "UPDATE `users` set otp_expiration = '{$expiration}', otp = '{$otp}' where usersUid = '{$username}' ";
+
+        $client = new rabbitMQClient("../ini/db.ini","dbServer");
+        $response = $client->send_request($request);
+
+        echo $response;
+        //$update_otp = mysqli_query(dbConnection(), $update_sql);
+
+        if($response){
+            echo "get email";
             $resp['status'] = 'success';
             //$email = $conn->query("SELECT email FROM `users` where usersId = '{$usersId}'")->fetch_array()[0];
-            $email_sql = "SELECT usersEmail FROM `users` where usersUid = '{$username}'";
-            $email =  mysqli_query(dbConnection(), $email_sql)->fetch_array()[0];
+            $request['type'] = "getEmail";
+            $request['username'] = $username;
+            //$request['query'] = "SELECT email FROM `users` where usersUid = '{$username}'";
+            //$email =  mysqli_query(dbConnection(), $email_sql)->fetch_array()[0];
             //$email = $conn->query($email_sql)->fetch_array()[0];
             //$this->send_mail($email,$otp);
+
+            $email = $client->send_request($request);
 
             send_mail($email,$otp);	//Uncomment/Comment to disable/run (disable API for testing purposes).
 
@@ -86,7 +98,6 @@ require 'includes/functions.inc.php';
         }
         else{
             $resp['status'] = 'failed';
-            $resp['error'] = $conn->error;
         }
         return json_encode($resp);
     }
@@ -144,21 +155,25 @@ require 'includes/functions.inc.php';
 
     if(isset($_POST['submitCode'])) {
 
+        echo "submit code";
         $otp_submitted = $_POST["code"];
         $username = $_COOKIE['username'];
         $sql_otp_verify = "SELECT * FROM `users` WHERE usersUid = '$username' AND otp = '$otp_submitted'";
         //$result = mysqli_query($conn,$sql_otp_verify);
-        $result = mysqli_query(dbConnection(), $sql_otp_verify);
-        $numrows = mysqli_num_rows($result);
-        if($numrows == 1){
+        //$result = mysqli_query(dbConnection(), $sql_otp_verify);
+        //$numrows = mysqli_num_rows($result);
+        $request['query'] = $sql_otp_verify;
+        $request['type'] = "2fa";
+
+        $client = new rabbitMQClient("../ini/db.ini","dbServer");
+        $response = $client->send_request($request);
+        if($response){
             echo '<script>alert("Logged in!")</script>';
             $erase_otp_sql = "UPDATE `users` SET otp = NULL WHERE usersUid = '{$username}' ";
-            $erase_otp = mysqli_query(dbConnection(), $erase_otp_sql);
+            $request['query'] = $erase_otp_sql;
+            $client = new rabbitMQClient("../ini/db.ini", "dbServer");
+            $response = $client->send_request($request);
             header('Location: index.php');
-            exit;
-        }
-        else if($numrows == 0){
-            echo '<script>alert("Code not correct.")</script>';
             exit;
         }
         else {
