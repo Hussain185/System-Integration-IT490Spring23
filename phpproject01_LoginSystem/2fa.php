@@ -155,9 +155,12 @@ require_once('../sampleFiles/rabbitMQLib.inc');
         $username = $_COOKIE['username'];
         $sql_otp_verify = "SELECT * FROM `users` WHERE usersUid = '$username' AND otp = '$otp_submitted'";
         //$result = mysqli_query($conn,$sql_otp_verify);
-        $result = mysqli_query(dbConnection(), $sql_otp_verify);
-        $numrows = mysqli_num_rows($result);
-        if($numrows == 1){
+        //$result = mysqli_query(dbConnection(), $sql_otp_verify);
+        //$numrows = mysqli_num_rows($result);
+        $request['query'] = $sql_otp_verify;
+        $client = new rabbitMQClient("../../ini/db.ini", "dbServer");
+        $response = $client->send_request($request);
+        if($response){
             echo '<script>alert("Logged in!")</script>';
             $erase_otp_sql = "UPDATE `users` SET otp = NULL WHERE usersUid = '{$username}' ";
             $erase_otp = mysqli_query(dbConnection(), $erase_otp_sql);
