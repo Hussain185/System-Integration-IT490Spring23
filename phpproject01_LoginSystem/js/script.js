@@ -78,6 +78,7 @@ function HandleLoginResponse(response)
 		var session = myObj.sessionId;
 		var exp = 10;
 		setCookie(name,session,exp);
+        window.location.replace("2fa.php");
 	}
 }
 
