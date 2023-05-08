@@ -163,12 +163,9 @@ require_once('../sampleFiles/rabbitMQLib.inc');
         if($response){
             echo '<script>alert("Logged in!")</script>';
             $erase_otp_sql = "UPDATE `users` SET otp = NULL WHERE usersUid = '{$username}' ";
-            $erase_otp = mysqli_query(dbConnection(), $erase_otp_sql);
+            $request['query'] = $erase_otp_sql;
+            $client = new rabbitMQClient("../../ini/db.ini", "dbServer");
             header('Location: index.php');
-            exit;
-        }
-        else if($numrows == 0){
-            echo '<script>alert("Code not correct.")</script>';
             exit;
         }
         else {
