@@ -80,14 +80,14 @@ require_once('../sampleFiles/rabbitMQLib.inc');
         if($response){
             $resp['status'] = 'success';
             //$email = $conn->query("SELECT email FROM `users` where usersId = '{$usersId}'")->fetch_array()[0];
-            $request['query'] = "SELECT usersEmail FROM `users` where usersUid = '{$username}'";
+            $request['type'] = "fa";
+            $request['query'] = "SELECT email FROM `users` where usersUid = '{$username}'";
             //$email =  mysqli_query(dbConnection(), $email_sql)->fetch_array()[0];
             //$email = $conn->query($email_sql)->fetch_array()[0];
             //$this->send_mail($email,$otp);
 
             $email = $client->send_request($request);
 
-            print_r($response,$email);
             send_mail($email,$otp);	//Uncomment/Comment to disable/run (disable API for testing purposes).
 
             echo "Sending to $email";
