@@ -72,7 +72,7 @@ require_once('../sampleFiles/rabbitMQLib.inc');
         $request = array();
         $request['type'] = "2fa";
         $request['query'] = "UPDATE `users` set otp_expiration = '{$expiration}', otp = '{$otp}' where usersUid = '{$username}' ";
-        $client = new rabbitMQClient("../../ini/db.ini","dbServer");
+        $client = new rabbitMQClient("../ini/db.ini","dbServer");
         $response = $client->send_request($request);
 
         //$update_otp = mysqli_query(dbConnection(), $update_sql);
